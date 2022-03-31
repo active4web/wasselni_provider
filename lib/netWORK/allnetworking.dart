@@ -40,7 +40,7 @@ import 'package:http_parser/http_parser.dart';
 import '../notification_helper.dart';
 
 class AllNetworking {
-  var paseurl = baseUrl;
+  var paseurl = fakeBaseUrl;
 
   //Response response;
   Dio dio = new Dio();

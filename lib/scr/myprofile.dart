@@ -204,62 +204,103 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             width: 50,
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              var image = await ImagePicker.platform.pickImage(
-                                  source: ImageSource.gallery,
-                                  maxHeight: 200,
-                                  maxWidth: 200,
-                                  imageQuality: 100);
-                              setState(() {
-                                if (image != null) {
-                                  _image = File(image.path);
-                                }
-                              });
-                            },
-                            child: _image == null && dat.mainImg.trim().isEmpty
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    //  crossAxisAlignment: CrossAxisAlignment.baseline,
-                                    children: [
-                                      Text('اضافة صورة المكان',
-                                          style: TextStyle(
-                                              fontFamily: 'Arbf',
-                                              color: hexToColor('#ed1c6f'),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                        width: 50,
-                                      ),
-                                      Icon(Icons.camera_alt)
-                                    ],
-                                  )
-                                : _image == null
-                                    ? Container(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                .3,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .3,
-                                        child: Image.network(
-                                          dat.mainImg,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )
-                                    : Container(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                .3,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .3,
-                                        child: Image.file(
-                                          _image,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      var image = await ImagePicker.platform.pickImage(
+                                          source: ImageSource.gallery,
+                                          maxHeight: 200,
+                                          maxWidth: 200,
+                                          imageQuality: 100);
+                                      setState(() {
+                                        if (image != null) {
+                                          _image = File(image.path);
+                                        }
+                                      });
+                                    },
+                                    child: _image == null && dat.mainImg.trim().isEmpty
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            //  crossAxisAlignment: CrossAxisAlignment.baseline,
+                                            children: [
+                                              Text('اضافة صورة المكان',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Arbf',
+                                                      color: hexToColor('#ed1c6f'),
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold)),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              Icon(Icons.camera_alt)
+                                            ],
+                                          )
+                                        : _image == null
+                                            ? Container(
+                                                height:
+                                                    MediaQuery.of(context).size.width *
+                                                        .3,
+                                                width:
+                                                    MediaQuery.of(context).size.width *
+                                                        .3,
+                                                child: Image.network(
+                                                  dat.mainImg,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              )
+                                            : Container(
+                                                height:
+                                                    MediaQuery.of(context).size.width *
+                                                        .3,
+                                                width:
+                                                    MediaQuery.of(context).size.width *
+                                                        .3,
+                                                child: Image.file(
+                                                  _image,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text('صورة البروفايل',
+                                      style: TextStyle(
+                                          fontFamily: 'Arbf',
+                                          color: hexToColor('#ed1c6f'),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Gallery()),
+                                  );
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.camera_alt),
+
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Text('صور الغلاف',
+                                        style: TextStyle(
+                                            fontFamily: 'Arbf',
+                                            color: hexToColor('#ed1c6f'),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 10,
@@ -282,30 +323,30 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: 10,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Gallery()),
-                              );
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('ﻣﻌﺮﺽ ﺍﻟﺼﻮﺭ',
-                                    style: TextStyle(
-                                        fontFamily: 'Arbf',
-                                        color: hexToColor('#ed1c6f'),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Icon(Icons.camera_alt)
-                              ],
-                            ),
-                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => Gallery()),
+                          //     );
+                          //   },
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //     children: [
+                          //       Text('ﻣﻌﺮﺽ ﺍﻟﺼﻮﺭ',
+                          //           style: TextStyle(
+                          //               fontFamily: 'Arbf',
+                          //               color: hexToColor('#ed1c6f'),
+                          //               fontSize: 20,
+                          //               fontWeight: FontWeight.bold)),
+                          //       SizedBox(
+                          //         width: 50,
+                          //       ),
+                          //       Icon(Icons.camera_alt)
+                          //     ],
+                          //   ),
+                          // ),
                           SizedBox(
                             height: high * .01,
                           ),
@@ -415,13 +456,13 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: high * .01,
                           ),
-                          mywidget(
-                              textEditingController: dlivery,
-                              inputtype: TextInputType.text,
-                              hint: 'ﺧﺪﻣﺔ ﺍﻟﺪﻟﻴﻔﺮﻱ'),
-                          SizedBox(
-                            height: high * .01,
-                          ),
+                          // mywidget(
+                          //     textEditingController: dlivery,
+                          //     inputtype: TextInputType.text,
+                          //     hint: 'ﺧﺪﻣﺔ ﺍﻟﺪﻟﻴﻔﺮﻱ'),
+                          // SizedBox(
+                          //   height: high * .01,
+                          // ),
                           TextFormField(
                             textAlign: TextAlign.center,
                             controller: addersinmap,
@@ -451,24 +492,25 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: high * .01,
                           ),
-                          Row(
-                            children: [
-                              ElevatedButton.icon(
-                                label: Text(' الموقع الحالي'),
-                                icon: Icon(Icons.location_on_sharp),
-                                onPressed: () {
-                                  getloc();
-                                },
-                              ),
-                              ElevatedButton.icon(
-                                label: Text('لضغط علي الخريطه'),
-                                icon: Icon(Icons.location_on_sharp),
-                                onPressed: () {
-                                  getloc();
-                                },
-                              )
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     ElevatedButton.icon(
+                          //       label: Text(' الموقع الحالي'),
+                          //       icon: Icon(Icons.location_on_sharp),
+                          //       onPressed: () {
+                          //         getloc();
+                          //       },
+                          //     ),
+                          //     SizedBox(width: 10,),
+                          //     ElevatedButton.icon(
+                          //       label: Text('لضغط علي الخريطه'),
+                          //       icon: Icon(Icons.location_on_sharp),
+                          //       onPressed: () {
+                          //         getloc();
+                          //       },
+                          //     )
+                          //   ],
+                          // ),
                           senddata
                               ? CircularProgressIndicator()
                               : GestureDetector(
@@ -556,32 +598,32 @@ class _ProfileeState extends State<Profilee> {
                           //   controlAffinity: ListTileControlAffinity
                           //       .leading, //  <-- leading Checkbox
                           // ),
-                          SizedBox(
-                            height: high * .01,
-                          ),
-                          Container(
-                            height: high * .3,
-                            child: Center(
-                              child: _kGooglePlex == null
-                                  ? CircularProgressIndicator()
-                                  : GoogleMap(
-                                      mapType: MapType.normal,
-                                      onTap: (mylocation) {
-                                        _locationtosend = LatLng(
-                                            mylocation.latitude,
-                                            mylocation.longitude);
-                                        print(mylocation);
-                                      },
-                                      initialCameraPosition: _kGooglePlex,
-                                      zoomGesturesEnabled: true,
-                                      onMapCreated:
-                                          (GoogleMapController controller) {
-                                        _controller.complete(controller);
-                                      },
-                                      markers: Set<Marker>.of(_markers),
-                                    ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: high * .01,
+                          // ),
+                          // Container(
+                          //   height: high * .3,
+                          //   child: Center(
+                          //     child: _kGooglePlex == null
+                          //         ? CircularProgressIndicator()
+                          //         : GoogleMap(
+                          //             mapType: MapType.normal,
+                          //             onTap: (mylocation) {
+                          //               _locationtosend = LatLng(
+                          //                   mylocation.latitude,
+                          //                   mylocation.longitude);
+                          //               print(mylocation);
+                          //             },
+                          //             initialCameraPosition: _kGooglePlex,
+                          //             zoomGesturesEnabled: true,
+                          //             onMapCreated:
+                          //                 (GoogleMapController controller) {
+                          //               _controller.complete(controller);
+                          //             },
+                          //             markers: Set<Marker>.of(_markers),
+                          //           ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

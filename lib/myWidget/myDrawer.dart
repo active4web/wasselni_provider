@@ -195,22 +195,22 @@ Widget mydrawer(context) {
             color: Colors.white,
             height: 2,
           ),
-          ListTile(
-            title: Text("ﺍﻟﻔﺮﻭﻉ",
-                style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Branch()),
-              );
-              // Get.to(Branch(),transition: Transition.cupertino);
-            },
-          ),
-          Container(
-            color: Colors.white,
-            height: 2,
-          ),
+          // ListTile(
+          //   title: Text("ﺍﻟﻔﺮﻭﻉ",
+          //       style: TextStyle(
+          //           fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => Branch()),
+          //     );
+          //     // Get.to(Branch(),transition: Transition.cupertino);
+          //   },
+          // ),
+          // Container(
+          //   color: Colors.white,
+          //   height: 2,
+          // ),
           ListTile(
             title: Text("ﺗﻨﺒﻴﻬﺎﺕ",
                 style: TextStyle(

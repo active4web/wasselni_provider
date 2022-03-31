@@ -439,7 +439,7 @@ class _StatisticssState extends State<Statisticss> {
                                         icon: 'assets/images/Help.png',
                                         keyupdata: 0,
                                         dat: false,
-                                        number: "",
+                                        number:data.totalListLocations.toString(),
                                         //data.totalProduct.toString(),
                                         width: width,
                                         name: data.locationTitle)),
@@ -674,8 +674,7 @@ class _StatisticssState extends State<Statisticss> {
     Uint8List result = await scanner.generateBarCode(inputCode);
     File.fromRawPath(result);
     print(File.fromRawPath(result)); //_imge=
-    FutureOr<dynamic> success =
-        await ImageGallerySaver.saveImage(result, quality: 100);
+    FutureOr<dynamic> success = await ImageGallerySaver.saveImage(result, quality: 100);
     print(success);
     String imageString = base64Encode(result);
     print(imageString);

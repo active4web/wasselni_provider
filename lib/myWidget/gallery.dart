@@ -21,7 +21,7 @@ bool uplodpic=false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('معرض الصور'),
+        title: Text('ﺼﻮﺭ الغلاف'),
         centerTitle: true,
       ),
       body: StreamBuilder<Get_list_gallery_json>(

@@ -103,8 +103,8 @@ class _VisitorCountState extends State<VisitorCount> {
                                         children: [
                                           Text(
                                               f.trim().isEmpty?    'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}': 'اسم العميل : ${data[pos].userName}'),
-                                          Text(
-                                              f.trim().isEmpty?     'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
+                                          Text(f.trim().isEmpty?     'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
+                                          Text(f.trim().isEmpty?     'تاريخ الزيارة : ${snapshot.data.result.allVisitoe[pos].date}': 'تاريخ الزيارة : ${data[pos].date}'),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
