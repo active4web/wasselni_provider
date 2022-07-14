@@ -528,7 +528,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                       child: Text(offers.productName),
                     ),
                   ),
-                  Text(offers.price + '  ' + offers.currencyName)
+                  Text(offers.price.toString() + '  ' + offers.currencyName)
                 ],
               ),
             ),

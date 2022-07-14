@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:awesome_notifications/awesome_notifications.dart';
+
 import 'package:commercial_app/netWORK/contsants.dart';
 import 'package:commercial_app/utilitie/jsondata/agent_login_JSON.dart';
 import 'package:commercial_app/utilitie/jsondata/cancel_order_json.dart';
-import 'package:commercial_app/utilitie/jsondata/check_coupon_json.dart';
 import 'package:commercial_app/utilitie/jsondata/create_coupon_json.dart';
 import 'package:commercial_app/utilitie/jsondata/galler_jason.dart';
 import 'package:commercial_app/utilitie/jsondata/gate_list_location_json.dart';
@@ -20,6 +19,7 @@ import 'package:commercial_app/utilitie/jsondata/get_home_json.dart';
 import 'package:commercial_app/utilitie/jsondata/get_list_notifications_JSON.dart';
 import 'package:commercial_app/utilitie/jsondata/get_order_details_json.dart';
 import 'package:commercial_app/utilitie/jsondata/get_previous_orders_json.dart';
+import 'package:commercial_app/utilitie/jsondata/ios_login_json.dart';
 import 'package:commercial_app/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:commercial_app/utilitie/jsondata/preparation_edit_offer_JSON.dart';
 import 'package:commercial_app/utilitie/jsondata/preparation_edit_product_JSON.dart';
@@ -28,10 +28,8 @@ import 'package:commercial_app/utilitie/jsondata/preparation_profile_json.dart';
 import 'package:commercial_app/utilitie/jsondata/tags_model.dart';
 import 'package:commercial_app/utilitie/jsondata/ticket_json.dart';
 import 'package:commercial_app/utilitie/jsondata/tickets_json.dart';
-import 'package:commercial_app/utilitie/jsondata/ios_login_json.dart';
 import 'package:commercial_app/utilitie/jsondata/tickets_types_json.dart';
 import 'package:dio/dio.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +38,7 @@ import 'package:http_parser/http_parser.dart';
 import '../notification_helper.dart';
 
 class AllNetworking {
-  var paseurl = fakeBaseUrl;
+  var paseurl = baseUrl;
 
   //Response response;
   Dio dio = new Dio();
@@ -779,7 +777,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       response = value;
     });
 
@@ -1104,6 +1102,7 @@ class AllNetworking {
 
     return data;
   }
+
   Future<Get_all_user_coupons_json> get_all_qr_points({
     @required String token_id,
     @required int limit,
@@ -1144,7 +1143,6 @@ class AllNetworking {
       "end_date": endDate,
       "limit": limit,
       "page_number": page_number,
-
     });
     await dio
         .post(
@@ -1152,7 +1150,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Get_all_user_coupons_json.fromJson(value.data);
     });
 
@@ -1251,7 +1249,7 @@ class AllNetworking {
     )
         .then((value) {
       data = value;
-    }).catchError((error){
+    }).catchError((error) {
       print(error.toString());
     });
 
@@ -1276,7 +1274,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Get_all_user_coupons_json.fromJson(value.data);
     });
 
@@ -1456,7 +1454,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Get_Waiting_Orders_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);
@@ -1508,6 +1506,8 @@ class AllNetworking {
         .then((value) {
       data = Get_order_details_json.fromJson(value.data);
     });
+
+    print(data.result.allProducts[0].productName);
     //  print(data.result.contactInfo[0].);
     return data;
   }
@@ -1571,7 +1571,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Gate_list_rate_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);

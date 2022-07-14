@@ -11,7 +11,7 @@ class Get_order_details_json {
     errNum = json['errNum'];
     status = json['status'];
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+        json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -65,21 +65,21 @@ class OrderDetails {
   String totalPrice;
   String totalProduct;
   String shippingCharges;
-  int totalPriceShippingCharges;
+  var totalPriceShippingCharges;
   String currencyName;
   String date;
   String viewStore;
 
   OrderDetails(
       {this.codeName,
-        this.idOrder,
-        this.totalPrice,
-        this.totalProduct,
-        this.shippingCharges,
-        this.totalPriceShippingCharges,
-        this.currencyName,
-        this.date,
-        this.viewStore});
+      this.idOrder,
+      this.totalPrice,
+      this.totalProduct,
+      this.shippingCharges,
+      this.totalPriceShippingCharges,
+      this.currencyName,
+      this.date,
+      this.viewStore});
 
   OrderDetails.fromJson(Map<String, dynamic> json) {
     codeName = json['code_name'];
@@ -119,12 +119,12 @@ class AllProducts {
 
   AllProducts(
       {this.id,
-        this.idProduct,
-        this.productName,
-        this.price,
-        this.quantity,
-        this.currencyName,
-        this.image});
+      this.idProduct,
+      this.productName,
+      this.price,
+      this.quantity,
+      this.currencyName,
+      this.image});
 
   AllProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];

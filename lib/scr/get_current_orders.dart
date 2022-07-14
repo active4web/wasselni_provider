@@ -561,7 +561,7 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                       child: Text(offers.productName),
                     ),
                   ),
-                  Text(offers.price + '  ' + offers.currencyName)
+                  Text(offers.price.toString() + '  ' + offers.currencyName)
                 ],
               ),
             ),

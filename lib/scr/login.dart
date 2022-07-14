@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:commercial_app/netWORK/allnetworking.dart';
 import 'package:commercial_app/scr/statistics.dart';
 import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
-import 'package:commercial_app/utilitie/jsondata/agent_login_JSON.dart';
 import 'package:commercial_app/utilitie/jsondata/ios_login_json.dart';
 import 'package:commercial_app/utilitie/push_notifcation.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -216,30 +212,30 @@ class _LoginScrState extends State<LoginScr> {
                           ),
                         ),
                       ),
-                      if (data.data.loginId == 1)
-                        InkWell(
-                            onTap: () async {
-                              await box.write('phone', "0123456789");
-                              await box.write('firebase_token', "11");
-                              await box.write('name', "Naser");
-
-                              await box.write('email', "naser@gmai.com");
-
-                              await box.write('id', "11");
-
-                              await box.write('token', data.data.tokenId);
-
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => Statisticss()),
-                                  (Route<dynamic> route) => false);
-                            },
-                            child: Text(
-                              "تخطي",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 20),
-                            ))
+                      // if (data.data.loginId == 1)
+                      //   InkWell(
+                      //       onTap: () async {
+                      //         await box.write('phone', "0123456789");
+                      //         await box.write('firebase_token', "11");
+                      //         await box.write('name', "Naser");
+                      //
+                      //         await box.write('email', "naser@gmai.com");
+                      //
+                      //         await box.write('id', "11");
+                      //
+                      //         await box.write('token', data.data.tokenId);
+                      //
+                      //         Navigator.pushAndRemoveUntil(
+                      //             context,
+                      //             new MaterialPageRoute(
+                      //                 builder: (context) => Statisticss()),
+                      //             (Route<dynamic> route) => false);
+                      //       },
+                      //       child: Text(
+                      //         "تخطي",
+                      //         style:
+                      //             TextStyle(color: Colors.blue, fontSize: 20),
+                      //       ))
                     ],
                   ),
                 );
