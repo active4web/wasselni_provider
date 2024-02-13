@@ -1,8 +1,8 @@
 class Get_list_gallery_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Get_list_gallery_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,24 +20,24 @@ class Get_list_gallery_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  int totalImg;
-  List<AllImages> allImages;
+  int? totalImg;
+  List<AllImages>? allImages;
 
   Result({this.totalImg, this.allImages});
 
   Result.fromJson(Map<String, dynamic> json) {
     totalImg = json['total_img'];
     if (json['all_images'] != null) {
-      allImages = new List<AllImages>();
+      allImages =  <AllImages>[];
       json['all_images'].forEach((v) {
-        allImages.add(new AllImages.fromJson(v));
+        allImages?.add(new AllImages.fromJson(v));
       });
     }
   }
@@ -46,15 +46,15 @@ class Result {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['total_img'] = this.totalImg;
     if (this.allImages != null) {
-      data['all_images'] = this.allImages.map((v) => v.toJson()).toList();
+      data['all_images'] = this.allImages?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllImages {
-  String img;
-  int id;
+  String? img;
+  int? id;
 
   AllImages({this.img, this.id});
 

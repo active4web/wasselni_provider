@@ -1,9 +1,9 @@
 class Get_all_user_coupons_json {
-  String message;
-  int messageid;
-  bool status;
+  String? message;
+  int? messageid;
+  bool? status;
   dynamic total;
-  Result result;
+  Result? result;
 
   Get_all_user_coupons_json(
       {this.message, this.messageid, this.status, this.total, this.result});
@@ -24,14 +24,14 @@ class Get_all_user_coupons_json {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllVisitoe> allVisitoe;
+  List<AllVisitoe>? allVisitoe;
   dynamic totalPoints;
 
   Result({this.allVisitoe});
@@ -39,9 +39,9 @@ class Result {
   Result.fromJson(Map<String, dynamic> json) {
     totalPoints = json['total_points'];
     if (json['all_visitoe'] != null) {
-      allVisitoe = new List<AllVisitoe>();
+      allVisitoe =<AllVisitoe>[];
       json['all_visitoe'].forEach((v) {
-        allVisitoe.add(new AllVisitoe.fromJson(v));
+        allVisitoe?.add(new AllVisitoe.fromJson(v));
       });
     }
   }
@@ -49,18 +49,18 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allVisitoe != null) {
-      data['all_visitoe'] = this.allVisitoe.map((v) => v.toJson()).toList();
+      data['all_visitoe'] = this.allVisitoe?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllVisitoe {
-  String userName;
-  String date;
+  String? userName;
+  String? date;
   dynamic serviceCoupon;
-  String userPhone;
-  String visitorId;
+  String? userPhone;
+  String? visitorId;
 
 
   AllVisitoe(

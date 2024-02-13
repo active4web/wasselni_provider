@@ -1,9 +1,9 @@
 class Get_all_visitor_json {
-  String message;
-  int messageid;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  int? total;
+  Result? result;
 
   Get_all_visitor_json(
       {this.message, this.messageid, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Get_all_visitor_json {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllVisitoe> allVisitoe;
+  List<AllVisitoe>? allVisitoe;
 
   Result({this.allVisitoe});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_visitoe'] != null) {
-      allVisitoe = new List<AllVisitoe>();
+      allVisitoe = <AllVisitoe>[];
       json['all_visitoe'].forEach((v) {
-        allVisitoe.add(new AllVisitoe.fromJson(v));
+        allVisitoe?.add(new AllVisitoe.fromJson(v));
       });
     }
   }
@@ -47,18 +47,18 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allVisitoe != null) {
-      data['all_visitoe'] = this.allVisitoe.map((v) => v.toJson()).toList();
+      data['all_visitoe'] = this.allVisitoe?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllVisitoe {
-  String userName;
-  String totalCountVisit;
-  String userPhone;
-  String visitorId;
-  String date;
+  String? userName;
+  String? totalCountVisit;
+  String? userPhone;
+  String? visitorId;
+  String? date;
 
   AllVisitoe(
       {this.userName,this.date, this.totalCountVisit, this.userPhone, this.visitorId});

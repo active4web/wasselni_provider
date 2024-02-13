@@ -1,8 +1,8 @@
 class Get_offers_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Get_offers_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,22 +20,22 @@ class Get_offers_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllOffers> allOffers;
+  List<AllOffers>? allOffers;
 
   Result({this.allOffers});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_offers'] != null) {
-      allOffers = new List<AllOffers>();
+      allOffers = <AllOffers>[];
       json['all_offers'].forEach((v) {
-        allOffers.add(new AllOffers.fromJson(v));
+        allOffers?.add(new AllOffers.fromJson(v));
       });
     }
   }
@@ -43,26 +43,26 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allOffers != null) {
-      data['all_offers'] = this.allOffers.map((v) => v.toJson()).toList();
+      data['all_offers'] = this.allOffers?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllOffers {
-  String offersImage;
-  String offersName;
-  String offerNameEn;
-  String nameTr;
-  String expireDate;
-  String startDate;
-  String endDate;
-  String description;
-  String descriptionEn;
-  String descriptionTr;
-  String oldPrice;
-  String newPrice;
-  int offersId;
+  String? offersImage;
+  String? offersName;
+  String? offerNameEn;
+  String? nameTr;
+  String? expireDate;
+  String? startDate;
+  String? endDate;
+  String? description;
+  String? descriptionEn;
+  String? descriptionTr;
+  String? oldPrice;
+  String? newPrice;
+  int? offersId;
 
   AllOffers(
       {this.offersImage,

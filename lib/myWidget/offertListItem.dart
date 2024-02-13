@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget offertListItem({high, AllOffers data, fun, funedit}) {
+Widget offertListItem({high, AllOffers? data, fun, funedit}) {
   return Directionality(
     textDirection: TextDirection.rtl,
     child: Card(
@@ -21,7 +21,7 @@ Widget offertListItem({high, AllOffers data, fun, funedit}) {
                     children: [
                       Container(
                         child: Image.network(
-                          data.offersImage,
+                          data?.offersImage??"",
                           fit: BoxFit.fill,
                         ),
                         width: high * .17,
@@ -29,7 +29,7 @@ Widget offertListItem({high, AllOffers data, fun, funedit}) {
                         color: Colors.blueAccent,
                       ),
                       Text(
-                        data.expireDate == "1"
+                        data?.expireDate == "1"
                             ? "تم انتهاء العرض"
                             : "العرض جاري",
                         style: TextStyle(
@@ -46,51 +46,51 @@ Widget offertListItem({high, AllOffers data, fun, funedit}) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.offersName,
+                        data?.offersName??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        data.offerNameEn,
+                        data?.offerNameEn??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        data.nameTr,
+                        data?.nameTr??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        " السعر القديم " + data.oldPrice,
+                        "السعر القديم ${data?.oldPrice}" ,
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
-                      data.newPrice.trim().isEmpty
+                      data!.newPrice!.trim().isEmpty
                           ? SizedBox()
                           : Text(
-                              ' السعر الجديد ' + data.newPrice,
+                              'السعر الجديد ${data.newPrice}' ,
                               style: TextStyle(
                                   fontFamily: 'Arbf',
                                   color: Colors.black,
                                   fontSize: 16),
                             ),
                       Text(
-                        'بداية العرض ' + data.startDate,
+                        'بداية العرض ${data.startDate}',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        'نهاية العرض  ' + data.endDate,
+                        'نهاية العرض ${data.endDate}',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
@@ -115,7 +115,7 @@ Widget offertListItem({high, AllOffers data, fun, funedit}) {
                             child: Icon(Icons.image),
                             onTap:  (){
             //Gallery_Offers_Scr
-                Get.to(Gallery_Offers_Scr(data.offersId));
+                Get.to(Gallery_Offers_Scr(data.offersId!));
         },
                           ),
                         ],

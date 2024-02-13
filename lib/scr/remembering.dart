@@ -21,11 +21,11 @@ class _RememberingState extends State<Remembering> {
   int sizelist = 0;
   bool getprodect = true;
   int limit = 10;
-  String token;
-  String phone;
+  String? token;
+  String? phone;
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -88,21 +88,21 @@ Get.to(ContactWithManager());
             ),
       Expanded(
         flex: 1,
-        child: StreamBuilder<Tickets_json>(
+        child: StreamBuilder<Tickets_json?>(
             stream: _allNetworking
                 .tickets(
                 token_id: token,
                 limit: limit ,
                 page_number: 0 )
-                .asStream(),
+                .asStream() ,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
 
                 return ListView.builder(
-                    itemCount: snapshot.data.result.myTickets.length,
+                    itemCount: snapshot.data?.result?.myTickets?.length,
                     controller: _scrollController,
                     itemBuilder: (context, pos) {
-                      return Itemli(high: height,data: snapshot.data.result.myTickets[pos]);
+                      return Itemli(high: height,data: snapshot.data!.result!.myTickets![pos]);
                     });
               } else {
                 return Center(
@@ -117,19 +117,19 @@ Get.to(ContactWithManager());
     );
   }
 
-  Widget Itemli( {high,MyTickets data}) {
+  Widget Itemli( {high,MyTickets? data}) {
     return Card(elevation: 5,
 
-      child: GestureDetector(onTap: (){ Get.to(TicketDetails(data.id));},
+      child: GestureDetector(onTap: (){ Get.to(TicketDetails(data!.id!));},
         child: Container(padding: EdgeInsets.all(8),height: high*.15,
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ Text(data.createdAt),Icon(Icons.delete),],
+                children: [ Text(data?.createdAt??''),Icon(Icons.delete),],
               ),
               Expanded(
-                  child: Text(data.title))
+                  child: Text(data?.title??''))
             ],
           ),
         ),
@@ -137,9 +137,9 @@ Get.to(ContactWithManager());
     );
   }
   _scrollListener() {
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+        _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
         setState(() {});

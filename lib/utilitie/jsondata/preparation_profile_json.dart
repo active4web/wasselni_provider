@@ -1,8 +1,8 @@
 class Preparation_profile_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Preparation_profile_json(
       {this.message, this.codenum, this.status, this.result});
@@ -21,22 +21,22 @@ class Preparation_profile_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<ServiceDetails> serviceDetails;
+  List<ServiceDetails>? serviceDetails;
 
   Result({this.serviceDetails});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['service_details'] != null) {
-      serviceDetails = new List<ServiceDetails>();
+      serviceDetails = <ServiceDetails>[];
       json['service_details'].forEach((v) {
-        serviceDetails.add(new ServiceDetails.fromJson(v));
+        serviceDetails?.add(new ServiceDetails.fromJson(v));
       });
     }
   }
@@ -45,38 +45,38 @@ class Result {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.serviceDetails != null) {
       data['service_details'] =
-          this.serviceDetails.map((v) => v.toJson()).toList();
+          this.serviceDetails?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class ServiceDetails {
-  String nameAr;
-  String nameEn;
-  String nameTr;
-  String whatsapp;
-  String facebook;
-  String email;
-  String website;
-  String instagram;
-  String twitter;
-  String lat;
-  String lag;
-  String address;
-  String addressEn;
-  String addressTr;
-  String description;
-  String descriptionEn;
-  String descriptionTr;
-  String deliveryOn;
-  String password;
-  String phone;
-  String phoneSecond;
-  String phoneThird;
-  String location;
-  String mainImg;
-  int id;
+  String? nameAr;
+  String? nameEn;
+  String? nameTr;
+  String? whatsapp;
+  String? facebook;
+  String? email;
+  String? website;
+  String? instagram;
+  String? twitter;
+  String? lat;
+  String? lag;
+  String? address;
+  String? addressEn;
+  String? addressTr;
+  String? description;
+  String? descriptionEn;
+  String? descriptionTr;
+  String? deliveryOn;
+  String? password;
+  String? phone;
+  String? phoneSecond;
+  String? phoneThird;
+  String? location;
+  String? mainImg;
+  int? id;
 
   ServiceDetails(
       {this.nameAr,

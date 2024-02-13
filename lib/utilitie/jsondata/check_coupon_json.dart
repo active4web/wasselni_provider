@@ -1,8 +1,8 @@
 class Check_coupon_json {
-  String message;
-  int codenum;
-  bool status;
-  Data data;
+  String? message;
+  int? codenum;
+  bool? status;
+  Data? data;
 
   Check_coupon_json({this.message, this.codenum, this.status, this.data});
 
@@ -19,15 +19,15 @@ class Check_coupon_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data?.toJson();
     }
     return data;
   }
 }
 
 class Data {
-  String userName;
-  String userPhone;
+  String? userName;
+  String? userPhone;
 
   Data({this.userName, this.userPhone});
 

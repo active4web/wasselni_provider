@@ -22,15 +22,15 @@ class _PointScrState extends State<PointScr> {
         title: Text('نقاطي'),
         centerTitle: true,
       ),
-      body: StreamBuilder<Preparation_points_json>(
+      body: StreamBuilder<Preparation_points_json?>(
           stream: _allNetworking
               .preparation_points(token_id: box.read('token'))
-              .asStream(),
+              .asStream() ,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              _pointsController.text = snapshot.data.result.totalPoints;
+              _pointsController.text = snapshot.data?.result?.totalPoints??'';
               _pointsForQrCodeController.text =
-                  snapshot.data.result.totalPointsQr;
+                  snapshot.data?.result?.totalPointsQr??'';
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

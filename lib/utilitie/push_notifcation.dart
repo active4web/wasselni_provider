@@ -10,7 +10,7 @@ class PushNotificationManagger{
       //ios
       _firebaseMessaging.requestPermission();
 
-      String token=await _firebaseMessaging.getToken();
+      String? token=await _firebaseMessaging.getToken();
 
       print('my new token = $token');
       _initialized=true;

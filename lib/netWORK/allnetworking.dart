@@ -43,11 +43,11 @@ class AllNetworking {
   //Response response;
   Dio dio = new Dio();
 
-  Future<Agent_login_JSON> Login({
-    @required String phone,
-    @required String password,
-    @required String firebase_token,
-    @required String lang,
+  Future<Agent_login_JSON?> Login({
+    @required String? phone,
+    @required String? password,
+    @required String? firebase_token,
+    @required String? lang,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -57,7 +57,7 @@ class AllNetworking {
       "firebase_token": firebase_token,
       "lang": lang,
     });
-    Agent_login_JSON data;
+    Agent_login_JSON? data;
     await dio
         .post(
       paseurl + '/provider/agent_login',
@@ -68,15 +68,14 @@ class AllNetworking {
       data = Agent_login_JSON.fromJson(value.data);
     });
 
-    print(data);
     return data;
   }
 
   Future<http.Response> Get_all_products({
-    @required String phone,
-    @required String token_id,
-    @required String limit,
-    @required String page_number,
+    @required String? phone,
+    @required String? token_id,
+    @required String? limit,
+    @required String? page_number,
   }) async {
     http.Response response = await http.post(
       Uri.parse(paseurl + '/provider/get_all_products'),
@@ -93,8 +92,8 @@ class AllNetworking {
   }
 
   Future<http.Response> delete_product({
-    @required String token_id,
-    @required String product_id,
+    @required String? token_id,
+    @required String? product_id,
   }) async {
     http.Response response = await http.post(
       Uri.parse(paseurl + '/provider/delete_product'),
@@ -110,20 +109,20 @@ class AllNetworking {
   }
 
   Future<Response> add_product(
-      {@required String phone,
-      @required String stock,
-      @required String token_id,
-      @required String name_tr,
-      @required String description_tr,
-      @required String title,
-      @required String title_en,
-      @required String current_price,
-      @required String old_price,
-      @required String description_ar,
-      @required String description_en,
-      @required File file}) async {
-    Response response;
-    String fileName = file.path.split('/').last;
+      {@required String? phone,
+      @required String? stock,
+      @required String? token_id,
+      @required String? name_tr,
+      @required String? description_tr,
+      @required String? title,
+      @required String? title_en,
+      @required String? current_price,
+      @required String? old_price,
+      @required String? description_ar,
+      @required String? description_en,
+      @required File? file}) async {
+    Response? response;
+    String? fileName = file?.path.split('/').last;
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -137,7 +136,7 @@ class AllNetworking {
       "old_price": old_price,
       "description_ar": description_ar,
       "description_en": description_en,
-      "file": await MultipartFile.fromFile(file.path,
+      "file": await MultipartFile.fromFile(file!.path,
           filename: fileName, contentType: new MediaType('image', 'png')),
     });
     response =
@@ -145,11 +144,11 @@ class AllNetworking {
     return response;
   }
 
-  Future<Preparation_edit_product_JSON> preparation_edit_product({
-    @required String token_id,
-    @required int product_id,
+  Future<Preparation_edit_product_JSON?> preparation_edit_product({
+    @required String? token_id,
+    @required int? product_id,
   }) async {
-    Preparation_edit_product_JSON data;
+    Preparation_edit_product_JSON? data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
@@ -170,21 +169,21 @@ class AllNetworking {
   }
 
   Future<Response> edit_product({
-    @required String token_id,
-    @required String stock,
-    @required String title,
-    @required String title_en,
-    @required String current_price,
-    @required String old_price,
-    @required String description_ar,
-    @required String description_tr,
-    @required String description_en,
-    @required String name_tr,
-    @required File file,
-    @required int id_product,
+    @required String? token_id,
+    @required String? stock,
+    @required String? title,
+    @required String? title_en,
+    @required String? current_price,
+    @required String? old_price,
+    @required String? description_ar,
+    @required String? description_tr,
+    @required String? description_en,
+    @required String? name_tr,
+    @required File? file,
+    @required int? id_product,
   }) async {
-    Response response;
-    String fileName;
+    Response? response;
+    String? fileName;
     if (file != null) {
       fileName = file.path.split('/').last;
     }
@@ -213,9 +212,9 @@ class AllNetworking {
   }
 
   Future<http.Response> get_offers({
-    @required String token_id,
-    @required String limit,
-    @required String page_number,
+    @required String? token_id,
+    @required String? limit,
+    @required String? page_number,
   }) async {
     http.Response response = await http.post(
       Uri.parse(paseurl + '/provider/get_offers'),
@@ -232,27 +231,27 @@ class AllNetworking {
   }
 
   Future<Response> add_offer({
-    @required String phone,
-    @required String name_tr,
-    @required String description_tr,
-    @required String token_id,
-    @required String title,
-    @required String title_en,
-    @required String current_price,
-    @required String old_price,
-    @required String description_ar,
-    @required String description_en,
-    @required String end_date,
-    @required String start_date,
-    @required File file,
-    @required File file1,
-    @required File file2,
-    @required File file3,
-    @required File file4,
-    @required File file5,
+    @required String? phone,
+    @required String? name_tr,
+    @required String? description_tr,
+    @required String? token_id,
+    @required String? title,
+    @required String? title_en,
+    @required String? current_price,
+    @required String? old_price,
+    @required String? description_ar,
+    @required String? description_en,
+    @required String? end_date,
+    @required String? start_date,
+    @required File? file,
+    @required File? file1,
+    @required File? file2,
+    @required File? file3,
+    @required File? file4,
+    @required File? file5,
   }) async {
     Response response;
-    String fileName = file.path.split('/').last ?? "";
+    String fileName = file?.path.split('/').last ?? "";
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -299,8 +298,8 @@ class AllNetworking {
   }
 
   Future<Response> delete_offers({
-    @required String token_id,
-    @required int product_id,
+    @required String? token_id,
+    @required int? product_id,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -317,11 +316,11 @@ class AllNetworking {
     return response;
   }
 
-  Future<Preparation_edit_offer_JSON> preparation_edit_details({
-    @required String token_id,
-    @required int offer_id,
+  Future<Preparation_edit_offer_JSON?> preparation_edit_details({
+    @required String? token_id,
+    @required int? offer_id,
   }) async {
-    Preparation_edit_offer_JSON data;
+    Preparation_edit_offer_JSON? data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
@@ -342,22 +341,22 @@ class AllNetworking {
   }
 
   Future<Response> edit_offer({
-    @required String token_id,
-    @required String name_tr,
-    @required String description_tr,
-    @required String title,
-    @required String title_en,
-    @required String current_price,
-    @required String old_price,
-    @required String description_ar,
-    @required String end_date,
-    @required String start_date,
-    @required String description_en,
-    @required File file,
-    @required int id_product,
+    @required String? token_id,
+    @required String? name_tr,
+    @required String? description_tr,
+    @required String? title,
+    @required String? title_en,
+    @required String? current_price,
+    @required String? old_price,
+    @required String? description_ar,
+    @required String? end_date,
+    @required String? start_date,
+    @required String? description_en,
+    @required File? file,
+    @required int? id_product,
   }) async {
-    Response response;
-    String fileName;
+    Response? response;
+    String? fileName;
     if (file != null) {
       fileName = file.path.split('/').last;
     }
@@ -390,10 +389,10 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_all_branches_JSON> get_all_branches({
-    @required String token_id,
+  Future<Get_all_branches_JSON?> get_all_branches({
+    @required String? token_id,
   }) async {
-    Get_all_branches_JSON data;
+    Get_all_branches_JSON? data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
@@ -412,29 +411,29 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> add_branch({
-    @required String token_id,
-    @required String name_tr,
-    @required String description_tr,
-    @required String title,
-    @required String titlen_en,
-    @required String phone,
-    @required String whatsapp,
-    @required String address_tr,
-    @required String description,
-    @required String description_en,
-    @required String phone_second,
-    @required String phone_third,
-    @required String city_id,
-    @required File file,
-    @required String location,
-    @required String address,
-    @required String address_en,
-    @required double lat,
-    @required double lag,
+  Future<Response?> add_branch({
+    @required String? token_id,
+    @required String? name_tr,
+    @required String? description_tr,
+    @required String? title,
+    @required String? titlen_en,
+    @required String? phone,
+    @required String? whatsapp,
+    @required String? address_tr,
+    @required String? description,
+    @required String? description_en,
+    @required String? phone_second,
+    @required String? phone_third,
+    @required String? city_id,
+    @required File? file,
+    @required String? location,
+    @required String? address,
+    @required String? address_en,
+    @required double? lat,
+    @required double? lag,
   }) async {
-    Response data;
-    String fileName;
+    Response? data;
+    String? fileName;
     if (file != null) {
       fileName = file.path.split('/').last;
     }
@@ -485,8 +484,8 @@ class AllNetworking {
   }
 
   Future<Response> delete_branch({
-    @required String token_id,
-    @required int id_branch,
+    @required String? token_id,
+    @required int? id_branch,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -503,12 +502,12 @@ class AllNetworking {
     return response;
   }
 
-  Future<Preparation_edit_branch_JSON> preparation_edit_branch({
-    @required String token_id,
-    @required int id_branch,
+  Future<Preparation_edit_branch_JSON?> preparation_edit_branch({
+    @required String? token_id,
+    @required int? id_branch,
   }) async {
-    Preparation_edit_branch_JSON data;
-    Response response;
+    Preparation_edit_branch_JSON? data;
+    Response? response;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -527,29 +526,29 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> edit_branch({
-    @required int id_branch,
-    @required String token_id,
-    @required String title,
-    @required String address_tr,
-    @required String name_tr,
-    @required String description_tr,
-    @required String titlen_en,
-    @required String phone,
-    @required String whatsapp,
-    @required String description,
-    @required String description_en,
-    @required String phone_second,
-    @required String phone_third,
-    @required File file,
-    @required String location,
-    @required String address,
-    @required String address_en,
-    @required double lat,
-    @required double lag,
+  Future<Response?> edit_branch({
+    @required int? id_branch,
+    @required String? token_id,
+    @required String? title,
+    @required String? address_tr,
+    @required String? name_tr,
+    @required String? description_tr,
+    @required String? titlen_en,
+    @required String? phone,
+    @required String? whatsapp,
+    @required String? description,
+    @required String? description_en,
+    @required String? phone_second,
+    @required String? phone_third,
+    @required File? file,
+    @required String? location,
+    @required String? address,
+    @required String? address_en,
+    @required double? lat,
+    @required double? lag,
   }) async {
-    Response data;
-    String fileName;
+    Response? data;
+    String? fileName;
     if (file != null) {
       fileName = file.path.split('/').last;
     }
@@ -596,13 +595,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_list_notifications_JSON> get_list_notifications({
-    @required String phone,
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_list_notifications_JSON?> get_list_notifications({
+    @required String? phone,
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_list_notifications_JSON data;
+    Get_list_notifications_JSON? data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -623,11 +622,11 @@ class AllNetworking {
   }
 
   Future<Response> delete_notification({
-    @required String token_id,
-    @required int id_notify,
+    @required String? token_id,
+    @required int? id_notify,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -641,12 +640,12 @@ class AllNetworking {
     return response;
   }
 
-  Future<Tickets_json> tickets({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Tickets_json?> tickets({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Tickets_json data;
+    Tickets_json? data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -666,11 +665,11 @@ class AllNetworking {
     return data;
   }
 
-  Future<Ticket_json> ticket({
-    @required String token_id,
-    @required int ticket_id,
+  Future<Ticket_json?> ticket({
+    @required String? token_id,
+    @required int? ticket_id,
   }) async {
-    Ticket_json data;
+    Ticket_json? data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -689,14 +688,14 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> new_ticket({
-    @required String token_id,
-    @required int ticket_type_id,
-    @required String title,
-    @required String content,
+  Future<Response?> new_ticket({
+    @required String? token_id,
+    @required int? ticket_type_id,
+    @required String? title,
+    @required String? content,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -716,11 +715,11 @@ class AllNetworking {
     return response;
   }
 
-  Future<Tickets_types_json> tickets_types({
-    @required String token_id,
+  Future<Tickets_types_json?> tickets_types({
+    @required String? token_id,
   }) async {
-    Tickets_types_json response;
-    FormData formData = new FormData.fromMap({
+    Tickets_types_json? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -738,9 +737,9 @@ class AllNetworking {
   }
 
   Future<Response> new_reply({
-    @required String token_id,
-    @required int ticket_id,
-    @required String content,
+    @required String? token_id,
+    @required int? ticket_id,
+    @required String? content,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -758,13 +757,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Response> add_photography_requests({
-    @required String token_id,
-    @required String title,
-    @required String content,
+  Future<Response?> add_photography_requests({
+    @required String? token_id,
+    @required String? title,
+    @required String? content,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -784,11 +783,11 @@ class AllNetworking {
     return response;
   }
 
-  Future<Preparation_profile_json> preparation_profile({
-    @required String token_id,
+  Future<Preparation_profile_json?> preparation_profile({
+    @required String? token_id,
   }) async {
-    Preparation_profile_json response;
-    FormData formData = new FormData.fromMap({
+    Preparation_profile_json? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -805,36 +804,36 @@ class AllNetworking {
     return response;
   }
 
-  Future<Response> edit_profile({
-    @required String token_id,
-    @required String password,
-    @required String name_ar,
-    @required String name_en,
-    @required String description_tr,
-    @required String name_tr,
-    @required String address_tr,
-    @required String phone,
-    @required String whatsapp,
-    @required String floar_num,
-    @required String description,
-    @required String description_en,
-    @required String phone_second,
-    @required String phone_third,
-    @required File main_img,
-    @required String location,
+  Future<Response?> edit_profile({
+    @required String? token_id,
+    @required String? password,
+    @required String? name_ar,
+    @required String? name_en,
+    @required String? description_tr,
+    @required String? name_tr,
+    @required String? address_tr,
+    @required String? phone,
+    @required String? whatsapp,
+    @required String? floar_num,
+    @required String? description,
+    @required String? description_en,
+    @required String? phone_second,
+    @required String? phone_third,
+    @required File? main_img,
+    @required String? location,
 //========================
-    @required String instagram,
-    @required String twitter,
-    @required String facebook,
-    @required String website,
-    @required String email,
-    @required String address,
-    @required String addressEn,
-    @required double lat,
-    @required double lag,
+    @required String? instagram,
+    @required String? twitter,
+    @required String? facebook,
+    @required String? website,
+    @required String? email,
+    @required String? address,
+    @required String? addressEn,
+    @required double? lat,
+    @required double? lag,
   }) async {
-    Response data;
-    String fileName;
+    Response? data;
+    String? fileName;
     if (main_img != null) {
       fileName = main_img.path.split('/').last;
     }
@@ -886,12 +885,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Create_coupon_json> create_coupon({
-    @required String token_id,
-    @required int type,
+  Future<Create_coupon_json?> create_coupon({
+    @required String? token_id,
+    @required int? type,
   }) async {
-    Create_coupon_json response;
-    FormData formData = new FormData.fromMap({
+    Create_coupon_json? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -910,13 +909,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_home_json> get_home({
-    @required String token_id,
-    @required String lang,
+  Future<Get_home_json?> get_home({
+    @required String? token_id,
+    @required String?lang,
   }) async {
     print('start get data');
-    Get_home_json response;
-    FormData formData = new FormData.fromMap({
+    Get_home_json? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -937,11 +936,11 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_list_gallery_json> get_list_gallery({
-    @required String token_id,
+  Future<Get_list_gallery_json?> get_list_gallery({
+    @required String? token_id,
   }) async {
-    Get_list_gallery_json response;
-    FormData formData = new FormData.fromMap({
+    Get_list_gallery_json? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -958,12 +957,12 @@ class AllNetworking {
     return response;
   }
 
-  Future<Response> delete_image({
-    @required String token_id,
-    @required int img_id,
+  Future<Response?> delete_image({
+    @required String? token_id,
+    @required int? img_id,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -982,11 +981,11 @@ class AllNetworking {
   }
 
   Future<Response> add_img({
-    @required String token_id,
-    @required File file,
+    @required String? token_id,
+    @required File? file,
   }) async {
-    Response response;
-    String fileName;
+    Response? response;
+    String? fileName;
     if (file != null) {
       fileName = file.path.split('/').last;
     }
@@ -1005,13 +1004,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_all_visitor_json> get_all_visitor({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_visitor_json?> get_all_visitor({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_all_visitor_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_visitor_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1030,12 +1029,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> delete_visitor({
-    @required String token_id,
-    @required String visitor_id,
+  Future<Response?> delete_visitor({
+    @required String? token_id,
+    @required String? visitor_id,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1053,13 +1052,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_all_order_json> get_all_order({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_order_json?> get_all_order({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_all_order_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_order_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1078,13 +1077,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_all_user_coupons_json> get_all_user_coupons({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_user_coupons_json?> get_all_user_coupons({
+    @required String? token_id,
+    @required int? limit,
+    @required int ?page_number,
   }) async {
-    Get_all_user_coupons_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_user_coupons_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1103,13 +1102,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_all_user_coupons_json> get_all_qr_points({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_user_coupons_json?> get_all_qr_points({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_all_user_coupons_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_user_coupons_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1127,15 +1126,15 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_all_user_coupons_json> filter_points({
-    @required String token_id,
-    @required String startDate,
-    @required String endDate,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_user_coupons_json?> filter_points({
+    @required String? token_id,
+    @required String? startDate,
+    @required String? endDate,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_all_user_coupons_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_user_coupons_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1157,12 +1156,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> delete_user_coupon({
-    @required String token_id,
-    @required String coupon_id,
+  Future<Response?> delete_user_coupon({
+    @required String? token_id,
+    @required String? coupon_id,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1180,14 +1179,14 @@ class AllNetworking {
     return response;
   }
 
-  Future<Response> check_coupon({
-    @required String token_id,
-    @required String coupon,
-    @required int actionKey,
+  Future<Response?> check_coupon({
+    @required String? token_id,
+    @required String? coupon,
+    @required int? actionKey,
   }) async {
-    Response data;
+    Response? data;
 
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1207,12 +1206,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Preparation_points_json> preparation_points({
-    @required String token_id,
+  Future<Preparation_points_json?> preparation_points({
+    @required String? token_id,
   }) async {
-    Preparation_points_json data;
+    Preparation_points_json? data;
 
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1229,13 +1228,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> edit_points({
-    @required String token_id,
-    @required String total_points,
-    @required String total_points_qr,
+  Future<Response?> edit_points({
+    @required String? token_id,
+    @required String? total_points,
+    @required String? total_points_qr,
   }) async {
-    Response data;
-    FormData formData = new FormData.fromMap({
+    Response? data;
+    FormData ?formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1257,12 +1256,12 @@ class AllNetworking {
   }
 
   Future<Get_all_user_coupons_json> check_phone({
-    @required String token_id,
-    @required String phone,
+    @required String? token_id,
+    @required String? phone,
   }) async {
     var data;
 
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1281,13 +1280,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> logout({
-    @required String token_id,
-    @required String firebase_token,
+  Future<Response?> logout({
+    @required String? token_id,
+    @required String? firebase_token,
   }) async {
-    Response data;
+    Response? data;
 
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1306,11 +1305,11 @@ class AllNetworking {
   }
 
   Future<Response> save_QR({
-    @required String token_id,
-    @required String file,
+    @required String? token_id,
+    @required String? file,
   }) async {
-    Response response;
-    String fileName = 'o';
+    Response? response;
+    String? fileName = 'o';
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -1322,13 +1321,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_all_visitor_points_json> get_all_visitor_points({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
+  Future<Get_all_visitor_points_json?> get_all_visitor_points({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
   }) async {
-    Get_all_visitor_points_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_visitor_points_json ?data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1347,12 +1346,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> delete_points({
-    @required String token_id,
-    @required String visitor_id,
+  Future<Response?> delete_points({
+    @required String? token_id,
+    @required String? visitor_id,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1370,13 +1369,13 @@ class AllNetworking {
     return response;
   }
 
-  Future<Response> empty_points({
-    @required String total_points,
-    @required String phone,
-    @required String token_id,
+  Future<Response?> empty_points({
+    @required String? total_points,
+    @required String? phone,
+    @required String? token_id,
   }) async {
-    Response response;
-    FormData formData = new FormData.fromMap({
+    Response? response;
+    FormData ?formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1395,9 +1394,9 @@ class AllNetworking {
     return response;
   }
 
-  Future<Ios_login_json> ios_login() async {
-    Ios_login_json data;
-    FormData formData = new FormData.fromMap({
+  Future<Ios_login_json?> ios_login() async {
+    Ios_login_json? data;
+    FormData ?formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
     });
@@ -1416,10 +1415,10 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_current_orders_json> get_current_orders(
-      {@required String token_id}) async {
-    Get_current_orders_json data;
-    FormData formData = new FormData.fromMap({
+  Future<Get_current_orders_json?> get_current_orders(
+      {@required String? token_id}) async {
+    Get_current_orders_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1439,11 +1438,11 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_Waiting_Orders_json> get_waiting_orders({
-    @required String token_id,
+  Future<Get_Waiting_Orders_json?> get_waiting_orders({
+    @required String? token_id,
   }) async {
-    Get_Waiting_Orders_json data;
-    FormData formData = new FormData.fromMap({
+    Get_Waiting_Orders_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1461,14 +1460,14 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> update_order({
-    @required String token_id,
-    @required String id_order,
-    @required int key_action,
+  Future<Response?> update_order({
+    @required String? token_id,
+    @required String? id_order,
+    @required int? key_action,
   }) async {
-    Response data;
+    Response? data;
 
-    FormData formData = new FormData.fromMap({
+    FormData ?formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1487,12 +1486,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_order_details_json> get_order_details({
-    @required int id_order,
-    @required String token_id,
+  Future<Get_order_details_json?> get_order_details({
+    @required int? id_order,
+    @required String? token_id,
   }) async {
-    Get_order_details_json data;
-    FormData formData = new FormData.fromMap({
+    Get_order_details_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "id_order": id_order,
@@ -1507,16 +1506,16 @@ class AllNetworking {
       data = Get_order_details_json.fromJson(value.data);
     });
 
-    print(data.result.allProducts[0].productName);
+    print(data?.result?.allProducts?[0].productName);
     //  print(data.result.contactInfo[0].);
     return data;
   }
 
-  Future<Get_previous_orders_json> get_previous_orders({
-    @required String token_id,
+  Future<Get_previous_orders_json?> get_previous_orders({
+    @required String? token_id,
   }) async {
-    Get_previous_orders_json data;
-    FormData formData = new FormData.fromMap({
+    Get_previous_orders_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1533,12 +1532,12 @@ class AllNetworking {
     return data;
   }
 
-  Future<Cancel_order_json> delete_order({
-    @required String token_id,
-    @required int order_id,
+  Future<Cancel_order_json?> delete_order({
+    @required String? token_id,
+    @required int? order_id,
   }) async {
-    Cancel_order_json data;
-    FormData formData = new FormData.fromMap({
+    Cancel_order_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1556,11 +1555,11 @@ class AllNetworking {
     return data;
   }
 
-  Future<Gate_list_rate_json> gate_list_rate({
-    @required String token_id,
+  Future<Gate_list_rate_json?> gate_list_rate({
+    @required String? token_id,
   }) async {
-    Gate_list_rate_json data;
-    FormData formData = new FormData.fromMap({
+    Gate_list_rate_json? data;
+    FormData ?formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1578,11 +1577,11 @@ class AllNetworking {
     return data;
   }
 
-  Future<Gate_list_location_json> gate_list_location({
-    @required String token_id,
+  Future<Gate_list_location_json?> gate_list_location({
+    @required String? token_id,
   }) async {
-    Gate_list_location_json data;
-    FormData formData = new FormData.fromMap({
+    Gate_list_location_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1600,14 +1599,14 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_all_gallery_offers_json> get_all_gallery_offers({
-    @required String token_id,
-    @required int limit,
-    @required int page_number,
-    @required int offer_id,
+  Future<Get_all_gallery_offers_json?> get_all_gallery_offers({
+    @required String? token_id,
+    @required int? limit,
+    @required int? page_number,
+    @required int? offer_id,
   }) async {
-    Get_all_gallery_offers_json data;
-    FormData formData = new FormData.fromMap({
+    Get_all_gallery_offers_json? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1628,10 +1627,10 @@ class AllNetworking {
   }
 
   Future delete_img_gallery_offer({
-    @required String token_id,
-    @required String img_id,
+    @required String? token_id,
+    @required String? img_id,
   }) async {
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1647,17 +1646,17 @@ class AllNetworking {
   }
 
   Future add_gallery_offer(
-      {@required String token_id,
-      @required int offer_id,
-      @required File file}) async {
-    Response response;
-    String fileName = file.path.split('/').last;
+      {@required String? token_id,
+      @required int? offer_id,
+      @required File? file}) async {
+    Response? response;
+    String? fileName = file?.path.split('/').last;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
       "offer_id": offer_id,
-      "file": await MultipartFile.fromFile(file.path,
+      "file": await MultipartFile.fromFile(file!.path,
           filename: fileName, contentType: new MediaType('image', 'png')),
     });
     await dio
@@ -1668,12 +1667,12 @@ class AllNetworking {
         .then((value) {});
   }
 
-  Future<Response> editPassword(
-      {String phone,
-      String password,
-      String confirmPassword,
-      String lang}) async {
-    Response data;
+  Future<Response?> editPassword(
+      {String? phone,
+      String ?password,
+      String ?confirmPassword,
+      String ?lang}) async {
+    Response? data;
 
     FormData formData = FormData.fromMap({
       "key": "1234567890",
@@ -1695,10 +1694,10 @@ class AllNetworking {
   }
 
   final box = GetStorage();
-  Future<Response> forgetPassword({String phone, String lang}) async {
-    Response data;
+  Future<Response?> forgetPassword({String? phone, String? lang}) async {
+    Response? data;
 
-    FormData formData =
+    FormData? formData =
         FormData.fromMap({"key": "1234567890", "phone": phone, "lang": lang});
     await dio
         .post(
@@ -1707,14 +1706,14 @@ class AllNetworking {
     )
         .then((value) {
       data = value;
-      print(data.data.toString());
-      if (data.data["status"]) {
+      print(data?.data.toString());
+      if (data?.data["status"]) {
         NotificationHelper().initializeNotification();
         NotificationHelper().requestIOSPermissions();
         NotificationHelper()
-            .displayNotification(title: "Code", body: data.data["result"])
+            .displayNotification(title: "Code", body: data?.data["result"])
             .then((value) {
-          box.write('code', data.data["result"]);
+          box.write('code', data?.data["result"]);
         });
       }
     });
@@ -1722,13 +1721,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<TagsModel> getAllTags({
-    @required String token_id,
-    @required String pageNumber,
-    @required String limit,
+  Future<TagsModel?> getAllTags({
+    @required String? token_id,
+    @required String? pageNumber,
+    @required String? limit,
   }) async {
-    TagsModel data;
-    FormData formData = new FormData.fromMap({
+    TagsModel? data;
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1748,11 +1747,11 @@ class AllNetworking {
   }
 
   Future editTags({
-    @required String token_id,
-    @required String tagName,
-    @required int tagId,
+    @required String? token_id,
+    @required String? tagName,
+    @required int? tagId,
   }) async {
-    FormData formData = new FormData.fromMap({
+    FormData? formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
@@ -1769,8 +1768,8 @@ class AllNetworking {
   }
 
   Future deleteTags({
-    @required String token_id,
-    @required int tagId,
+    @required String? token_id,
+    @required int? tagId,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1790,8 +1789,8 @@ class AllNetworking {
   }
 
   Future addTags({
-    @required String token_id,
-    @required String tagName,
+    @required String? token_id,
+    @required String? tagName,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1809,8 +1808,8 @@ class AllNetworking {
   }
 
   Future getTagsDetails({
-    @required String token_id,
-    @required int tagId,
+    @required String? token_id,
+    @required int? tagId,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1830,8 +1829,8 @@ class AllNetworking {
   }
 
   Future deleteRate({
-    @required String token_id,
-    @required int rateId,
+    @required String? token_id,
+    @required int? rateId,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1851,8 +1850,8 @@ class AllNetworking {
   }
 
   Future<Response> addPoints({
-    @required String token_id,
-    @required String coupon,
+    @required String? token_id,
+    @required String? coupon,
   }) async {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",

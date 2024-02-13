@@ -1,17 +1,27 @@
 import 'package:commercial_app/scr/login.dart';
 import 'package:commercial_app/scr/statistics.dart';
 import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_storage/get_storage.dart';
 import 'Translation/Trans.dart';
+import 'firebase_options.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  debugPrint("Handling a background message: ${message.messageType}");
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FCMConfig.instance.init(
+      onBackgroundMessage: _firebaseMessagingBackgroundHandler,
+      defaultAndroidChannel: AndroidNotificationChannel(
+          'high_importance_channel', // same as value from android setup
+          'Fcm config'));
   runApp(MyApp());
 }
 
@@ -19,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final box = GetStorage();
-    String token = box.read('token');
+    String? token = box.read('token');
     return GetMaterialApp(
         locale: LocalizationService.locale,
         translations: LocalizationService(),

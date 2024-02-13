@@ -3,7 +3,7 @@ import 'package:commercial_app/utilitie/jsondata/get_all_products_JSON.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget productListItem({high, AllProducts data, fun, funedit, bool offer}) {
+Widget productListItem({high, AllProducts? data, fun, funedit, bool? offer}) {
   return Directionality(
     textDirection: TextDirection.rtl,
     child: Card(
@@ -18,7 +18,7 @@ Widget productListItem({high, AllProducts data, fun, funedit, bool offer}) {
                   right: 2,
                   child: Container(
                     child: Image.network(
-                      data.productImage,
+                      data?.productImage??'',
                       fit: BoxFit.fill,
                     ),
                     width: high * .17,
@@ -32,21 +32,21 @@ Widget productListItem({high, AllProducts data, fun, funedit, bool offer}) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.productName,
+                        data?.productName??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        data.productNameEn,
+                        data?.productNameEn??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
                             fontSize: 16),
                       ),
                       Text(
-                        data.nameTr,
+                        data?.nameTr??'',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
@@ -59,17 +59,17 @@ Widget productListItem({high, AllProducts data, fun, funedit, bool offer}) {
                       //       color: Colors.black,
                       //       fontSize: 16),
                       // ),
-                      data.price.trim().isEmpty
+                      data!.price!.trim().isEmpty
                           ? SizedBox()
                           : Text(
-                              ' السعر   ' + data.price,
+                              ' السعر ${ data.price}',
                               style: TextStyle(
                                   fontFamily: 'Arbf',
                                   color: Colors.black,
                                   fontSize: 16),
                             ),
                       Text(
-                        ' الكميه في المخزن   ' + data.stock,
+                        ' الكميه في المخزن ${ data.stock}',
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.black,
@@ -84,7 +84,7 @@ Widget productListItem({high, AllProducts data, fun, funedit, bool offer}) {
                           SizedBox(
                             width: 8,
                           ),
-                          offer
+                          offer!
                               ? SizedBox()
                               : InkWell(
                                   child: Icon(Icons.article_outlined),

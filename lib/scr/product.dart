@@ -23,13 +23,13 @@ List<AllProducts> list = [];
 int sizelist=0;
 bool getprodect = true;
 int limit = 10;
-String token;
-String phone;
+String? token;
+String? phone;
 
 class _ProductScrState extends State<ProductScr> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -119,21 +119,21 @@ class _ProductScrState extends State<ProductScr> {
 
                           Get_all_products_JSON data =
                           Get_all_products_JSON.fromJson(
-                              json.decode(snapdata.data.body));
-                          sizelist=data.result.allProducts.length;
+                              json.decode(snapdata.data!.body));
+                          sizelist=data.result!.allProducts!.length;
                           return ListView.builder(
-                              itemCount: data.result.allProducts.length,controller: _scrollController,
+                              itemCount: data.result?.allProducts?.length,controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return productListItem(
                                     high: high,offer: false,
-                                    data: data.result.allProducts[pos],
+                                    data: data.result?.allProducts?[pos],
                                     fun: () async {
                                       getprodect = true;
                                       setState(() {});
                                       _allNetworking
                                           .delete_product(
                                           token_id: token,
-                                          product_id:data.result.allProducts[pos].productId)
+                                          product_id:data.result?.allProducts?[pos].productId)
                                           .then((value) {
                                         // var v = json.decode(value.body);
 
@@ -142,14 +142,14 @@ class _ProductScrState extends State<ProductScr> {
                                       );
                                     },
                                     funedit: () {
-                                      print(data.result.allProducts[pos].productId);
+                                      print(data.result?.allProducts?[pos].productId);
 
                                       Navigator.push(
                                         context,
                                         new MaterialPageRoute(
                                             builder: (context) => EditProduct(
                                               proid: int.parse(
-                                                  data.result.allProducts[pos].productId),
+                                                  data.result?.allProducts?[pos].productId??''),
                                               token: token,
                                             )),
                                       );
@@ -167,9 +167,9 @@ class _ProductScrState extends State<ProductScr> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+        _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
 
       if (sizelist > 8) {
 

@@ -16,7 +16,7 @@ class Get_previous_orders extends StatefulWidget {
 
 class _Get_previous_ordersState extends State<Get_previous_orders> {
   final box = GetStorage();
-  String token;
+  String? token;
   AllNetworking _allNetworking = AllNetworking();
 
   @override
@@ -36,7 +36,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
         top: true,
         child: Scaffold(
           body: token != null
-              ? StreamBuilder<Get_previous_orders_json>(
+              ? StreamBuilder<Get_previous_orders_json?>(
                   stream: _allNetworking
                       .get_previous_orders(token_id: token)
                       .asStream(),
@@ -44,9 +44,9 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                     print(snapshot.data);
 
                     if (snapshot.hasData) {
-                      if (snapshot.data.result.allOrders.length > 0) {
+                      if (snapshot.data!.result!.allOrders!.length > 0) {
                         return ListView.builder(
-                            itemCount: snapshot.data.result.allOrders.length,
+                            itemCount: snapshot.data?.result?.allOrders?.length,
                             itemBuilder: (context, pos) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -82,25 +82,20 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                  snapshot.data.result
-                                                      .allOrders[pos].viewStore,
+                                                  snapshot.data?.result?.allOrders?[pos].viewStore??'',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 18)),
                                             ),
-                                            RaisedButton(
-                                                color: Colors.blue[900],
+                                            ElevatedButton(
+                                                // color: Colors.blue[900],
                                                 onPressed: () {
                                                   _allNetworking
                                                       .delete_order(
                                                           token_id: token,
-                                                          order_id: snapshot
-                                                              .data
-                                                              .result
-                                                              .allOrders[pos]
-                                                              .idOrder)
+                                                          order_id: snapshot.data?.result?.allOrders?[pos].idOrder)
                                                       .then((value) {
                                                     setState(() {});
                                                     // Get.snackbar(
@@ -132,9 +127,8 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].idOrder
-                                                .toString()),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].idOrder
+                                                .toString()??''),
                                           ),
                                         ],
                                       ),
@@ -190,8 +184,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].totalProduct),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].totalProduct??''),
                                           ),
                                         ],
                                       ),
@@ -211,8 +204,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].date),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].date??''),
                                           ),
                                         ],
                                       ),
@@ -232,8 +224,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                    .allOrders[pos].totalPrice
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].totalPrice??''
                                                 // +
                                                 // " " +
                                                 // snapshot
@@ -270,8 +261,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].fullname),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].fullname??''),
                                           ),
                                         ],
                                       ),
@@ -291,8 +281,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].phone),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].phone??''),
                                           ),
                                         ],
                                       ),
@@ -311,8 +300,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                             ),
                                           ),
                                           Flexible(
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].address),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].address??''),
                                           ),
                                         ],
                                       ),
@@ -333,11 +321,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
                                             child: Container(
-                                              child: Text(snapshot
-                                                  .data
-                                                  .result
-                                                  .allOrders[pos]
-                                                  .antherAddress),
+                                              child: Text(snapshot.data?.result?.allOrders?[pos].antherAddress??''),
                                             ),
                                           ),
                                         ],
@@ -358,8 +342,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].cityName),
+                                            child: Text(snapshot.data?.result?.allOrders?[pos].cityName??''),
                                           ),
                                         ],
                                       ),
@@ -372,21 +355,14 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                               await MapLauncher.installedMaps;
                                           print(availableMaps);
                                           if (await MapLauncher.isMapAvailable(
-                                              MapType.google)) {
+                                              MapType.google)?? false) {
                                             await MapLauncher.showMarker(
                                                 mapType: MapType.google,
                                                 coords: Coords(
                                                   double.parse(snapshot
-                                                      .data
-                                                      .result
-                                                      .allOrders[pos]
-                                                      .lat),
-                                                  double.parse(snapshot
-                                                      .data
-                                                      .result
-                                                      .allOrders[pos]
-                                                      .lag),
-                                                ));
+                                                      .data?.result?.allOrders?[pos].lat??''),
+                                                  double.parse(snapshot.data?.result?.allOrders?[pos].lag??''),
+                                                ), title: '');
                                           }
                                         },
                                         child: Row(
@@ -410,11 +386,11 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                           ],
                                         ),
                                       ),
-                                      FutureBuilder<Get_order_details_json>(
+                                      FutureBuilder<Get_order_details_json?>(
                                           future:
                                               _allNetworking.get_order_details(
-                                            id_order: snapshot.data.result
-                                                .allOrders[pos].idOrder,
+                                            id_order: snapshot.data?.result
+                                                ?.allOrders?[pos].idOrder,
                                             token_id: token,
                                           ),
                                           builder: (context, snapshot) {
@@ -425,13 +401,13 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                                             if (snapshot.hasData) {
                                               for (int i = 0;
                                                   i <
-                                                      snapshot.data.result
-                                                          .allProducts.length;
+                                                      snapshot.data!.result!
+                                                          .allProducts!.length;
                                                   i++) {
                                                 list.add(Productsiteem(
                                                     size: size,
-                                                    offers: snapshot.data.result
-                                                        .allProducts[i]));
+                                                    offers: snapshot.data!.result
+                                                        !.allProducts![i]));
                                               }
                                               return ExpansionTile(
                                                 title: Text('تفاصيل'),
@@ -483,7 +459,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
     );
   }
 
-  Widget Productsiteem({AllProducts offers, size}) {
+  Widget Productsiteem({AllProducts? offers, size}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -511,7 +487,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.network(
-                offers.image,
+                offers?.image??'',
                 width: size.width * .3,
                 height: size.height * .15,
                 fit: BoxFit.fill,
@@ -525,10 +501,10 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
                     child: Container(
                       height: size.height * .1,
                       width: size.width * .3,
-                      child: Text(offers.productName),
+                      child: Text(offers?.productName??''),
                     ),
                   ),
-                  Text(offers.price.toString() + '  ' + offers.currencyName)
+                  Text("${offers?.price?.toString()}  ${offers?.currencyName}")
                 ],
               ),
             ),
@@ -537,7 +513,7 @@ class _Get_previous_ordersState extends State<Get_previous_orders> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(offers.quantity.toString(),
+                  Text(offers?.quantity.toString()??'',
                       style: TextStyle(
                           fontSize: 22,
                           color: Colors.black87,

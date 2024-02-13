@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
-  final String title, description;
+  final String? title, description;
 
 
 
@@ -26,14 +26,14 @@ class CustomDialog extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 20,),
           Text(
-            title,
+            title??'',
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w700,
             ),
           ),
           Text(
-            description,
+            description??'',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16.0,

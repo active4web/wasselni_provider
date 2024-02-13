@@ -23,14 +23,14 @@ class _MapScrState extends State<MapScr> {
     markers.add(
         Marker(
           markerId: MarkerId('1'),
-          position:  LatLng(double.tryParse(widget.allListLocation.lat), double.tryParse(widget.allListLocation.lag)),
+          position:  LatLng(double.tryParse(widget.allListLocation.lat??'')!, double.tryParse(widget.allListLocation.lag??'')!),
           // infoWindow: InfoWindow(
           //     title: 'The title of the marker'
           // )
         )
     );
     final CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(double.parse( widget.allListLocation.lat), double.parse(widget.allListLocation.lag)),
+      target: LatLng(double.parse( widget.allListLocation.lat??''), double.parse(widget.allListLocation.lag??'')),
       zoom: 10,
     );
 

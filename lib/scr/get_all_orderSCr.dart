@@ -5,7 +5,7 @@ import 'package:commercial_app/utilitie/jsondata/get_all_visitor_json.dart';
 import 'package:flutter/material.dart';
 
 class Get_all_order extends StatefulWidget {
-  String token_id;
+  String? token_id;
 
   Get_all_order(this.token_id);
 
@@ -15,11 +15,11 @@ class Get_all_order extends StatefulWidget {
 
 class _Get_all_orderState extends State<Get_all_order> {
   AllNetworking _allNetworking = AllNetworking();
-  TextEditingController _textEditingController=TextEditingController();
+  TextEditingController _textEditingController = TextEditingController();
   int sizelist = 0;
   int limit = 50;
-String f="";
-  ScrollController _scrollController;
+  String f = "";
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -39,24 +39,22 @@ String f="";
               centerTitle: true,
               title: Text('عدد الطلبات'),
             ),
-            body: StreamBuilder<Get_all_order_json>(
+            body: StreamBuilder<Get_all_order_json?>(
                 stream: _allNetworking
                     .get_all_order(
-                    token_id: widget.token_id, limit: limit, page_number: 0)
-                    .asStream() ,
+                        token_id: widget.token_id, limit: limit, page_number: 0)
+                    .asStream(),
                 builder: (context, snapshot) {
 
-                  if (snapshot.hasData) {
-                    List<AllOrders>dat=snapshot.data.result.allOrders;
-                    List<AllOrders>data=[];
+          if (snapshot.hasData) {
+                    List<AllOrders> dat = snapshot.data?.result?.allOrders??[];
+                    List<AllOrders> data = [];
                     dat.forEach((element) {
-if(element.userPhone.contains(f)){
-  data.add(element);
-}
-
-
+                      if (element.userPhone!.contains(f)) {
+                        data.add(element);
+                      }
                     });
-print(data.length);
+                    print(data.length);
                     print("data.length");
                     return Column(
                       children: [
@@ -69,12 +67,12 @@ print(data.length);
                                 children: [
                                   Expanded(
                                       child: TextFormField(
-                                          textAlign: TextAlign.center,controller: _textEditingController,onChanged: (v){
-                                            f=v;
-                                            setState(() {
-
-                                            });
-                                      },
+                                          textAlign: TextAlign.center,
+                                          controller: _textEditingController,
+                                          onChanged: (v) {
+                                            f = v;
+                                            setState(() {});
+                                          },
                                           decoration: InputDecoration(
                                             hintText: 'البحث برقم التلفون',
                                             hintStyle: TextStyle(
@@ -89,7 +87,10 @@ print(data.length);
                         ),
                         Expanded(
                           child: ListView.builder(
-                              itemCount:f.trim().isEmpty? snapshot.data.result.allOrders.length:data.length,controller: _scrollController,
+                              itemCount: f.trim().isEmpty
+                                  ? snapshot.data?.result?.allOrders?.length
+                                  : data.length,
+                              controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -102,44 +103,41 @@ print(data.length);
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                              f.trim().isEmpty?'اسم العميل : ${snapshot.data.result.allOrders[pos].userName}':'اسم العميل : ${data[pos].userName}'),
-                                          Text(
-                                              f.trim().isEmpty? 'رقم التلفون : ${snapshot.data.result.allOrders[pos].userPhone}':'رقم التلفون : ${data[pos].userPhone}'),
+                                          Text(f.trim().isEmpty
+                                              ? 'اسم العميل : ${snapshot.data?.result?.allOrders?[pos].userName}'
+                                              : 'اسم العميل : ${data[pos].userName}'),
+                                          Text(f.trim().isEmpty
+                                              ? 'رقم التلفون : ${snapshot.data?.result?.allOrders?[pos].userPhone}'
+                                              : 'رقم التلفون : ${data[pos].userPhone}'),
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-
-                                              Text( f.trim().isEmpty?'عدد الزيارات : ${snapshot
-                                                  .data
-                                                  .result
-                                                  .allOrders[pos]
-                                                  .totalCountVisit}':'عدد الزيارات : ${data[pos]
-                                                  .totalCountVisit}')
-                                              ,   GestureDetector(
+                                              Text(f.trim().isEmpty
+                                                  ? 'عدد الزيارات : ${snapshot.data?.result?.allOrders?[pos].totalCountVisit}'
+                                                  : 'عدد الزيارات : ${data[pos].totalCountVisit}'),
+                                              GestureDetector(
                                                   onTap: () {
                                                     _allNetworking
                                                         .delete_visitor(
-                                                        token_id:
-                                                        widget.token_id,
-                                                        visitor_id:  f.trim().isEmpty
-                                                            ?snapshot
-                                                            .data
-                                                            .result
-                                                            .allOrders[pos]
-                                                            .orderId:data[pos]
-                                                            .orderId)
+                                                            token_id:
+                                                                widget.token_id,
+                                                            visitor_id: f
+                                                                    .trim()
+                                                                    .isEmpty
+                                                                ? snapshot.data?.result?.allOrders![pos].orderId
+                                                                : data[pos]
+                                                                    .orderId)
                                                         .then((value) {
-                                                      print(value.data);
                                                       setState(() {});
                                                     });
                                                   },
-                                                  child: Icon(Icons.delete)),],
+                                                  child: Icon(Icons.delete)),
+                                            ],
                                           )
                                         ],
                                       ),
@@ -161,9 +159,9 @@ print(data.length);
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

@@ -58,10 +58,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               !login
                   ? Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
+                      child: ElevatedButton(
+                       style: ButtonStyle(
+                         shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                             borderRadius: BorderRadius.circular(24),
+                           ),
+                         )
+                       ),
                         onPressed: () async {
                           if (phoneNumber.text != null) {
                             login = true;
@@ -71,14 +75,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   .forgetPassword(
                                       phone: phoneNumber.text, lang: 'ar')
                                   .then((value) async {
-                                if (value.data["status"]) {
+                                if (value?.data["status"]) {
                                   Navigator.push(
                                     context,
                                     new MaterialPageRoute(
                                         builder: (context) => OtpScreen()),
                                   );
                                 } else {
-                                  Get.snackbar('', value.data["message"]);
+                                  Get.snackbar('', value?.data["message"]);
                                 }
                                 login = false;
                                 setState(() {});
@@ -86,8 +90,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             }
                           }
                         },
-                        padding: EdgeInsets.all(12),
-                        color: hexToColor('#00abeb'),
+                        // padding: EdgeInsets.all(12),
+                        // color: hexToColor('#00abeb'),
                         child: Text('تاكيد',
                             style: TextStyle(color: Colors.white)),
                       ),

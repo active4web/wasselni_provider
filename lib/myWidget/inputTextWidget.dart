@@ -1,7 +1,7 @@
 import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:flutter/material.dart';
 
-Widget inputText({hint,changedata,stram,inputtype, TextEditingController textedet}) {
+Widget inputText({hint,changedata,stram,inputtype, TextEditingController? textedet}) {
 
 return  StreamBuilder(
       stream: stram,
@@ -25,7 +25,7 @@ return  StreamBuilder(
               borderRadius: BorderRadius.circular(5.0),
             ),
             hintText: hint,
-            errorText: snapshot.error,
+            errorText: snapshot.error.toString(),
             hintStyle:
              TextStyle(
                 fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),

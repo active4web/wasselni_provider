@@ -21,7 +21,7 @@ class _TicketDetailsState extends State<TicketDetails> {
   TextEditingController masg=TextEditingController();
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String token;
+  String? token;
 
   @override
   void initState() {
@@ -40,16 +40,16 @@ class _TicketDetailsState extends State<TicketDetails> {
         centerTitle: true,
         title: Text('ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺬﻛﺮﺓ'),
       ),
-      body: Column(children: [StreamBuilder<Ticket_json>(
+      body: Column(children: [StreamBuilder<Ticket_json?>(
         stream:_allNetworking.ticket(token_id: token, ticket_id: widget.ticket_id).asStream(),
         builder: (context, snapshot) {
          if(snapshot.hasData){ return Expanded(
            child: Padding(
              padding: const EdgeInsets.all(16.0),
-             child: ListView.builder(  controller: _scrollController,itemCount: snapshot.data.result.ticketInfo.ticketReplies.length, itemBuilder: (context, pos) {
+             child: ListView.builder(  controller: _scrollController,itemCount: snapshot.data?.result?.ticketInfo?.ticketReplies?.length, itemBuilder: (context, pos) {
                return Padding(
                  padding: const EdgeInsets.only(bottom: 8),
-                 child: MessageBubble(str:snapshot.data.result.ticketInfo.ticketReplies[pos].content,sender:   snapshot.data.result.ticketInfo.ticketReplies[pos].senderType   ),
+                 child: MessageBubble(str:snapshot.data?.result?.ticketInfo?.ticketReplies?[pos].content,sender: snapshot.data!.result!.ticketInfo!.ticketReplies![pos].senderType!  ),
                );
              }),
            ),
@@ -110,7 +110,7 @@ _allNetworking.new_reply(token_id: token, ticket_id: widget.ticket_id, content: 
     );
   }
 
-  Widget MessageBubble({str, int sender}) {
+  Widget MessageBubble({str, int? sender}) {
     if (sender == 0) {
       return ChatBubble(
         clipper: ChatBubbleClipper2(

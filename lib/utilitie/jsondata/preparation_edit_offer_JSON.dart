@@ -1,8 +1,8 @@
 class Preparation_edit_offer_JSON {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Preparation_edit_offer_JSON(
       {this.message, this.codenum, this.status, this.result});
@@ -21,22 +21,22 @@ class Preparation_edit_offer_JSON {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<OfferDetails> offerDetails;
+  List<OfferDetails>? offerDetails;
 
   Result({this.offerDetails});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['offer_details'] != null) {
-      offerDetails = new List<OfferDetails>();
+      offerDetails = <OfferDetails>[];
       json['offer_details'].forEach((v) {
-        offerDetails.add(new OfferDetails.fromJson(v));
+        offerDetails?.add(new OfferDetails.fromJson(v));
       });
     }
   }
@@ -44,25 +44,25 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.offerDetails != null) {
-      data['offer_details'] = this.offerDetails.map((v) => v.toJson()).toList();
+      data['offer_details'] = this.offerDetails?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class OfferDetails {
-  String offersImage;
-  String oldPrice;
-  String newPrice;
-  String offersName;
-  String offerNameEn;
-  String nameTr;
-  String endDate;
-  String startDate;
-  String offersDescription;
-  String descriptionEn;
-  String descriptionTr;
-  int offersId;
+  String? offersImage;
+  String? oldPrice;
+  String? newPrice;
+  String? offersName;
+  String? offerNameEn;
+  String? nameTr;
+  String? endDate;
+  String? startDate;
+  String? offersDescription;
+  String? descriptionEn;
+  String? descriptionTr;
+  int? offersId;
 
   OfferDetails(
       {this.offersImage,

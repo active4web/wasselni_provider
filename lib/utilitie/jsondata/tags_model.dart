@@ -1,8 +1,8 @@
 class TagsModel {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   TagsModel({this.message, this.codenum, this.status, this.result});
 
@@ -20,22 +20,22 @@ class TagsModel {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllListLocation> allListLocation;
+  List<AllListLocation>? allListLocation;
 
   Result({this.allListLocation});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_list_location'] != null) {
-      allListLocation = new List<AllListLocation>();
+      allListLocation = <AllListLocation>[];
       json['all_list_location'].forEach((v) {
-        allListLocation.add(new AllListLocation.fromJson(v));
+        allListLocation?.add(new AllListLocation.fromJson(v));
       });
     }
   }
@@ -44,15 +44,15 @@ class Result {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allListLocation != null) {
       data['all_list_location'] =
-          this.allListLocation.map((v) => v.toJson()).toList();
+          this.allListLocation?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllListLocation {
-  String tagName;
-  int tagId;
+  String? tagName;
+  int? tagId;
 
   AllListLocation({this.tagName, this.tagId});
 

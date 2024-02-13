@@ -1,4 +1,4 @@
-package com.nram.commercial_app
+package com.mystore.wasselni
 
 import io.flutter.embedding.android.FlutterActivity
 

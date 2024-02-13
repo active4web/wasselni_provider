@@ -38,10 +38,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
 
 
 
-  File _image;
+  File? _image;
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String base64Image;
+  String? base64Image;
   bool savedata = false;
 
   @override
@@ -50,7 +50,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
     super.dispose();
   }
 
-  String thename, theenname,thetarkname, theoldprice, theardes, theendes, thenewprice,stock;
+  String? thename, theenname,thetarkname, theoldprice, theardes, theendes, thenewprice,stock;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                             )
                           : CircleAvatar(
                               radius: 50,
-                              backgroundImage: FileImage(_image),
+                              backgroundImage: FileImage(_image!),
                             ),
                     )
                   ],
@@ -367,7 +367,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                       //      title: Text(''),
                       //      content: Text("تم اضافة المنتج"),
                       //      actions: <Widget>[
-                      //        FlatButton(
+                      //        TextButton(
                       //          child: Text("CLOSE"),
                       //          onPressed: () {
                       //            Get.back();
@@ -457,7 +457,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 //                      //      title: Text(''),
                 //                      //      content: Text("تم اضافة المنتج"),
                 //                      //      actions: <Widget>[
-                //                      //        FlatButton(
+                //                      //        TextButton(
                 //                      //          child: Text("CLOSE"),
                 //                      //          onPressed: () {
                 //                      //            Get.back();

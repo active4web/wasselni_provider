@@ -1,44 +1,45 @@
 {
   "project_info": {
-    "project_number": "659324225022",
-    "project_id": "wasselni-a4bff",
-    "storage_bucket": "wasselni-a4bff.appspot.com"
+    "project_number": "1038203745884",
+    "project_id": "wasselni-provider",
+    "storage_bucket": "wasselni-provider.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:659324225022:android:4b91656326cc32fb4e6caf",
+        "mobilesdk_app_id": "1:1038203745884:android:499bbdeec2bde3e5945899",
         "android_client_info": {
-          "package_name": "com.nram.commercial_app"
+          "package_name": "com.mystore.wasselni"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "659324225022-1js231hhlvqc5ttm801duf994ibk4juc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.nram.commercial_app",
-            "certificate_hash": "8eb9a80ee2fec0fb2aca12bfb1874e8e5f80cbe0"
-          }
-        },
-        {
-          "client_id": "659324225022-eid0t4kgrhpkjbclc32uh3rrh1msfdm3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAg-2_DgXYyU4qA2feF8pLgHGFZg7jy1rc"
+          "current_key": "AIzaSyCcvdWuyB0qnbxs5oYVEzviAbMoEOfGAdg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "659324225022-eid0t4kgrhpkjbclc32uh3rrh1msfdm3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038203745884:android:183ad84379e8c6aa945899",
+        "android_client_info": {
+          "package_name": "com.nram.commercial_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcvdWuyB0qnbxs5oYVEzviAbMoEOfGAdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

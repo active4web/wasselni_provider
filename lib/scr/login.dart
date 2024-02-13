@@ -27,18 +27,23 @@ class _LoginScrState extends State<LoginScr> {
 
   final loginButton = Padding(
     padding: EdgeInsets.symmetric(vertical: 16.0),
-    child: RaisedButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
+    child: ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.blue[900]),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        )
       ),
       onPressed: () {},
-      padding: EdgeInsets.all(12),
-      color: hexToColor('#00abeb'),
+      // padding: EdgeInsets.all(12),
+      // color: hexToColor('#00abeb'),
       child: Text('تسجيل الدخول', style: TextStyle(color: Colors.white)),
     ),
   );
 
-  final forgotLabel = FlatButton(
+  final forgotLabel = TextButton(
     child: Text(
       'Forgot password?',
       style: TextStyle(color: Colors.black54),
@@ -61,8 +66,8 @@ class _LoginScrState extends State<LoginScr> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: FutureBuilder<Ios_login_json>(
-            future: _allNetworking.ios_login(),
+        body: FutureBuilder<Ios_login_json?>(
+            future: _allNetworking.ios_login() ,
             builder: (context, data) {
               print(data.data);
               if (data.hasData) {
@@ -82,6 +87,7 @@ class _LoginScrState extends State<LoginScr> {
                           keyboardType: TextInputType.phone,
                           controller: phone,
                           decoration: InputDecoration(
+                            // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             labelText: ' رقم الهاتف',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -104,6 +110,7 @@ class _LoginScrState extends State<LoginScr> {
                         obscureText: isShown,
                         controller: password,
                         decoration: InputDecoration(
+                          // contentPadding: EdgeInsets.symmetric(horizontal: 10),
                           labelText: ' كلمه السر',
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -135,9 +142,14 @@ class _LoginScrState extends State<LoginScr> {
                           ? Center(child: CircularProgressIndicator())
                           : Padding(
                               padding: EdgeInsets.symmetric(vertical: 16.0),
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                    shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  )
                                 ),
                                 onPressed: () async {
                                   if (phone.text != null &&
@@ -147,38 +159,34 @@ class _LoginScrState extends State<LoginScr> {
                                     await _pushNotificationManagger
                                         .init()
                                         .then((valueee) async {
-                                      print(
-                                          'fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-                                      print(valueee);
-                                      print(
-                                          'fireeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
                                       await _allNetworking.Login(
                                               phone: phone.text,
                                               password: password.text,
-                                              firebase_token: valueee,
+                                              firebase_token: 'valueee',
                                               lang: 'ar')
                                           .then((value) async {
-                                        if (value.status) {
+                                            print('a'*100);
+                                        if (value!.status!) {
                                           await box.write('phone',
-                                              value.result.agentData.phone);
+                                              value.result?.agentData?.phone);
                                           await box.write(
-                                              'firebase_token', valueee);
+                                              'firebase_token', 'valueee');
                                           await box.write('name',
-                                              value.result.agentData.name);
+                                              value.result?.agentData?.name);
                                           await box.write('token',
-                                              value.result.agentData.token);
+                                              value.result?.agentData?.token);
                                           await box.write('email',
-                                              value.result.agentData.email);
+                                              value.result?.agentData?.email);
                                           await box.write(
-                                              'id', value.result.agentData.id);
+                                              'id', value.result?.agentData?.id);
                                           Navigator.pushAndRemoveUntil(
                                               context,
                                               new MaterialPageRoute(
                                                   builder: (context) =>
                                                       Statisticss()),
-                                              (Route<dynamic> route) => false);
+                                              (Route<dynamic> route) => false);setState(() {});
                                         } else {
-                                          Get.snackbar('', value.message);
+                                          Get.snackbar('', value.message??'');
                                         }
                                         login = false;
                                         setState(() {});
@@ -186,8 +194,8 @@ class _LoginScrState extends State<LoginScr> {
                                     });
                                   }
                                 },
-                                padding: EdgeInsets.all(12),
-                                color: hexToColor('#00abeb'),
+                                // padding: EdgeInsets.all(12),
+                                // color: hexToColor('#00abeb'),
                                 child: Text('تسجيل الدخول',
                                     style: TextStyle(color: Colors.white)),
                               ),

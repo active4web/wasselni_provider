@@ -13,8 +13,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditOffer extends StatefulWidget {
-  String token;
-  int offid;
+  String? token;
+  int? offid;
 
   EditOffer({this.offid, this.token});
 
@@ -25,10 +25,10 @@ class EditOffer extends StatefulWidget {
 class _EditOfferState extends State<EditOffer> {
   datavalidatorAddOffer v = datavalidatorAddOffer();
   AllNetworking _allNetworking = AllNetworking();
-  DateTime startpickDate;
-  DateTime startpick;
-  DateTime endpick;
-  DateTime endpickDate;
+  DateTime? startpickDate;
+  DateTime? startpick;
+  DateTime? endpick;
+  DateTime? endpickDate;
   final box = GetStorage();
   TextEditingController pronamear = TextEditingController();
   TextEditingController pronameen = TextEditingController();
@@ -43,7 +43,7 @@ class _EditOfferState extends State<EditOffer> {
 
 
 
-  File _image;
+  File? _image;
   bool savedata = false;
 
   @override
@@ -73,25 +73,25 @@ class _EditOfferState extends State<EditOffer> {
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
           ),
-          body: StreamBuilder<Preparation_edit_offer_JSON>(
+          body: StreamBuilder<Preparation_edit_offer_JSON?>(
               stream: _allNetworking
                   .preparation_edit_details(
                       token_id: widget.token, offer_id: widget.offid)
-                  .asStream(),
+                  .asStream() ,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   pronamear.text =
-                      snapshot.data.result.offerDetails[0].offersName;
+                      snapshot.data?.result?.offerDetails?[0].offersName??'';
                   pronameen.text =
-                      snapshot.data.result.offerDetails[0].offerNameEn;
+                      snapshot.data?.result?.offerDetails?[0].offerNameEn??'';
                   detailsar.text =
-                      snapshot.data.result.offerDetails[0].offersDescription;
+                      snapshot.data?.result?.offerDetails?[0].offersDescription??'';
                   detailsen.text =
-                      snapshot.data.result.offerDetails[0].descriptionEn;
+                      snapshot.data?.result?.offerDetails?[0].descriptionEn??'';
                   theoldprice.text =
-                      snapshot.data.result.offerDetails[0].oldPrice;
+                      snapshot.data?.result?.offerDetails?[0].oldPrice??'';
                   thenewprice.text =
-                      snapshot.data.result.offerDetails[0].newPrice ?? ' ';
+                      snapshot.data?.result?.offerDetails?[0].newPrice ?? ' ';
 
                   return Padding(
                     padding:
@@ -128,12 +128,12 @@ class _EditOfferState extends State<EditOffer> {
                                 width: high * .1,
                                 child: _image != null
                                     ? Image.file(
-                                        _image,
+                                        _image!,
                                         fit: BoxFit.fill,
                                       )
                                     : Image.network(
-                                        snapshot.data.result.offerDetails[0]
-                                            .offersImage,
+                                        snapshot.data?.result?.offerDetails?[0]
+                                            .offersImage??'',
                                         fit: BoxFit.fill,
                                       ),
                               ),
@@ -417,8 +417,8 @@ class _EditOfferState extends State<EditOffer> {
                               child: Center(
                                 child: Text(startpick == null
                                     ?"تاريخ البدء ${ snapshot
-                                    .data.result.offerDetails[0].startDate}"
-                                    : "تاريخ البدء: ${startpickDate.year},${startpickDate.month},${startpickDate.day}"),
+                                    .data?.result?.offerDetails?[0].startDate}"
+                                    : "تاريخ البدء: ${startpickDate?.year},${startpickDate?.month},${startpickDate?.day}"),
                               ),
                             )),
                         SizedBox(
@@ -449,8 +449,8 @@ class _EditOfferState extends State<EditOffer> {
                               child: Center(
                                 child: Text(endpick == null
                                     ? "تاريخ انتهاء ${snapshot
-                                    .data.result.offerDetails[0].endDate}"
-                                    : "تاريخ الانتهاء: ${endpickDate.year},${endpickDate.month},${endpickDate.day}"),
+                                    .data?.result?.offerDetails?[0].endDate}"
+                                    : "تاريخ الانتهاء: ${endpickDate?.year},${endpickDate?.month},${endpickDate?.day}"),
                               ),
                             )),
                         SizedBox(
@@ -469,35 +469,29 @@ class _EditOfferState extends State<EditOffer> {
                                   setState(() {});
                                   String token = box.read('token');
 
-                                  String end_date;
+                                  String? end_date;
                                   if (endpick != null) {
-                                    end_date = endpickDate.year.toString() +
+                                    end_date = endpickDate!.year.toString() +
                                         "-" +
-                                        endpickDate.month.toString() +
+                                        endpickDate!.month.toString() +
                                         "-" +
-                                        endpickDate.day.toString();
+                                        endpickDate!.day.toString();
                                   }
 
-                                  String start_date;
-                                  if (startpick != null) {
-                                    start_date = startpickDate.year.toString() +
-                                        "-" +
-                                        startpickDate.month.toString() +
-                                        "-" +
-                                        startpickDate.day.toString();
-                                  }
-print(start_date);
-                                  print(end_date);
+                                  String? start_date;
                                   print('6666666666666666666666666666666666666666666666');
-                                  _allNetworking
-                                      .edit_offer(
-                                          start_date: start_date == null
-                                              ? snapshot.data.result
-                                                  .offerDetails[0].startDate
+                                  if (startpick != null) {
+                                    start_date = startpickDate!.year.toString() +
+                                        "-" +
+                                        startpickDate!.month.toString() +
+                                        "-" +
+                                        startpickDate!.day.toString();
+                                  }
+                                  _allNetworking.edit_offer(start_date:start_date == null
+                                              ? snapshot.data!.result!.offerDetails![0].startDate
                                               : start_date,
                                           end_date: end_date == null
-                                              ? snapshot.data.result
-                                                  .offerDetails[0].endDate
+                                              ? snapshot.data!.result!.offerDetails![0].endDate
                                               : end_date,
                                           token_id: token,
                                           title: pronamear.text,description_tr: details_tr.text??"",name_tr: name_tr.text??"",
@@ -519,7 +513,7 @@ print(start_date);
                                         title: Text( ''),
                                         content: Text("تم تعديل العرض"),
                                         actions: <Widget>[
-                                          FlatButton(
+                                          TextButton(
                                             child: Text("CLOSE"),
                                             onPressed: () {
                                               Get.back();

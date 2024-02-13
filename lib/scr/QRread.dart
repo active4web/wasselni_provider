@@ -164,7 +164,7 @@ class _QRReadState extends State<QRRead> {
   }
 
   Future _scan() async {
-    barcode = await scanner.scan();
+    barcode = (await scanner.scan())!;
     if (barcode == null) {
       print('nothing return.');
     } else {

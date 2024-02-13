@@ -1,9 +1,9 @@
 class Get_all_gallery_offers_json {
-  String message;
-  int messageid;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  int? total;
+  Result? result;
 
   Get_all_gallery_offers_json(
       {this.message, this.messageid, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Get_all_gallery_offers_json {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllGalleries> allGalleries;
+  List<AllGalleries>? allGalleries;
 
   Result({this.allGalleries});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_galleries'] != null) {
-      allGalleries = new List<AllGalleries>();
+      allGalleries = <AllGalleries>[];
       json['all_galleries'].forEach((v) {
-        allGalleries.add(new AllGalleries.fromJson(v));
+        allGalleries?.add(new AllGalleries.fromJson(v));
       });
     }
   }
@@ -47,15 +47,15 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allGalleries != null) {
-      data['all_galleries'] = this.allGalleries.map((v) => v.toJson()).toList();
+      data['all_galleries'] = this.allGalleries?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllGalleries {
-  String offerImage;
-  String imgId;
+  String? offerImage;
+  String? imgId;
 
   AllGalleries({this.offerImage, this.imgId});
 

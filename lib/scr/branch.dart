@@ -20,7 +20,7 @@ class Branch extends StatefulWidget {
 class _BranchState extends State<Branch> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String token;
+  String? token;
 
   @override
   void initState() {
@@ -78,28 +78,26 @@ class _BranchState extends State<Branch> {
             ),
             Expanded(
               flex: 1,
-              child: StreamBuilder<Get_all_branches_JSON>(
-                  stream: _allNetworking
-                      .get_all_branches(token_id: token)
-                      .asStream(),
+              child: StreamBuilder<Get_all_branches_JSON?>(
+                  stream: _allNetworking.get_all_branches(token_id: token).asStream(),
                   builder: (context, snapshot) {
                     // .
                     if (snapshot.hasData) {
                       return ListView.builder(
                           padding: EdgeInsets.all(4),
-                          itemCount: snapshot.data.result.allProducts.length,
+                          itemCount: snapshot.data?.result?.allProducts?.length,
                           itemBuilder: (context, pos) {
                             return branchItemWidg(
 
                                 high: high,context: context,
                                 width: width,
-                                branch: snapshot.data.result.allProducts[pos],
+                                branch: snapshot.data?.result?.allProducts?[pos],
                                 fundel: () {
                                   _allNetworking
                                       .delete_branch(
                                           token_id: token,
-                                          id_branch: snapshot.data.result
-                                              .allProducts[pos].prodId)
+                                          id_branch: snapshot.data?.result
+                                              ?.allProducts?[pos].prodId)
                                       .then((value) {
                                         print(value);
                                         setState(() {

@@ -21,7 +21,7 @@ class _QRPointsState extends State<QRPoints> {
   bool search = false;
   String f = "";
   List<AllVisitoe> searchData = [];
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
   TextEditingController _startDate=TextEditingController();
   TextEditingController _endDate=TextEditingController();
 
@@ -44,17 +44,17 @@ class _QRPointsState extends State<QRPoints> {
               style: TextStyle(
                   fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
         ),
-        body: StreamBuilder<Get_all_user_coupons_json>(
+        body: StreamBuilder<Get_all_user_coupons_json?>(
             stream: _allNetworking
                 .get_all_qr_points(
                     token_id: box.read('token'), limit: limit, page_number: 0)
-                .asStream(),
+                .asStream() ,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<AllVisitoe> dat = snapshot.data.result.allVisitoe;
+                List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe??[];
                 List<AllVisitoe> data = [];
                 dat.forEach((element) {
-                  if (element.userPhone.contains(f)) {
+                  if (element.userPhone!.contains(f)) {
                     data.add(element);
                   }
                 });
@@ -111,7 +111,7 @@ class _QRPointsState extends State<QRPoints> {
                               suffix: InkWell(
                                   onTap: ()async {
                                     var result = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2021), lastDate: DateTime(2050));
-                                    _startDate.text = intl.DateFormat("yyyy-MM-dd").format(result);
+                                    _startDate.text = intl.DateFormat("yyyy-MM-dd").format(result!);
                                   },
                                   child: Icon(Icons.calendar_today)),
 
@@ -144,7 +144,7 @@ class _QRPointsState extends State<QRPoints> {
                               suffix: InkWell(
                                 onTap: ()async {
                                   var result = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2021), lastDate: DateTime(2050));
-                                  _endDate.text = intl.DateFormat("yyyy-MM-dd").format(result);
+                                  _endDate.text = intl.DateFormat("yyyy-MM-dd").format(result!);
                                 },
                                   child: Icon(Icons.calendar_today)),
                               hintStyle:
@@ -158,7 +158,7 @@ class _QRPointsState extends State<QRPoints> {
                               .filter_points(
                               token_id: box.read('token'),startDate: _startDate.text,endDate: _endDate.text,limit: limit,page_number: 0);
                           searchData = [];
-                          result.result.allVisitoe.forEach((element) {
+                          result?.result?.allVisitoe?.forEach((element) {
                             searchData.add(element);
                           });
                           print(searchData.length);
@@ -226,8 +226,8 @@ class _QRPointsState extends State<QRPoints> {
                                                     coupon_id:  f.trim().isEmpty
                                                         ? snapshot
                                                         .data
-                                                        .result
-                                                        .allVisitoe[pos]
+                                                        ?.result
+                                                        ?.allVisitoe![pos]
                                                         .visitorId:data[pos]
                                                         .visitorId)
                                                     .then((value) {
@@ -244,7 +244,7 @@ class _QRPointsState extends State<QRPoints> {
                           }),
                     ) : Expanded(
                       child: ListView.builder(
-                          itemCount:  f.trim().isEmpty ? snapshot.data.result.allVisitoe.length: data.length,
+                          itemCount:  f.trim().isEmpty ? snapshot.data?.result?.allVisitoe?.length: data.length,
                           controller: _scrollController,
                           itemBuilder: (context, pos) {
                             return Directionality(
@@ -263,7 +263,7 @@ class _QRPointsState extends State<QRPoints> {
                                     children: [
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}'
+                                            ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
                                             : 'اسم العميل : ${data[pos].userName}' ,
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -272,7 +272,7 @@ class _QRPointsState extends State<QRPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}'
+                                            ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
                                             : 'رقم التلفون : ${data[pos].userPhone}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -281,7 +281,7 @@ class _QRPointsState extends State<QRPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'نقاط المسح : ${snapshot.data.result.allVisitoe[pos].serviceCoupon}': 'نقاط المسح : ${data[pos].serviceCoupon}',
+                                            ?  'نقاط المسح : ${snapshot.data?.result?.allVisitoe?[pos].serviceCoupon}': 'نقاط المسح : ${data[pos].serviceCoupon}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -289,7 +289,7 @@ class _QRPointsState extends State<QRPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'تاريخ المسح : ${snapshot.data.result.allVisitoe[pos].date}':'تاريخ المسح : ${data[pos].date}',
+                                            ?  'تاريخ المسح : ${snapshot.data?.result?.allVisitoe?[pos].date}':'تاريخ المسح : ${data[pos].date}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -306,8 +306,8 @@ class _QRPointsState extends State<QRPoints> {
                                                     coupon_id:  f.trim().isEmpty
                                                         ? snapshot
                                                         .data
-                                                        .result
-                                                        .allVisitoe[pos]
+                                                        ?.result
+                                                        ?.allVisitoe![pos]
                                                         .visitorId:data[pos]
                                                         .visitorId)
                                                     .then((value) {
@@ -344,9 +344,9 @@ class _QRPointsState extends State<QRPoints> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

@@ -10,7 +10,7 @@ class RateTitle extends StatefulWidget {
 
 class _RateTitleState extends State<RateTitle> {
   final box = GetStorage();
-  String token;
+  String? token;
   AllNetworking _allNetworking = AllNetworking();
 
   @override
@@ -24,12 +24,12 @@ class _RateTitleState extends State<RateTitle> {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          body: FutureBuilder<Gate_list_rate_json>(
+          body: FutureBuilder<Gate_list_rate_json?>(
               future: _allNetworking.gate_list_rate(token_id: token),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
-                    itemCount: snapshot.data.result.allRate.length,
+                    itemCount: snapshot.data?.result?.allRate?.length,
                     itemBuilder: (context, pos) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -46,7 +46,7 @@ class _RateTitleState extends State<RateTitle> {
                                     child: Row(
                                       children: [
                                         Text(
-                                            ' الاسم : ${snapshot.data.result.allRate[pos].username}')
+                                            ' الاسم : ${snapshot.data?.result?.allRate?[pos].username}')
                                       ],
                                     ),
                                   ),
@@ -56,7 +56,7 @@ class _RateTitleState extends State<RateTitle> {
                                       AllNetworking().deleteRate(
                                           token_id: token,
                                           rateId: snapshot
-                                              .data.result.allRate[pos].rateId);
+                                              .data?.result?.allRate?[pos].rateId);
                                       setState(() {});
                                     },
                                   )
@@ -67,7 +67,7 @@ class _RateTitleState extends State<RateTitle> {
                                 child: Row(
                                   children: [
                                     Text(
-                                        '  التقيم  ${snapshot.data.result.allRate[pos].userrate}'),
+                                        '  التقيم  ${snapshot.data?.result?.allRate?[pos].userrate}'),
                                     SizedBox(
                                       width: 8,
                                     ),
@@ -80,7 +80,7 @@ class _RateTitleState extends State<RateTitle> {
                                 child: Row(
                                   children: [
                                     Text(
-                                        'تعليقات ${snapshot.data.result.allRate[pos].usercomment}')
+                                        'تعليقات ${snapshot.data?.result?.allRate?[pos].usercomment}')
                                   ],
                                 ),
                               )

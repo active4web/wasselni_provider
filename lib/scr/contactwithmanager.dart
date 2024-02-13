@@ -16,21 +16,21 @@ class _ContactWithManagerState extends State<ContactWithManager> {
   String data = '';
   String title = '';
   bool senddata = false;
-  String token;
+  String? token;
 bool getdata=true;
   @override
   void initState() {
     super.initState();
     token = box.read('token');
     _allNetworking.tickets_types(token_id: token).then((value) {
-      dataaa=value.result .ticketsTypes;
+      dataaa=value!.result!.ticketsTypes!;
       getdata=false;
     setState(() {
 
     });});
   }
 
-  TicketsTypes dropdownValue  ;
+  TicketsTypes? dropdownValue  ;
 List<TicketsTypes>dataaa=[];
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ List<TicketsTypes>dataaa=[];
                           height: 2,
                           color: Colors.black,
                         ),
-                        onChanged: (TicketsTypes newValue) {
+                        onChanged: ( newValue) {
                           setState(() {
                             dropdownValue = newValue;
                           });
@@ -71,7 +71,7 @@ List<TicketsTypes>dataaa=[];
                             .map<DropdownMenuItem<TicketsTypes>>((TicketsTypes value) {
                           return DropdownMenuItem<TicketsTypes>(
                             value: value,
-                            child: Text(value.name),
+                            child: Text(value.name??''),
                           );
                         }).toList(),
                       ) ,
@@ -155,11 +155,11 @@ List<TicketsTypes>dataaa=[];
                           _allNetworking
                               .new_ticket(
                                   token_id: token,
-                                  ticket_type_id: dropdownValue.id,
+                                  ticket_type_id: dropdownValue?.id,
                                   title: title,
                                   content: data)
                               .then((value) {
-                            print(value.data);
+                            print(value?.data??'');
                             senddata = false;
                             setState(() {});
                           });

@@ -1,9 +1,9 @@
 class Get_list_notifications_JSON {
-  String message;
-  int codenum;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  int? total;
+  Result? result;
 
   Get_list_notifications_JSON(
       {this.message, this.codenum, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Get_list_notifications_JSON {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllNotifications> allNotifications;
+  List<AllNotifications>? allNotifications;
 
   Result({this.allNotifications});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_notifications'] != null) {
-      allNotifications = new List<AllNotifications>();
+      allNotifications = <AllNotifications>[];
       json['all_notifications'].forEach((v) {
-        allNotifications.add(new AllNotifications.fromJson(v));
+        allNotifications?.add(new AllNotifications.fromJson(v));
       });
     }
   }
@@ -48,18 +48,18 @@ class Result {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allNotifications != null) {
       data['all_notifications'] =
-          this.allNotifications.map((v) => v.toJson()).toList();
+          this.allNotifications?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllNotifications {
-  String title;
-  int id;
-  String body;
-  int isRead;
-  String createdAt;
+  String? title;
+  int? id;
+  String? body;
+  int? isRead;
+  String? createdAt;
 
   AllNotifications(
       {this.title, this.id, this.body, this.isRead, this.createdAt});

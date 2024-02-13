@@ -41,13 +41,13 @@ class _StatisticssState extends State<Statisticss> {
   Uint8List bytes = Uint8List(0);
   String _qrStringgnra = '';
   int _selectedIndex = 0;
-  String token;
+  String? token;
   bool serch = false;
   bool qrgnratt = false;
   bool activediscount = false;
   final box = GetStorage();
   AllNetworking _allNetworking = AllNetworking();
-  File _imge;
+  File? _imge;
   @override
   void initState() {
     super.initState();
@@ -57,7 +57,7 @@ class _StatisticssState extends State<Statisticss> {
   }
 
   void getMessage() async {
-    RemoteMessage initialMessage =
+    RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage?.data != null) {
       if (initialMessage?.data['type'] == '1') {
@@ -91,7 +91,7 @@ class _StatisticssState extends State<Statisticss> {
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     var color = hexToColor('#00abeb');
-    List bottomitem = <BottomNavigationBarItem>[
+    List<BottomNavigationBarItem> bottomitem = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
         label: 'الرئيسية',
@@ -131,15 +131,15 @@ class _StatisticssState extends State<Statisticss> {
 
   Widget swithscren({pos, high, width}) {
     if (pos == 0) {
-      return StreamBuilder<Get_home_json>(
+      return StreamBuilder<Get_home_json?>(
           stream:
               _allNetworking.get_home(token_id: token, lang: 'ar').asStream(),
           builder: (context, snapshot) {
             print(snapshot.data);
 
             if (snapshot.hasData) {
-              Result data = snapshot.data.result;
-              if (data.type == 0) {
+              Result? data = snapshot.data?.result;
+              if (data!.type == 0) {
                 activediscount = false;
               } else {
                 activediscount = true;
@@ -158,7 +158,7 @@ class _StatisticssState extends State<Statisticss> {
                         GestureDetector(
                           onTap: () async {
                             // set up the buttons
-                            Widget cancelButton = FlatButton(
+                            Widget cancelButton = TextButton(
                               child: Text("الفاء"),
                               onPressed: () {
                                 _allNetworking
@@ -170,7 +170,7 @@ class _StatisticssState extends State<Statisticss> {
                                 setState(() {});
                               },
                             );
-                            Widget continueButton = FlatButton(
+                            Widget continueButton = TextButton(
                               child: Text("تنفيذ"),
                               onPressed: () {
                                 _allNetworking
@@ -193,7 +193,7 @@ class _StatisticssState extends State<Statisticss> {
                                   coupon: _textEditingController.text)
                                   .then((value) {
                                 // set up the AlertDialog
-                                print(value.data);
+                                print(value!.data);
                                 if (value.data['status']) {
                                   String user_name =
                                   value.data['data']['user_name'];
@@ -213,7 +213,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 } else {
                                   // set up the button
-                                  Widget okButton = FlatButton(
+                                  Widget okButton = TextButton(
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -309,7 +309,7 @@ class _StatisticssState extends State<Statisticss> {
                               //     );
                               //   } else {
                               //     // set up the button
-                              //     Widget okButton = FlatButton(
+                              //     Widget okButton = TextButton(
                               //       child: Text("OK"),
                               //       onPressed: () {
                               //         Navigator.of(context).pop();
@@ -442,7 +442,7 @@ class _StatisticssState extends State<Statisticss> {
                                         number:data.totalListLocations.toString(),
                                         //data.totalProduct.toString(),
                                         width: width,
-                                        name: data.locationTitle)),
+                                        name: data.locationTitle??'')),
                               ),
                             if (data.showRate == "1")
                               Padding(
@@ -463,7 +463,7 @@ class _StatisticssState extends State<Statisticss> {
                                         number: "",
                                         //data.totalProduct.toString(),
                                         width: width,
-                                        name: data.rateTitle)),
+                                        name: data.rateTitle??'')),
                               ),
                             Padding(
                               padding:
@@ -474,7 +474,7 @@ class _StatisticssState extends State<Statisticss> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              VisitorCount(token)),
+                                              VisitorCount(token!)),
                                     );
                                   },
                                   child: item_home_list(
@@ -495,7 +495,7 @@ class _StatisticssState extends State<Statisticss> {
                                       keyupdata: 0,
                                       dat: true,
                                       width: width,
-                                      number: data.startDate,
+                                      number: data.startDate??'',
                                       number2: data.endDate,
                                       name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
                             ),
@@ -689,7 +689,7 @@ class _StatisticssState extends State<Statisticss> {
           title: Text(''),
           content: Text("تم حفظ الصوره في مكتبة الصور"),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("CLOSE"),
               onPressed: () {
                 Get.back();
@@ -706,14 +706,14 @@ class _StatisticssState extends State<Statisticss> {
   }
 
   Widget item_home_list(
-      {String name,
-      String number,
-      String icon,
+      {String? name,
+      String? number,
+      String? icon,
       width,
-      int keyupdata,
+      int? keyupdata,
       fun,
       number2,
-      bool dat}) {
+      bool? dat}) {
     print("111111111111111111111111111111");
     print(keyupdata);
     print("111111111111111111111111111111");
@@ -768,7 +768,7 @@ class _StatisticssState extends State<Statisticss> {
                     color: Colors.blue,
                     width: 75,
                     child: Image.asset(
-                      icon,
+                      icon!,
                       height: 30,
                       width: 30,
                       color: Colors.white,
@@ -784,19 +784,19 @@ class _StatisticssState extends State<Statisticss> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(name,
+                Text(name??'',
                     style: TextStyle(
                         fontFamily: 'Arbf', color: Colors.black, fontSize: 18)),
                 SizedBox(
                   width: 8,
                 ),
-                dat
+                dat!
                     ? Expanded(
                         flex: 1,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(" من " + number,
+                            Text(" من " + number!,
                                 style: TextStyle(
                                     fontFamily: 'Arbf',
                                     color: Colors.blue,
@@ -809,7 +809,7 @@ class _StatisticssState extends State<Statisticss> {
                           ],
                         ))
                     : Flexible(
-                        child: Text(number,
+                        child: Text(number??'',
                             style: TextStyle(
                                 fontFamily: 'Arbf',
                                 color: Colors.blue,

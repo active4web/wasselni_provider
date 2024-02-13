@@ -12,8 +12,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProduct extends StatefulWidget {
-  String token;
-  int proid;
+  String? token;
+  int? proid;
 
   EditProduct({this.proid, this.token});
 
@@ -33,7 +33,7 @@ class _EditProductState extends State<EditProduct> {
   TextEditingController name_tr = TextEditingController();
   TextEditingController details_tr = TextEditingController();
   TextEditingController thenewprice = TextEditingController();
-  File _image;
+  File? _image;
   bool savedata = false;
   @override
   void dispose() {
@@ -60,29 +60,29 @@ class _EditProductState extends State<EditProduct> {
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
           ),
-          body: StreamBuilder<Preparation_edit_product_JSON>(
+          body: StreamBuilder<Preparation_edit_product_JSON?>(
               stream: _allNetworking
                   .preparation_edit_product(
                       token_id: widget.token, product_id: widget.proid)
-                  .asStream(),
+                  .asStream() ,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  stock.text= snapshot.data.result.allProducts[0].stock;
+                  stock.text= snapshot.data?.result?.allProducts?[0].stock??'';
                   pronamear.text =
-                      snapshot.data.result.allProducts[0].productName;
+                      snapshot.data?.result?.allProducts?[0].productName??'';
                   pronameen.text =
-                      snapshot.data.result.allProducts[0].productNameEn;
+                      snapshot.data?.result?.allProducts?[0].productNameEn??'';
                   detailsar.text =
-                      snapshot.data.result.allProducts[0].productDescription;
+                      snapshot.data?.result?.allProducts?[0].productDescription??'';
                   detailsen.text =
-                      snapshot.data.result.allProducts[0].productDescriptionEn;
-                  name_tr.text= snapshot.data.result.allProducts[0].nameTr;
+                      snapshot.data?.result?.allProducts?[0].productDescriptionEn??'';
+                  name_tr.text= snapshot.data?.result?.allProducts?[0].nameTr??'';
 
-                  details_tr .text= snapshot.data.result.allProducts[0].descriptionTr;
+                  details_tr .text= snapshot.data?.result?.allProducts?[0].descriptionTr??'';
 
 
                   thenewprice.text =
-                      snapshot.data.result.allProducts[0].newPrice ?? ' ';
+                      snapshot.data?.result?.allProducts?[0].newPrice ?? ' ';
 
                   return Padding(
                     padding:
@@ -119,12 +119,12 @@ class _EditProductState extends State<EditProduct> {
                                 width: high * .1,
                                 child: _image != null
                                     ? Image.file(
-                                        _image,
+                                        _image!,
                                         fit: BoxFit.fill,
                                       )
                                     : Image.network(
-                                        snapshot.data.result.allProducts[0]
-                                            .productImage,
+                                        snapshot.data?.result?.allProducts?[0]
+                                            .productImage??'',
                                         fit: BoxFit.fill,
                                       ),
                               ),
@@ -448,7 +448,7 @@ class _EditProductState extends State<EditProduct> {
                                         title: Text( ''),
                                         content: Text("تم التعديل"),
                                         actions: <Widget>[
-                                          FlatButton(
+                                          TextButton(
                                             child: Text("CLOSE"),
                                             onPressed: () {
                                               Get.back();

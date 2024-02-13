@@ -1,9 +1,9 @@
 class Ios_login_json {
-  String message;
-  int codenum;
-  bool status;
-  int loginId;
-  String tokenId;
+  String? message;
+  int? codenum;
+  bool? status;
+  int? loginId;
+  String? tokenId;
 
   Ios_login_json(
       {this.message, this.codenum, this.status, this.loginId, this.tokenId});

@@ -18,7 +18,7 @@ class _QRClientState extends State<QRClient> {
   int limit = 1000;
   final box = GetStorage();
   String f = "";
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -40,17 +40,17 @@ class _QRClientState extends State<QRClient> {
               style: TextStyle(
                   fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
         ),
-        body: StreamBuilder<Get_all_user_coupons_json>(
+        body: StreamBuilder<Get_all_user_coupons_json?>(
             stream: _allNetworking
                 .get_all_user_coupons(
                     token_id: box.read('token'), limit: limit, page_number: 0)
-                .asStream(),
+                .asStream() ,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<AllVisitoe> dat = snapshot.data.result.allVisitoe;
+                List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe??[];
                 List<AllVisitoe> data = [];
                 dat.forEach((element) {
-                  if (element.userPhone.contains(f)) {
+                  if (element.userPhone!.contains(f)) {
                     data.add(element);
                   }
                 });
@@ -86,7 +86,7 @@ class _QRClientState extends State<QRClient> {
                     Expanded(
                       child: ListView.builder(
                           itemCount:  f.trim().isEmpty
-                              ?snapshot.data.result.allVisitoe.length:data.length,
+                              ?snapshot.data?.result?.allVisitoe?.length:data.length,
                           controller: _scrollController,
                           itemBuilder: (context, pos) {
                             return Directionality(
@@ -105,7 +105,7 @@ class _QRClientState extends State<QRClient> {
                                     children: [
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}'
+                                            ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
                                             : 'اسم العميل : ${data[pos].userName}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -114,7 +114,7 @@ class _QRClientState extends State<QRClient> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}'
+                                            ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
                                             : 'رقم التلفون : ${data[pos].userPhone}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -123,7 +123,7 @@ class _QRClientState extends State<QRClient> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'كود الخصم : ${snapshot.data.result.allVisitoe[pos].serviceCoupon}': 'كود الخصم : ${data[pos].serviceCoupon}',
+                                            ?  'كود الخصم : ${snapshot.data?.result?.allVisitoe?[pos].serviceCoupon}': 'كود الخصم : ${data[pos].serviceCoupon}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -131,7 +131,7 @@ class _QRClientState extends State<QRClient> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'تاريخ الاستخدام : ${snapshot.data.result.allVisitoe[pos].date}':'تاريخ الاستخدام : ${data[pos].date}',
+                                            ?  'تاريخ الاستخدام : ${snapshot.data?.result?.allVisitoe?[pos].date}':'تاريخ الاستخدام : ${data[pos].date}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -148,8 +148,8 @@ class _QRClientState extends State<QRClient> {
                                                         coupon_id:  f.trim().isEmpty
                                                             ? snapshot
                                                             .data
-                                                            .result
-                                                            .allVisitoe[pos]
+                                                            ?.result
+                                                            ?.allVisitoe![pos]
                                                             .visitorId:data[pos]
                                                             .visitorId)
                                                     .then((value) {
@@ -185,9 +185,9 @@ class _QRClientState extends State<QRClient> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapForOlder extends StatefulWidget {
-  final double lat;
+  final double? lat;
 
-  final double lag;
+  final double? lag;
   MapForOlder({this.lat, this.lag});
 
   @override
@@ -21,14 +21,14 @@ class _MapForOlderState extends State<MapForOlder> {
   Widget build(BuildContext context) {
     markers.add(Marker(
       markerId: MarkerId('1'),
-      position: LatLng(widget.lat, widget.lag),
+      position: LatLng(widget.lat!, widget.lag!),
 
       // infoWindow: InfoWindow(
       //     title: 'The title of the marker'
       // )
     ));
     final CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(widget.lat, widget.lag),
+      target: LatLng(widget.lat!, widget.lag!),
       zoom: 10,
     );
 

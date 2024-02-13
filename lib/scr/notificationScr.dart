@@ -13,9 +13,9 @@ class NotificationScr extends StatefulWidget {
 class _NotificationScrState extends State<NotificationScr> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  ScrollController _scrollController;
-  String token;
-  String phone;
+  ScrollController? _scrollController;
+  String? token;
+  String? phone;
   int limit = 10;
   int sizelist = 0;
 
@@ -39,7 +39,7 @@ class _NotificationScrState extends State<NotificationScr> {
         centerTitle: true,
         title: Text('التنبيهات'),
       ),
-      body: StreamBuilder<Get_list_notifications_JSON>(
+      body: StreamBuilder<Get_list_notifications_JSON?>(
           stream: _allNetworking
               .get_list_notifications(
               phone: phone, token_id: token, limit: limit, page_number: 0)
@@ -49,18 +49,18 @@ class _NotificationScrState extends State<NotificationScr> {
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ListView.builder(
-                    itemCount: snapshot.data.result.allNotifications.length,
+                    itemCount: snapshot.data?.result?.allNotifications?.length,
                     itemBuilder: (cont, pos) {
                       return GestureDetector(onTap: (){
 
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => NotifictionDetSCR( snapshot.data.result
-                              .allNotifications[pos])),
+                          MaterialPageRoute(builder: (context) => NotifictionDetSCR( snapshot.data!.result
+                              !.allNotifications![pos])),
                         );
                       },
-                        child: Card(color:  snapshot.data.result
-                            .allNotifications[pos].isRead==1?Colors.black12:Colors.grey
+                        child: Card(color:  snapshot.data?.result
+                            ?.allNotifications?[pos].isRead==1?Colors.black12:Colors.grey
                      ,   elevation: 8,
                           child: Container(
                             //height: 100,
@@ -72,8 +72,8 @@ class _NotificationScrState extends State<NotificationScr> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(snapshot.data.result
-                                          .allNotifications[pos].createdAt),
+                                      child: Text(snapshot.data?.result
+                                          ?.allNotifications?[pos].createdAt??''),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -81,8 +81,8 @@ class _NotificationScrState extends State<NotificationScr> {
                                         print ('ggggggggggggggggggggggggggg');
                                         _allNetworking.delete_notification(
                                             token_id: token,
-                                             id_notify:               snapshot.data.result
-                                                .allNotifications[pos].id).then((value) {
+                                             id_notify:               snapshot.data?.result
+                                                ?.allNotifications?[pos].id).then((value) {
                                                   print(value.data);
                                                   setState(() {
 
@@ -97,11 +97,11 @@ class _NotificationScrState extends State<NotificationScr> {
 
                                 },
                                   child:  Text(
-                                          snapshot.data.result.allNotifications[pos]
-                                              .title) ,
+                                          snapshot.data?.result?.allNotifications?[pos]
+                                              .title??'') ,
                                 )
-                              ,  snapshot.data.result
-                                    .allNotifications[pos].isRead==1?Padding(
+                              ,  snapshot.data?.result
+                                    ?.allNotifications?[pos].isRead==1?Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Align(alignment: Alignment.bottomLeft,child: Text( ' تم قراءة الرسالة')),
                                     ):Padding(
@@ -123,9 +123,9 @@ class _NotificationScrState extends State<NotificationScr> {
 
 
   _scrollListener() {
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+        _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
         setState(() {

@@ -1,8 +1,8 @@
 class Get_all_branches_JSON {
-  String message;
-  int messageid;
-  bool status;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  Result? result;
 
   Get_all_branches_JSON(
       {this.message, this.messageid, this.status, this.result});
@@ -21,22 +21,22 @@ class Get_all_branches_JSON {
     data['Messageid'] = this.messageid;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllProducts> allProducts;
+  List<AllProducts>? allProducts;
 
   Result({this.allProducts});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_products'] != null) {
-      allProducts = new List<AllProducts>();
+      allProducts = <AllProducts>[];
       json['all_products'].forEach((v) {
-        allProducts.add(new AllProducts.fromJson(v));
+        allProducts?.add(new AllProducts.fromJson(v));
       });
     }
   }
@@ -44,29 +44,29 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allProducts != null) {
-      data['all_products'] = this.allProducts.map((v) => v.toJson()).toList();
+      data['all_products'] = this.allProducts?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllProducts {
-  String productImage;
-  String brancheName;
-  String brancheNameEn;
-  String nameTr;
-  String phone;
-  String phoneSecond;
-  String views;
-  String view;
-  String phoneThird;
-  int prodId;
-  String lat;
-  String lag;
-  String address;
-  String addressEn;
-  String addressTr;
-  String location;
+  String? productImage;
+  String? brancheName;
+  String? brancheNameEn;
+  String? nameTr;
+  String? phone;
+  String? phoneSecond;
+  String? views;
+  String? view;
+  String? phoneThird;
+  int? prodId;
+  String? lat;
+  String? lag;
+  String? address;
+  String? addressEn;
+  String? addressTr;
+  String? location;
 
   AllProducts(
       {this.productImage,

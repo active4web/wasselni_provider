@@ -15,7 +15,7 @@ class Gallery extends StatefulWidget {
 class _GalleryState extends State<Gallery> {
   final box = GetStorage();
   AllNetworking _allNetworking = AllNetworking();
-  File _image;
+  File? _image;
 bool uplodpic=false;
   @override
   Widget build(BuildContext context) {
@@ -24,17 +24,17 @@ bool uplodpic=false;
         title: Text('ﺼﻮﺭ الغلاف'),
         centerTitle: true,
       ),
-      body: StreamBuilder<Get_list_gallery_json>(
+      body: StreamBuilder<Get_list_gallery_json?>(
           stream: _allNetworking
               .get_list_gallery(token_id: box.read('token'))
-              .asStream(),
+              .asStream() ,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
                 children: [
                   Expanded(
                       child: ListView.builder(
-                          itemCount: snapshot.data.result.allImages.length,
+                          itemCount: snapshot.data?.result?.allImages?.length,
                           itemBuilder: (context, pos) {
                             return Card(
                               elevation: 8,
@@ -54,7 +54,7 @@ bool uplodpic=false;
                                               .30,
                                       width: MediaQuery.of(context).size.width,
                                       child: Image.network(
-                                        snapshot.data.result.allImages[pos].img,
+                                        snapshot.data?.result?.allImages?[pos].img??'',
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -63,8 +63,7 @@ bool uplodpic=false;
                                         _allNetworking
                                             .delete_image(
                                                 token_id: box.read('token'),
-                                                img_id: snapshot.data.result
-                                                    .allImages[pos].id)
+                                                img_id: snapshot.data?.result?.allImages?[pos].id??0)
                                             .then((value) {
                                               setState(() {
 
@@ -78,34 +77,36 @@ bool uplodpic=false;
                               ),
                             );
                           })),
-                  uplodpic?CircularProgressIndicator():  RaisedButton(
+                  uplodpic?CircularProgressIndicator():  ElevatedButton(
                       child: Text('اضافه صوره'),
-                      onPressed: snapshot.data.result.totalImg <=
-                              snapshot.data.result.allImages.length
-                          ? Null
-                          : () async {
-                              var image = await ImagePicker.platform.pickImage(
-                                  source: ImageSource.gallery,
-                                  maxHeight: 1000,
-                                  maxWidth: 1000,
-                                  imageQuality: 100);
-                              setState(() {
-                                if (image != null) {
-                                  _image = File(image.path);
-                                  uplodpic=true;
-                                }
-                              });
+                      onPressed:
+                        snapshot.data!.result!.totalImg! <=
+                            snapshot.data!.result!.allImages!.length
+                            ? null
+                            : () async {
+                          var image = await ImagePicker.platform.pickImage(
+                              source: ImageSource.gallery,
+                              maxHeight: 1000,
+                              maxWidth: 1000,
+                              imageQuality: 100);
+                          setState(() {
+                            if (image != null) {
+                              _image = File(image.path);
+                              uplodpic=true;
+                            }
+                          });
 
-                              _allNetworking
-                                  .add_img(
-                                      token_id: box.read('token'), file: _image)
-                                  .then((value) {
-                                print(value);
-                                setState(() {
-                                  uplodpic=false;
-                                });
-                              });
-                            })
+                          _allNetworking
+                              .add_img(
+                              token_id: box.read('token'), file: _image!)
+                              .then((value) {
+                            print(value);
+                            setState(() {
+                              uplodpic=false;
+                            });
+                          });
+                        }
+                      )
                 ],
               );
             } else {

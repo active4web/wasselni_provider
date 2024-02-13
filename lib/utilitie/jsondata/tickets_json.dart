@@ -1,9 +1,9 @@
 class Tickets_json {
-  String message;
-  int codenum;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  int? total;
+  Result? result;
 
   Tickets_json(
       {this.message, this.codenum, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Tickets_json {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<MyTickets> myTickets;
+  List<MyTickets>? myTickets;
 
   Result({this.myTickets});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['my_tickets'] != null) {
-      myTickets = new List<MyTickets>();
+      myTickets = <MyTickets>[];
       json['my_tickets'].forEach((v) {
-        myTickets.add(new MyTickets.fromJson(v));
+        myTickets?.add(new MyTickets.fromJson(v));
       });
     }
   }
@@ -47,20 +47,20 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.myTickets != null) {
-      data['my_tickets'] = this.myTickets.map((v) => v.toJson()).toList();
+      data['my_tickets'] = this.myTickets?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class MyTickets {
-  int id;
-  String title;
-  String type;
-  String senderType;
-  String color;
-  String content;
-  String createdAt;
+  int? id;
+  String? title;
+  String? type;
+  String? senderType;
+  String? color;
+  String? content;
+  String? createdAt;
 
   MyTickets(
       {this.id,

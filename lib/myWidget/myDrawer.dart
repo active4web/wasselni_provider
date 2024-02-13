@@ -22,8 +22,8 @@ import '../main.dart';
 
 Widget mydrawer(context) {
   AllNetworking _allNetworking = AllNetworking();
-  String phone;
-  String point;
+  String? phone;
+  String? point;
   final box = GetStorage();
   return Drawer(
     child: Container(
@@ -115,29 +115,28 @@ Widget mydrawer(context) {
                     ],
                   ),
                   actions: <Widget>[
-                    FlatButton(
+                    TextButton(
                       child: Text("CLOSE"),
                       onPressed: () {
                         print(phone);
                         Get.back();
                       },
                     ),
-                    FlatButton(
+                    TextButton(
                       child: Text("تنفيذ"),
                       onPressed: () {
                         print(phone);
-                        _allNetworking
-                            .empty_points(
-                                total_points: point,
-                                phone: phone,
+                        _allNetworking.empty_points(
+                                total_points: point??'',
+                                phone: phone??'',
                                 token_id: box.read('token'))
                             .then((value) {
                           Get.dialog(
                             AlertDialog(
                               title: Text(''),
-                              content: Text(value.data['message']),
+                              content: Text('value?.data[message]'),
                               actions: <Widget>[
-                                FlatButton(
+                                TextButton(
                                   child: Text("CLOSE"),
                                   onPressed: () {
                                     Get.back();

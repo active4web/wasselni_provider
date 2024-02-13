@@ -16,7 +16,7 @@ final box = GetStorage();
 int limit = 1000;
 int sizelist = 0;
 
-ScrollController _scrollController;
+ScrollController? _scrollController;
 
 class _TagsScreenState extends State<TagsScreen> {
   @override
@@ -28,9 +28,9 @@ class _TagsScreenState extends State<TagsScreen> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
         setState(() {});
@@ -54,16 +54,16 @@ class _TagsScreenState extends State<TagsScreen> {
           centerTitle: true,
           title: Text('الكلمات البحثية'),
         ),
-        body: StreamBuilder<TagsModel>(
+        body: StreamBuilder<TagsModel?>(
           stream: AllNetworking()
               .getAllTags(
                   token_id: box.read('token'),
                   pageNumber: 0.toString(),
                   limit: limit.toString())
-              .asStream(),
+              .asStream() ,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              sizelist = snapshot.data.result.allListLocation.length;
+              sizelist = snapshot.data?.result?.allListLocation?.length??0;
               return Column(
                 children: [
                   GestureDetector(
@@ -169,7 +169,7 @@ class _TagsScreenState extends State<TagsScreen> {
                         separatorBuilder: (context, index) => SizedBox(
                               height: 10,
                             ),
-                        itemCount: snapshot.data.result.allListLocation.length),
+                        itemCount: snapshot.data?.result?.allListLocation?.length??0),
                   )
                 ],
               );
@@ -182,9 +182,9 @@ class _TagsScreenState extends State<TagsScreen> {
         ));
   }
 
-  Widget buildTagItem(AsyncSnapshot<TagsModel> snapshot, index, hight, width) =>
+  Widget buildTagItem(AsyncSnapshot<TagsModel?> snapshot, index, hight, width) =>
       ListTile(
-        title: Text(snapshot.data.result.allListLocation[index].tagName),
+        title: Text(snapshot?.data?.result?.allListLocation?[index].tagName??''),
         trailing: IntrinsicWidth(
           child: Row(
             children: [
@@ -192,7 +192,7 @@ class _TagsScreenState extends State<TagsScreen> {
                   onPressed: () {
                     var editTagNameController = TextEditingController(
                         text: snapshot
-                            .data.result.allListLocation[index].tagName);
+                            ?.data?.result?.allListLocation?[index].tagName);
                     showDialog(
                       context: context,
                       builder: (context) => Dialog(
@@ -227,8 +227,8 @@ class _TagsScreenState extends State<TagsScreen> {
                                   AllNetworking()
                                       .editTags(
                                           token_id: box.read('token'),
-                                          tagId: snapshot.data.result
-                                              .allListLocation[index].tagId,
+                                          tagId: snapshot?.data?.result
+                                              ?.allListLocation?[index].tagId,
                                           tagName: editTagNameController.text)
                                       .then((value) {
                                     Navigator.pop(context);
@@ -272,7 +272,7 @@ class _TagsScreenState extends State<TagsScreen> {
                         .deleteTags(
                             token_id: box.read('token'),
                             tagId: snapshot
-                                .data.result.allListLocation[index].tagId)
+                                .data?.result?.allListLocation?[index].tagId)
                         .then((value) {
                       Fluttertoast.showToast(msg: "تمت الحذف");
                     });

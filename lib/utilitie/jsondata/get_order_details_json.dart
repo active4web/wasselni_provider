@@ -1,8 +1,8 @@
 class Get_order_details_json {
-  String message;
-  int errNum;
-  bool status;
-  Result result;
+  String? message;
+  int? errNum;
+  bool? status;
+  Result? result;
 
   Get_order_details_json({this.message, this.errNum, this.status, this.result});
 
@@ -20,29 +20,29 @@ class Get_order_details_json {
     data['errNum'] = this.errNum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<OrderDetails> orderDetails;
-  List<AllProducts> allProducts;
+  List<OrderDetails>? orderDetails;
+  List<AllProducts>? allProducts;
 
   Result({this.orderDetails, this.allProducts});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['order_details'] != null) {
-      orderDetails = new List<OrderDetails>();
+      orderDetails = <OrderDetails>[];
       json['order_details'].forEach((v) {
-        orderDetails.add(new OrderDetails.fromJson(v));
+        orderDetails?.add(new OrderDetails.fromJson(v));
       });
     }
     if (json['all_products'] != null) {
-      allProducts = new List<AllProducts>();
+      allProducts = <AllProducts>[];
       json['all_products'].forEach((v) {
-        allProducts.add(new AllProducts.fromJson(v));
+        allProducts?.add(new AllProducts.fromJson(v));
       });
     }
   }
@@ -50,25 +50,25 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.orderDetails != null) {
-      data['order_details'] = this.orderDetails.map((v) => v.toJson()).toList();
+      data['order_details'] = this.orderDetails?.map((v) => v.toJson()).toList();
     }
     if (this.allProducts != null) {
-      data['all_products'] = this.allProducts.map((v) => v.toJson()).toList();
+      data['all_products'] = this.allProducts?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class OrderDetails {
-  int codeName;
-  int idOrder;
-  String totalPrice;
-  String totalProduct;
-  String shippingCharges;
+  int? codeName;
+  int? idOrder;
+  String? totalPrice;
+  String? totalProduct;
+  String? shippingCharges;
   var totalPriceShippingCharges;
-  String currencyName;
-  String date;
-  String viewStore;
+  String? currencyName;
+  String? date;
+  String? viewStore;
 
   OrderDetails(
       {this.codeName,
@@ -109,13 +109,13 @@ class OrderDetails {
 }
 
 class AllProducts {
-  int id;
-  int idProduct;
-  String productName;
-  String price;
-  int quantity;
-  String currencyName;
-  String image;
+  int? id;
+  int? idProduct;
+  String? productName;
+  String? price;
+  int? quantity;
+  String? currencyName;
+  String? image;
 
   AllProducts(
       {this.id,

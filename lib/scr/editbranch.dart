@@ -15,8 +15,8 @@ import 'package:permission_handler/permission_handler.dart';
 //import 'package:location/location.dart';
 
 class EditPranch extends StatefulWidget {
-  int bid;
-  String tok;
+  int? bid;
+  String? tok;
 
   EditPranch({this.bid});
 
@@ -27,13 +27,13 @@ class EditPranch extends StatefulWidget {
 class _EditPranchState extends State<EditPranch> {
   List<Marker> _markers = <Marker>[];
   Completer<GoogleMapController> _controller = Completer();
-  CameraPosition _kGooglePlexfromweb;
-  CameraPosition _kGooglePlex;
+  CameraPosition? _kGooglePlexfromweb;
+  CameraPosition? _kGooglePlex;
   bool setcaruntloction = false;
-  File _image;
+  File? _image;
   AllNetworking _allNetworking = AllNetworking();
-  bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
+  bool? _serviceEnabled;
+  PermissionStatus? _permissionGranted;
 
   TextEditingController title = TextEditingController();
   TextEditingController titlen_en = TextEditingController();
@@ -61,7 +61,7 @@ class _EditPranchState extends State<EditPranch> {
   TextEditingController address_tr = TextEditingController();
 
 
-  LatLng mlocation;
+  LatLng? mlocation;
   // getloc() async {
   //   _serviceEnabled = await location.serviceEnabled();
   //   if (!_serviceEnabled) {
@@ -88,7 +88,7 @@ class _EditPranchState extends State<EditPranch> {
   //   });
   // }
 
-  String token;
+  String? token;
   final box = GetStorage();
 
   @override
@@ -121,39 +121,38 @@ class _EditPranchState extends State<EditPranch> {
                     color: Colors.black,
                   )),
             ),
-            body: FutureBuilder<Preparation_edit_branch_JSON>(
-              future: _allNetworking.preparation_edit_branch(
-                  token_id: token, id_branch: widget.bid),
+            body: FutureBuilder<Preparation_edit_branch_JSON?>(
+              future: _allNetworking.preparation_edit_branch(token_id: token, id_branch: widget.bid) ,
               builder: (conrtex, snap) {
-                if (snap.hasData && snap.data.status) {
-                  title.text = snap.data.result.allProducts.brancheName;
-                  titlen_en.text = snap.data.result.allProducts.brancheNameEn;
-                  phone.text = snap.data.result.allProducts.phone;
-                  phone2.text = snap.data.result.allProducts.phoneSecond;
-                  phone3.text = snap.data.result.allProducts.phoneThird;
-                  whatsapp.text = snap.data.result.allProducts.whatsapp;
-                  address.text = snap.data.result.allProducts.address;
-                  address_en.text = snap.data.result.allProducts.addressEn;
-                  description.text = snap.data.result.allProducts.description;
+                if (snap.hasData && snap.data!.status!) {
+                  title.text = snap.data?.result?.allProducts?.brancheName??'';
+                  titlen_en.text = snap.data?.result?.allProducts?.brancheNameEn??'';
+                  phone.text = snap.data?.result?.allProducts?.phone??'';
+                  phone2.text = snap.data?.result?.allProducts?.phoneSecond??'';
+                  phone3.text = snap.data?.result?.allProducts?.phoneThird??'';
+                  whatsapp.text = snap.data?.result?.allProducts?.whatsapp??'';
+                  address.text = snap.data?.result?.allProducts?.address??'';
+                  address_en.text = snap.data?.result?.allProducts?.addressEn??'';
+                  description.text = snap.data?.result?.allProducts?.description??'';
                   description_en.text =
-                      snap.data.result.allProducts.descriptionEn;
-                   name_tr.text =   snap.data.result.allProducts.nameTr;
-                 description_tr.text=  snap.data.result.allProducts.descriptionTr;
-                  address_tr.text=  snap.data.result.allProducts.addressTr;
+                      snap.data?.result?.allProducts?.descriptionEn??'';
+                   name_tr.text =   snap.data?.result?.allProducts?.nameTr??'';
+                 description_tr.text=  snap.data?.result?.allProducts?.descriptionTr??'';
+                  address_tr.text=  snap.data?.result?.allProducts?.addressTr??'';
 
-                  mlocation=LatLng(double.parse(snap.data.result.allProducts.lat),
-                      double.parse(snap.data.result.allProducts.lag));
+                  mlocation=LatLng(double.parse(snap.data?.result?.allProducts?.lat??''),
+                      double.parse(snap.data?.result?.allProducts?.lag??''));
                   _markers.add(
                       Marker(
                         markerId: MarkerId('1'),
-                        position: mlocation,
+                        position: mlocation!,
                         // infoWindow: InfoWindow(
                         //     title: 'The title of the marker'
                         // )
                       )
                   );
                   _kGooglePlexfromweb = CameraPosition(
-                    target: mlocation,
+                    target: mlocation!,
                     zoom: 10,
                   );
                   // if (!snap.data.result.allProducts.lat.trim().isEmpty) {
@@ -166,9 +165,9 @@ class _EditPranchState extends State<EditPranch> {
                   ///  phone_third,
                   //  city_id.text=snap.data.result.allProducts.c;
                   addersinmap.text =
-                      snap.data.result.allProducts.location ?? " ";
+                      snap.data?.result?.allProducts?.location ?? " ";
                   print('pppppppppppppppppppppppppppppppppppppppppppp');
-                  print(snap.data.result.allProducts.nameTr);
+                  print(snap.data?.result?.allProducts?.nameTr);
                   print('pppppppppppppppppppppppppppppppppppppppppppp');
                   return SingleChildScrollView(
                     child: Container(
@@ -224,11 +223,11 @@ class _EditPranchState extends State<EditPranch> {
                                   width: high * .1,
                                   child: _image != null
                                       ? Image.file(
-                                    _image,
+                                    _image!,
                                     fit: BoxFit.fill,
                                   )
                                       : Image.network(
-                                    snap.data.result.allProducts.productImage,
+                                    snap.data?.result?.allProducts?.productImage??'',
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -757,7 +756,7 @@ class _EditPranchState extends State<EditPranch> {
                             child: Center(
                               child: GoogleMap(
                                       mapType: MapType.terrain,zoomGesturesEnabled: true,
-                                      initialCameraPosition:   _kGooglePlexfromweb
+                                      initialCameraPosition:   _kGooglePlexfromweb!
                                            ,onTap: (LatLng mylocation){
 
                                 mlocation=mylocation;
@@ -794,10 +793,10 @@ print(mlocation);
                                       phone_second: phone2.text,
                                       phone_third: phone3.text,
                                       lag:
-                                     mlocation.longitude
+                                     mlocation?.longitude
                                           ,
                                       lat:
-                                    mlocation.latitude,
+                                    mlocation?.latitude,
 
                                       file: _image)
                                   .then((value) {
@@ -806,7 +805,7 @@ print(mlocation);
                                     title: Text( ''),
                                     content: Text("تم التعديل"),
                                     actions: <Widget>[
-                                      FlatButton(
+                                      TextButton(
                                         child: Text("CLOSE"),
                                         onPressed: () {
                                           Get.back();
@@ -816,8 +815,7 @@ print(mlocation);
                                   ),
                                   barrierDismissible: false,
                                 );
-                                print(value.data);
-                                print(value.data["message"]);
+
                               });
                               // print("_locationData.longitude");
                               // print(_locationData.longitude);

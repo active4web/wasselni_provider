@@ -14,7 +14,7 @@ class Gate_list_location extends StatefulWidget {
 
 class _Gate_list_locationState extends State<Gate_list_location> {
   final box = GetStorage();
-  String token;
+  String? token;
   AllNetworking _allNetworking = AllNetworking();
   String f = "";
   @override
@@ -34,15 +34,14 @@ class _Gate_list_locationState extends State<Gate_list_location> {
               centerTitle: true,
               title:Text('طلبات النجدة'),
             ),
-            body: FutureBuilder<Gate_list_location_json>(
+            body: FutureBuilder<Gate_list_location_json?>(
                 future: _allNetworking.gate_list_location(token_id: token),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<AllListLocation> dat =
-                        snapshot.data.result.allListLocation;
+                    List<AllListLocation> dat = snapshot.data?.result?.allListLocation??[];
                     List<AllListLocation> data = [];
                     dat.forEach((element) {
-                      if (element.phone.contains(f)) {
+                      if (element.phone!.contains(f)) {
                         data.add(element);
                       }
                     });
@@ -79,7 +78,7 @@ class _Gate_list_locationState extends State<Gate_list_location> {
                           flex: 1,
                           child: ListView.builder(
                             itemCount: f.trim().isEmpty
-                                ? snapshot.data.result.allListLocation.length
+                                ? snapshot.data?.result?.allListLocation?.length
                                 : data.length,
                             itemBuilder: (context, pos) {
                               return GestureDetector(
@@ -90,16 +89,13 @@ class _Gate_list_locationState extends State<Gate_list_location> {
                                   final availableMaps =
                                       await MapLauncher.installedMaps;
                                   print(availableMaps);
-                                  if (await MapLauncher.isMapAvailable(
-                                      MapType.google)) {
+                                  if ( await MapLauncher.isMapAvailable(MapType.google)??false ) {
                                     await MapLauncher.showMarker(
                                         mapType: MapType.google,
                                         coords: Coords(
-                                          double.parse(snapshot.data.result
-                                              .allListLocation[pos].lat),
-                                          double.parse(snapshot.data.result
-                                              .allListLocation[pos].lag),
-                                        ));
+                                          double.parse(snapshot.data?.result?.allListLocation?[pos].lat??''),
+                                          double.parse(snapshot.data?.result?.allListLocation?[pos].lag??''),
+                                        ), title: '');
                                   }
                                 },
                                 child: Padding(
@@ -113,7 +109,7 @@ class _Gate_list_locationState extends State<Gate_list_location> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                  ' الاسم : ${f.trim().isEmpty ? snapshot.data.result.allListLocation[pos].username : data[pos].username}')
+                                                  ' الاسم : ${f.trim().isEmpty ? snapshot.data?.result?.allListLocation![pos].username : data[pos].username}')
                                             ],
                                           ),
                                         ),
@@ -122,7 +118,7 @@ class _Gate_list_locationState extends State<Gate_list_location> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                  ' الهاتف  ${f.trim().isEmpty ? snapshot.data.result.allListLocation[pos].phone : data[pos].phone}')
+                                                  ' الهاتف  ${f.trim().isEmpty ? snapshot.data?.result?.allListLocation![pos].phone : data[pos].phone}')
                                             ],
                                           ),
                                         ),
@@ -133,7 +129,7 @@ class _Gate_list_locationState extends State<Gate_list_location> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                  '  الموقع علي الخريطه  ${f.trim().isEmpty ? snapshot.data.result.allListLocation[pos].comment : data[pos].comment}'),
+                                                  '  الموقع علي الخريطه  ${f.trim().isEmpty ? snapshot.data?.result?.allListLocation![pos].comment : data[pos].comment}'),
                                               Icon(
                                                 Icons.map,
                                                 size: 30,

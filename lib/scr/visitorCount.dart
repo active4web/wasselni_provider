@@ -17,7 +17,7 @@ class _VisitorCountState extends State<VisitorCount> {
   int sizelist = 0;
   int limit = 1000;
   String f="";
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -37,17 +37,17 @@ class _VisitorCountState extends State<VisitorCount> {
               centerTitle: true,
               title:Text('عدد الزوار'),
             ),
-            body: StreamBuilder<Get_all_visitor_json>(
+            body: StreamBuilder<Get_all_visitor_json?>(
                 stream: _allNetworking
                     .get_all_visitor(
                         token_id: widget.token_id, limit: limit, page_number: 0)
-                    .asStream(),
+                    .asStream() ,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-    List<AllVisitoe>dat=snapshot.data.result.allVisitoe;
+    List<AllVisitoe>dat=snapshot.data?.result?.allVisitoe??[];
     List<AllVisitoe>data=[];
     dat.forEach((element) {
-    if(element.userPhone.contains(f)){
+    if(element.userPhone!.contains(f)){
     data.add(element);
     }}
     );
@@ -84,7 +84,7 @@ class _VisitorCountState extends State<VisitorCount> {
                         ),
                         Expanded(
                           child: ListView.builder(
-                              itemCount:f.trim().isEmpty? snapshot.data.result.allVisitoe.length:data.length,controller: _scrollController,
+                              itemCount:f.trim().isEmpty? snapshot.data?.result?.allVisitoe?.length:data.length,controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -102,9 +102,9 @@ class _VisitorCountState extends State<VisitorCount> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              f.trim().isEmpty?    'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}': 'اسم العميل : ${data[pos].userName}'),
-                                          Text(f.trim().isEmpty?     'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
-                                          Text(f.trim().isEmpty?     'تاريخ الزيارة : ${snapshot.data.result.allVisitoe[pos].date}': 'تاريخ الزيارة : ${data[pos].date}'),
+                                              f.trim().isEmpty?    'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}': 'اسم العميل : ${data[pos].userName}'),
+                                          Text(f.trim().isEmpty?     'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
+                                          Text(f.trim().isEmpty?     'تاريخ الزيارة : ${snapshot.data?.result?.allVisitoe?[pos].date}': 'تاريخ الزيارة : ${data[pos].date}'),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -112,8 +112,8 @@ class _VisitorCountState extends State<VisitorCount> {
 
                                               Text(f.trim().isEmpty?   'عدد الزيارات : ${snapshot
                                                   .data
-                                                  .result
-                                                  .allVisitoe[pos]
+                                                  ?.result
+                                                  ?.allVisitoe![pos]
                                                   .totalCountVisit}':  'عدد الزيارات : ${data[pos]
                                                   .totalCountVisit}')
                                             ,   GestureDetector(
@@ -125,12 +125,12 @@ class _VisitorCountState extends State<VisitorCount> {
                                                         visitor_id: f.trim().isEmpty
                                                             ?snapshot
                                                             .data
-                                                            .result
-                                                            .allVisitoe[pos]
+                                                            ?.result
+                                                            ?.allVisitoe![pos]
                                                             .visitorId:data[pos]
                                                             .visitorId)
                                                         .then((value) {
-                                                      print(value.data);
+
                                                       setState(() {});
                                                     });
                                                   },
@@ -156,9 +156,9 @@ class _VisitorCountState extends State<VisitorCount> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

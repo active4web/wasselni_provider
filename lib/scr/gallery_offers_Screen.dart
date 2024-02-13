@@ -22,7 +22,7 @@ class Gallery_Offers_Scr extends StatefulWidget {
 class _Gallery_Offers_ScrState extends State<Gallery_Offers_Scr> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String token;
+  String? token;
 
   @override
   void initState() {
@@ -69,7 +69,7 @@ Get.to(AddPicOfferGallery(widget.offer_id));
           ),
         ),
           Expanded(
-            child: FutureBuilder<Get_all_gallery_offers_json>(
+            child: FutureBuilder<Get_all_gallery_offers_json?>(
                 future: _allNetworking.get_all_gallery_offers(
                     token_id: token,
                     limit: 100,
@@ -78,9 +78,8 @@ Get.to(AddPicOfferGallery(widget.offer_id));
                 builder: (context, snapshot) {
 
                   if (snapshot.hasData) {
-                    print(snapshot.data.result.allGalleries);
                     return ListView.builder(
-                        itemCount: snapshot.data.result.allGalleries.length,
+                        itemCount: snapshot.data?.result?.allGalleries?.length,
                         itemBuilder: (context, pos) {
                           return Card(elevation: 8,
                             child: Container(width: size.width,padding: EdgeInsets.all(8),
@@ -91,7 +90,7 @@ Get.to(AddPicOfferGallery(widget.offer_id));
                                   Expanded(
                                     child: Container( width: size.width,
                                       child: Image.network(snapshot
-                                          .data.result.allGalleries[pos].offerImage,fit: BoxFit.fill,),
+                                          .data?.result?.allGalleries?[pos].offerImage??'',fit: BoxFit.fill,),
                                     ),
                                   ),
                                   GestureDetector(
@@ -99,8 +98,7 @@ Get.to(AddPicOfferGallery(widget.offer_id));
                                         _allNetworking
                                             .delete_img_gallery_offer(
                                                 token_id: token,
-                                                img_id: snapshot.data.result
-                                                    .allGalleries[pos].imgId)
+                                                img_id: snapshot.data?.result?.allGalleries?[pos].imgId)
                                             .then((value) {
                                           setState(() {});
                                         });

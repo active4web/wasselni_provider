@@ -1,9 +1,9 @@
 class Get_all_order_json {
-  String message;
-  int messageid;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  int? total;
+  Result? result;
 
   Get_all_order_json(
       {this.message, this.messageid, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Get_all_order_json {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllOrders> allOrders;
+  List<AllOrders>? allOrders;
 
   Result({this.allOrders});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_orders'] != null) {
-      allOrders = new List<AllOrders>();
+      allOrders = <AllOrders>[];
       json['all_orders'].forEach((v) {
-        allOrders.add(new AllOrders.fromJson(v));
+        allOrders?.add(new AllOrders.fromJson(v));
       });
     }
   }
@@ -47,17 +47,17 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allOrders != null) {
-      data['all_orders'] = this.allOrders.map((v) => v.toJson()).toList();
+      data['all_orders'] = this.allOrders?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllOrders {
-  String userName;
-  String totalCountVisit;
-  String userPhone;
-  String orderId;
+  String? userName;
+  String? totalCountVisit;
+  String? userPhone;
+  String? orderId;
 
   AllOrders(
       {this.userName, this.totalCountVisit, this.userPhone, this.orderId});

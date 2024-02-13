@@ -5,23 +5,23 @@ import 'package:commercial_app/utilitie/jsondata/get_all_branches_JSON.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-CameraPosition _kGooglePlex;
+CameraPosition? _kGooglePlex;
 List<Marker> _markers = <Marker>[];
-Widget branchItemWidg({high, AllProducts branch, width, fundel,context}) {
+Widget branchItemWidg({high, AllProducts? branch, width, fundel,context}) {
 
   print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-  print(branch.nameTr);
-  print(branch.nameTr);
+  print(branch?.nameTr);
+  print(branch?.nameTr);
   print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
   // if (!branch.lat.trim().isEmpty) {
     _kGooglePlex = CameraPosition(
-      target: LatLng(double.tryParse(branch.lat), double.tryParse(branch.lag)),
+      target: LatLng(double.tryParse(branch!.lat!)!, double.tryParse(branch.lag!)!),
       zoom: 10,
     );
   _markers.add(
       Marker(
         markerId: MarkerId('1'),
-        position:  LatLng(double.tryParse(branch.lat), double.tryParse(branch.lag)),
+        position:  LatLng(double.tryParse(branch.lat!)!, double.tryParse(branch.lag!)!),
         // infoWindow: InfoWindow(
         //     title: 'The title of the marker'
         // )
@@ -51,12 +51,12 @@ Widget branchItemWidg({high, AllProducts branch, width, fundel,context}) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(branch.brancheName),
-                  Text(branch.brancheNameEn),
-                  Text( branch.nameTr ),
-                  Text(branch.phone),
-                  Text(branch.phoneSecond),
-                  Text(branch.phoneThird),
+                  Text(branch.brancheName??''),
+                  Text(branch.brancheNameEn??''),
+                  Text( branch.nameTr ??''),
+                  Text(branch.phone??''),
+                  Text(branch.phoneSecond??''),
+                  Text(branch.phoneThird??''),
 
                 ],
               ),
@@ -64,10 +64,10 @@ Widget branchItemWidg({high, AllProducts branch, width, fundel,context}) {
             Expanded(
               child: Container(
                 width: width * .5,
-                child: branch.productImage.trim().isEmpty
+                child: branch.productImage!.trim().isEmpty
                     ? Text('')
                     : Image.network(
-                        branch.productImage,
+                        branch.productImage??'',
                         fit: BoxFit.fill,
                       ),
               ),
@@ -81,7 +81,7 @@ Widget branchItemWidg({high, AllProducts branch, width, fundel,context}) {
             padding: const EdgeInsets.all(8.0),
             child: GoogleMap(
               mapType: MapType.normal,
-              initialCameraPosition: _kGooglePlex,zoomGesturesEnabled: true,
+              initialCameraPosition: _kGooglePlex!,zoomGesturesEnabled: true,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
@@ -103,7 +103,7 @@ Widget branchItemWidg({high, AllProducts branch, width, fundel,context}) {
                   context,
                   new MaterialPageRoute(
                       builder: (context) =>
-                          EditPranch(bid: branch.prodId  )
+                          EditPranch(bid: branch.prodId!  )
                   ),
                 );
 

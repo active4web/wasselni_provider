@@ -1,8 +1,8 @@
 class Create_coupon_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int?codenum;
+  bool? status;
+  Result? result;
 
   Create_coupon_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,7 +20,7 @@ class Create_coupon_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }

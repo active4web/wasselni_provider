@@ -14,10 +14,10 @@ class Add_Photography_Requests extends StatefulWidget {
 class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String data = '';
-  String title = '';
-  String token;
-  bool senddata = false;
+  String? data = '';
+  String? title = '';
+  String? token;
+  bool? senddata = false;
   @override
   void initState() {
     super.initState();
@@ -107,11 +107,11 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
               SizedBox(
                 height: 8,
               ),
-              senddata
+              senddata!
                   ? CircularProgressIndicator()
                   : GestureDetector(
                 onTap: () {
-                  if (!data.trim().isEmpty && !title.trim().isEmpty) {
+                  if (!data!.trim().isEmpty && !title!.trim().isEmpty) {
                     senddata = true;
                     setState(() {});
                     _allNetworking
@@ -124,9 +124,9 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
                       Get.dialog(
                         AlertDialog(
                           title: Text(''),
-                          content: Text(value.data['message']),
+                          content: Text(value?.data['message']),
                           actions: <Widget>[
-                            FlatButton(
+                            TextButton(
                               child: Text("CLOSE"),
                               onPressed: () {
                                 Get.back();

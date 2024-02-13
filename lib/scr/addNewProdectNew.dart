@@ -18,17 +18,17 @@ class AddNewProdectNEW extends StatefulWidget {
 
 class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
   datavalidatorAddOffer v = datavalidatorAddOffer();
-  File _image;
+  File? _image;
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String base64Image;
+  String? base64Image;
 
   @override
   void dispose() {
     v.despoos();
     super.dispose();
   }
-  String thename, theenname, theoldprice, theardes, theendes,thenewprice;
+  String? thename, theenname, theoldprice, theardes, theendes,thenewprice;
   @override
   Widget build(BuildContext context) {
     var high = MediaQuery
@@ -68,7 +68,7 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                           maxWidth: 200,
                           imageQuality: 100);
                       setState(() {
-                        _image = File(image.path);
+                        _image = File(image!.path);
                       });
                     },
                     child: _image == null
@@ -78,7 +78,7 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                     )
                         : CircleAvatar(
                       radius: 50,
-                      backgroundImage: FileImage(_image),
+                      backgroundImage: FileImage(_image!),
                     ),
                   )
                 ],
@@ -261,7 +261,6 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                 onTap:   () async {
 
 
-                  print ( thename+ theenname+ theoldprice+ theardes+ theendes);
                   String phone = box.read('phone');
                   String token = box.read('token');
                   // final bytes =

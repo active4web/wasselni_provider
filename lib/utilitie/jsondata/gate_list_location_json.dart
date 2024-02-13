@@ -1,8 +1,8 @@
 class Gate_list_location_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Gate_list_location_json(
       {this.message, this.codenum, this.status, this.result});
@@ -21,14 +21,14 @@ class Gate_list_location_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllListLocation> allListLocation;
+  List<AllListLocation>? allListLocation;
 
   Result({this.allListLocation});
 
@@ -36,7 +36,7 @@ class Result {
     if (json['all_list_location'] != null) {
       allListLocation = <AllListLocation>[];
       json['all_list_location'].forEach((v) {
-        allListLocation.add(new AllListLocation.fromJson(v));
+        allListLocation?.add(new AllListLocation.fromJson(v));
       });
     }
   }
@@ -45,19 +45,19 @@ class Result {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allListLocation != null) {
       data['all_list_location'] =
-          this.allListLocation.map((v) => v.toJson()).toList();
+          this.allListLocation?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllListLocation {
-  String username;
-  String phone;
-  String lat;
-  String lag;
-  String comment;
-  int locationId;
+  String? username;
+  String? phone;
+  String? lat;
+  String? lag;
+  String? comment;
+  int? locationId;
 
   AllListLocation(
       {this.username,

@@ -2,7 +2,7 @@ import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:commercial_app/utilitie/jsondata/get_all_user_coupons_json.dart';
 import 'package:flutter/material.dart';
 
-Widget listQRclient({high, AllVisitoe data, fun}) {
+Widget listQRclient({high, AllVisitoe? data, fun}) {
   return Directionality(
     textDirection: TextDirection.rtl,
     child: Card(elevation: 8,
@@ -12,15 +12,15 @@ Widget listQRclient({high, AllVisitoe data, fun}) {
       child: Container(padding: const EdgeInsets.all(8.0),
 
         child: Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
-          children: [ Text('اسم العميل : ${data.userName}',
+          children: [ Text('اسم العميل : ${data?.userName}',
             style: TextStyle(
                 fontFamily: 'Arbf', color: Colors.black, fontSize: 18),),
-            Text('رقم التلفون : ${data.userPhone}',
+            Text('رقم التلفون : ${data?.userPhone}',
               style: TextStyle(
                   fontFamily: 'Arbf', color: Colors.black, fontSize: 18),),
-            Text('كود الخصم : ${data.serviceCoupon}',
+            Text('كود الخصم : ${data?.serviceCoupon}',
               style: TextStyle(
-                  fontFamily: 'Arbf', color: Colors.black, fontSize: 18),),Text('تاريخ الاستخدام : ${data.date}',
+                  fontFamily: 'Arbf', color: Colors.black, fontSize: 18),),Text('تاريخ الاستخدام : ${data?.date}',
         style: TextStyle(
             fontFamily: 'Arbf', color: Colors.black, fontSize: 18),),
            Align( alignment: Alignment.bottomLeft,

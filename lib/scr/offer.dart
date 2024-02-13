@@ -23,16 +23,16 @@ class OfferScr extends StatefulWidget {
 int sizelist = 0;
 bool getprodect = true;
 int limit = 1000;
-String token;
-String phone;
-DateTime endpick;
-DateTime endpickDate;
+String? token;
+String? phone;
+DateTime? endpick;
+DateTime? endpickDate;
 List<AllOffers> _list = [];
 
 class _OfferScrState extends State<OfferScr> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -76,8 +76,8 @@ class _OfferScrState extends State<OfferScr> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         Get_offers_json data = Get_offers_json.fromJson(
-                            json.decode(snapshot.data.body));
-                        sizelist = data.result.allOffers.length;
+                            json.decode(snapshot.data!.body));
+                        sizelist = data.result?.allOffers?.length??0;
                         return Column(
                           children: [
                             Padding(
@@ -137,14 +137,14 @@ class _OfferScrState extends State<OfferScr> {
                                         if (endpick != null) {
                                           endpickDate = endpick;
                                           end_date =
-                                              endpickDate.year.toString() +
+                                              endpickDate!.year.toString() +
                                                   "-" +
-                                                  endpickDate.month.toString() +
+                                                  endpickDate!.month.toString() +
                                                   "-" +
-                                                  endpickDate.day.toString();
+                                                  endpickDate!.day.toString();
                                           _list.clear();
-                                          data.result.allOffers
-                                              .forEach((element) {
+                                          data.result!.allOffers
+                                              !.forEach((element) {
                                             if (element.endDate == end_date ||
                                                 element.startDate == end_date) {
                                               _list.add(element);
@@ -176,7 +176,7 @@ class _OfferScrState extends State<OfferScr> {
                                               child: Text(
                                                 endpick == null
                                                     ? "البحث"
-                                                    : "تاريخ : ${endpickDate.year}-${endpickDate.month}-${endpickDate.day}",
+                                                    : "تاريخ : ${endpickDate?.year}-${endpickDate?.month}-${endpickDate?.day}",
                                                 style: TextStyle(
                                                     fontFamily: 'Arbf',
                                                     color: Colors.white,
@@ -205,20 +205,20 @@ class _OfferScrState extends State<OfferScr> {
                             Expanded(
                               child: ListView.builder(
                                   itemCount: endpick == null
-                                      ? data.result.allOffers.length
+                                      ? data.result?.allOffers?.length
                                       : _list.length,
                                   controller: _scrollController,
                                   itemBuilder: (context, pos) {
                                     return offertListItem(
                                         high: high,
                                         data: endpick == null
-                                            ? data.result.allOffers[pos]
+                                            ? data.result?.allOffers![pos]
                                             : _list[pos],
                                         fun: () async {
                                           getprodect = true;
 
                                           print(data
-                                              .result.allOffers[pos].offersId);
+                                              .result!.allOffers![pos].offersId);
 
                                           setState(() {});
                                           _allNetworking
@@ -227,7 +227,7 @@ class _OfferScrState extends State<OfferScr> {
                                                   product_id: endpick == null
                                                       ? data
                                                           .result
-                                                          .allOffers[pos]
+                                                          ?.allOffers![pos]
                                                           .offersId
                                                       : _list[pos].offersId)
                                               .then((value) {
@@ -237,8 +237,7 @@ class _OfferScrState extends State<OfferScr> {
                                           });
                                         },
                                         funedit: () {
-                                          print(data
-                                              .result.allOffers[pos].offersId);
+
 
                                           Navigator.push(
                                             context,
@@ -247,7 +246,7 @@ class _OfferScrState extends State<OfferScr> {
                                                       offid: endpick == null
                                                           ? data
                                                               .result
-                                                              .allOffers[pos]
+                                                              ?.allOffers![pos]
                                                               .offersId
                                                           : _list[pos].offersId,
                                                       token: token,
@@ -271,9 +270,9 @@ class _OfferScrState extends State<OfferScr> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
         setState(() {});

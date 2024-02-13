@@ -1,8 +1,8 @@
 class Ticket_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Ticket_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,14 +20,14 @@ class Ticket_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  TicketInfo ticketInfo;
+  TicketInfo? ticketInfo;
 
   Result({this.ticketInfo});
 
@@ -40,16 +40,16 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.ticketInfo != null) {
-      data['ticket_info'] = this.ticketInfo.toJson();
+      data['ticket_info'] = this.ticketInfo?.toJson();
     }
     return data;
   }
 }
 
 class TicketInfo {
-  Ticket ticket;
-  int repliesNumber;
-  List<TicketReplies> ticketReplies;
+  Ticket? ticket;
+  int? repliesNumber;
+  List<TicketReplies>? ticketReplies;
 
   TicketInfo({this.ticket, this.repliesNumber, this.ticketReplies});
 
@@ -58,9 +58,9 @@ class TicketInfo {
     json['ticket'] != null ? new Ticket.fromJson(json['ticket']) : null;
     repliesNumber = json['replies_number'];
     if (json['ticket_replies'] != null) {
-      ticketReplies = new List<TicketReplies>();
+      ticketReplies = <TicketReplies>[];
       json['ticket_replies'].forEach((v) {
-        ticketReplies.add(new TicketReplies.fromJson(v));
+        ticketReplies?.add(new TicketReplies.fromJson(v));
       });
     }
   }
@@ -68,24 +68,24 @@ class TicketInfo {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.ticket != null) {
-      data['ticket'] = this.ticket.toJson();
+      data['ticket'] = this.ticket?.toJson();
     }
     data['replies_number'] = this.repliesNumber;
     if (this.ticketReplies != null) {
       data['ticket_replies'] =
-          this.ticketReplies.map((v) => v.toJson()).toList();
+          this.ticketReplies?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Ticket {
-  int ticketId;
-  String title;
-  String type;
-  String color;
-  String content;
-  String createdAt;
+  int? ticketId;
+  String? title;
+  String? type;
+  String? color;
+  String? content;
+  String? createdAt;
 
   Ticket(
       {this.ticketId,
@@ -117,12 +117,12 @@ class Ticket {
 }
 
 class TicketReplies {
-  int id;
-  String createdAt;
-  String time;
-  String content;
-  String sender;
-  int senderType;
+  int? id;
+  String? createdAt;
+  String? time;
+  String? content;
+  String? sender;
+  int? senderType;
 
   TicketReplies(
       {this.id,

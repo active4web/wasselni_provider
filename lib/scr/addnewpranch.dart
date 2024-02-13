@@ -35,14 +35,14 @@ class _AddnewPranchState extends State<AddnewPranch> {
       TextEditingController();
   TextEditingController _textEditingControllerthetarkaddrees =
       TextEditingController();
-  CameraPosition _kGooglePlex;
+  CameraPosition? _kGooglePlex;
   bool savedata = false;
-  File _image;
+  File? _image;
   AllNetworking _allNetworking = AllNetworking();
-  bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
-  LatLng _locationData;
-  String title,
+  bool? _serviceEnabled;
+  PermissionStatus? _permissionGranted;
+  LatLng? _locationData;
+  String? title,
       titlen_en,
       phone,
       phone2,
@@ -81,7 +81,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
   //   });
   // }
 
-  String token;
+  String? token;
   final box = GetStorage();
 
   @override
@@ -163,7 +163,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
                           ? Icon(Icons.camera_alt)
                           : CircleAvatar(
                               radius: 50,
-                              backgroundImage: FileImage(_image),
+                              backgroundImage: FileImage(_image!),
                             )
                     ],
                   ),
@@ -522,7 +522,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
                                 _locationData = mylocation;
                                 print(_locationData);
                               },
-                              initialCameraPosition: _kGooglePlex,
+                              initialCameraPosition: _kGooglePlex!,
                               onMapCreated: (GoogleMapController controller) {
                                 _controller.complete(controller);
                               },
@@ -549,38 +549,38 @@ class _AddnewPranchState extends State<AddnewPranch> {
                                       print('888888888888888888888');
                                       _allNetworking
                                           .add_branch(
-                                              token_id: token,
+                                              token_id: token!,
                                               description_tr:
                                                   _textEditingControllerthetarkdes
                                                       .text,address_tr: _textEditingControllerthetarkaddrees.text??"",
                                               name_tr:
                                                   _textEditingControllerthetarkname
                                                       .text,
-                                              title: title,
-                                              location: addersinmap,
-                                              titlen_en: titlen_en,
-                                              phone: phone,
+                                              title: title??'',
+                                              location: addersinmap??'',
+                                              titlen_en: titlen_en??'',
+                                              phone: phone??'',
                                               address_en: address_en.text,
                                               address: address.text,
-                                              whatsapp: whatsapp,
-                                              description: description,
-                                              description_en: description_en,
-                                              phone_second: phone2,
-                                              phone_third: phone3,
+                                              whatsapp: whatsapp??'',
+                                              description: description??'',
+                                              description_en: description_en??'',
+                                              phone_second: phone2??'',
+                                              phone_third: phone3??'',
                                               lag: _locationData == null
                                                   ? 37.43296265331129
-                                                  : _locationData.longitude,
+                                                  : _locationData!.longitude,
                                               lat: _locationData == null
                                                   ? -122.08832357078792
-                                                  : _locationData.latitude,
-                                              file: _image)
+                                                  : _locationData!.latitude,
+                                              file: _image!)
                                           .then((value) {
                                         // Get.dialog(
                                         //   AlertDialog(
                                         //     title: Text( ''),
                                         //     content: Text("تم اضافة الفرع"),
                                         //     actions: <Widget>[
-                                        //       FlatButton(
+                                        //       TextButton(
                                         //         child: Text("CLOSE"),
                                         //         onPressed: () {
                                         //           //  Get.back();

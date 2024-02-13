@@ -1,9 +1,9 @@
 class Get_all_products_JSON {
-  String message;
-  int messageid;
-  bool status;
-  int total;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  int? total;
+  Result? result;
 
   Get_all_products_JSON(
       {this.message, this.messageid, this.status, this.total, this.result});
@@ -24,22 +24,22 @@ class Get_all_products_JSON {
     data['status'] = this.status;
     data['total'] = this.total;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllProducts> allProducts;
+  List<AllProducts>? allProducts;
 
   Result({this.allProducts});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_products'] != null) {
-      allProducts = new List<AllProducts>();
+      allProducts = <AllProducts>[];
       json['all_products'].forEach((v) {
-        allProducts.add(new AllProducts.fromJson(v));
+        allProducts?.add(new AllProducts.fromJson(v));
       });
     }
   }
@@ -47,20 +47,20 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allProducts != null) {
-      data['all_products'] = this.allProducts.map((v) => v.toJson()).toList();
+      data['all_products'] = this.allProducts?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllProducts {
-  String productImage;
-  String productName;
-  String stock;
-  String productNameEn;
-  String nameTr;
-  String productId;
-  String price;
+  String? productImage;
+  String? productName;
+  String? stock;
+  String? productNameEn;
+  String? nameTr;
+  String? productId;
+  String? price;
 
   AllProducts(
       {this.productImage,

@@ -1,8 +1,8 @@
 class Preparation_edit_branch_JSON {
-  String message;
-  int messageid;
-  bool status;
-  Result result;
+  String? message;
+  int? messageid;
+  bool? status;
+  Result? result;
 
   Preparation_edit_branch_JSON(
       {this.message, this.messageid, this.status, this.result});
@@ -21,14 +21,14 @@ class Preparation_edit_branch_JSON {
     data['Messageid'] = this.messageid;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  AllProducts allProducts;
+  AllProducts? allProducts;
 
   Result({this.allProducts});
 
@@ -41,33 +41,33 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allProducts != null) {
-      data['all_products'] = this.allProducts.toJson();
+      data['all_products'] = this.allProducts?.toJson();
     }
     return data;
   }
 }
 
 class AllProducts {
-  String productImage;
-  String brancheName;
-  String brancheNameEn;
-  String nameTr;
-  String phone;
-  String phoneSecond;
-  String views;
-  String view;
-  String phoneThird;
-  int prodId;
-  String lat;
-  String lag;
-  String descriptionEn;
-  String description;
-  String descriptionTr;
-  String whatsapp;
-  String address;
-  String addressEn;
-  String addressTr;
-  String location;
+  String? productImage;
+  String? brancheName;
+  String? brancheNameEn;
+  String? nameTr;
+  String? phone;
+  String? phoneSecond;
+  String? views;
+  String? view;
+  String? phoneThird;
+  int? prodId;
+  String? lat;
+  String? lag;
+  String? descriptionEn;
+  String? description;
+  String? descriptionTr;
+  String? whatsapp;
+  String? address;
+  String? addressEn;
+  String? addressTr;
+  String? location;
 
   AllProducts(
       {this.productImage,

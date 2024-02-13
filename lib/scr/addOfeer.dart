@@ -41,15 +41,15 @@ class _AddOfferState extends State<AddOffer> {
   TextEditingController _textEditingControllerthetarkdes =
       TextEditingController();
   final ImagePicker _picker = ImagePicker();
-  List<XFile> _imageFileList;
-  File _image;
+  List<XFile>? _imageFileList;
+  File? _image;
   List<File> _images = [];
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  String thename, theenname, theoldprice, theardes, theendes, thenewprice;
+  String? thename, theenname, theoldprice, theardes, theendes, thenewprice;
   bool savedata = false;
-  DateTime startpickDate;
-  DateTime endpickDate;
+  DateTime? startpickDate;
+  DateTime? endpickDate;
 
   @override
   void dispose() {
@@ -99,7 +99,7 @@ class _AddOfferState extends State<AddOffer> {
                                 maxWidth: 1200,
                                 imageQuality: 100);
                             setState(() {
-                              _image = File(image.path);
+                              _image = File(image!.path);
                             });
                           },
                           child: Text('اضافه الصوره الرئيسية للعرض',
@@ -165,7 +165,7 @@ class _AddOfferState extends State<AddOffer> {
                             maxWidth: 1200,
                             imageQuality: 100);
                         setState(() {
-                          _image = File(image.path);
+                          _image = File(image!.path);
                         });
                       },
                       child: _image == null
@@ -175,7 +175,7 @@ class _AddOfferState extends State<AddOffer> {
                             )
                           : CircleAvatar(
                               radius: 50,
-                              backgroundImage: FileImage(_image),
+                              backgroundImage: FileImage(_image!),
                             ),
                     )
                   ],
@@ -367,7 +367,7 @@ class _AddOfferState extends State<AddOffer> {
                 ),
                 GestureDetector(
                     onTap: () async {
-                      DateTime date = await showDatePicker(
+                      DateTime? date = await showDatePicker(
                           context: context,
                           initialDate: startpickDate,
                           firstDate: DateTime(DateTime.now().year),
@@ -389,7 +389,7 @@ class _AddOfferState extends State<AddOffer> {
                       ),
                       child: Center(
                         child: Text(
-                            "تاريخ البدء: ${startpickDate.year},${startpickDate.month},${startpickDate.day}"),
+                            "تاريخ البدء: ${startpickDate?.year},${startpickDate?.month},${startpickDate?.day}"),
                       ),
                     )),
                 SizedBox(
@@ -397,7 +397,7 @@ class _AddOfferState extends State<AddOffer> {
                 ),
                 GestureDetector(
                     onTap: () async {
-                      DateTime date = await showDatePicker(
+                      DateTime? date = await showDatePicker(
                           context: context,
                           initialDate: endpickDate,
                           firstDate: DateTime(DateTime.now().year),
@@ -419,7 +419,7 @@ class _AddOfferState extends State<AddOffer> {
                       ),
                       child: Center(
                         child: Text(
-                            "تاريخ الانتهاء: ${endpickDate.year},${endpickDate.month},${endpickDate.day}"),
+                            "تاريخ الانتهاء: ${endpickDate?.year},${endpickDate?.month},${endpickDate?.day}"),
                       ),
                     )),
                 SizedBox(
@@ -439,16 +439,16 @@ class _AddOfferState extends State<AddOffer> {
                           // //  base64Image = base64Encode(bytes.readAsBytesSync());
                           // base64Image = await base64.encode(bytes);
                           // print(base64Image);
-                          String end_date = endpickDate.year.toString() +
+                          String end_date = endpickDate!.year.toString() +
                               "-" +
-                              endpickDate.month.toString() +
+                              endpickDate!.month.toString() +
                               "-" +
-                              endpickDate.day.toString();
-                          String start_date = startpickDate.year.toString() +
+                              endpickDate!.day.toString();
+                          String start_date = startpickDate!.year.toString() +
                               "-" +
-                              startpickDate.month.toString() +
+                              startpickDate!.month.toString() +
                               "-" +
-                              startpickDate.day.toString();
+                              startpickDate!.day.toString();
                           print(end_date);
                           print(start_date);
                           _allNetworking

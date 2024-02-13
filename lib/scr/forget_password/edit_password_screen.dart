@@ -139,10 +139,14 @@ class _EditPasswordState extends State<EditPassword> {
                   ? Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
+                      child: ElevatedButton(
+                       style: ButtonStyle(
+                         shape: MaterialStateProperty.all(
+                         RoundedRectangleBorder(
+                             borderRadius: BorderRadius.circular(24),
+                           ),
+                         )
+                       ),
                         onPressed: () async {
                           if (phone.text != null &&
                               newPassword.text == confirmNewPassword.text) {
@@ -159,14 +163,14 @@ class _EditPasswordState extends State<EditPassword> {
                                 // Agent_login_JSON data = Agent_login_JSON.fromJson(
                                 //     json.decode(value ));
 
-                                if (value.data["status"]) {
+                                if (value?.data["status"]) {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       new MaterialPageRoute(
                                           builder: (context) => LoginScr()),
                                       (Route<dynamic> route) => false);
                                 } else {
-                                  Get.snackbar('', value.data["message"]);
+                                  Get.snackbar('', value?.data["message"]);
                                 }
 
                                 login = false;
@@ -176,8 +180,8 @@ class _EditPasswordState extends State<EditPassword> {
                             ;
                           }
                         },
-                        padding: EdgeInsets.all(12),
-                        color: hexToColor('#00abeb'),
+                        // padding: EdgeInsets.all(12),
+                        // color: hexToColor('#00abeb'),
                         child: Text('تسجيل الدخول',
                             style: TextStyle(color: Colors.white)),
                       ),

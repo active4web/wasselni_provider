@@ -56,20 +56,20 @@ class _ProfileeState extends State<Profilee> {
   final box = GetStorage();
   Location location = new Location();
   Completer<GoogleMapController> _controller = Completer();
-  PermissionStatus _permissionGranted;
-  LocationData _locationData;
-  LatLng _locationtosend;
-  bool _serviceEnabled;
-  CameraPosition _kGooglePlex;
+  PermissionStatus? _permissionGranted;
+  LocationData? _locationData;
+  LatLng? _locationtosend;
+  bool? _serviceEnabled;
+  CameraPosition? _kGooglePlex;
   bool setcaruntloction = false;
-  File _image;
+  File? _image;
   bool senddata = false;
   List<Marker> _markers = <Marker>[];
   getloc() async {
     _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
+    if (!_serviceEnabled!) {
       _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
+      if (!_serviceEnabled!) {
         return;
       }
     }
@@ -84,18 +84,17 @@ class _ProfileeState extends State<Profilee> {
     _locationData = await location.getLocation();
     _markers.add(Marker(
       markerId: MarkerId('1'),
-      position: LatLng(_locationData.latitude, _locationData.longitude),
+      position: LatLng(_locationData!.latitude!, _locationData!.longitude!),
       // infoWindow: InfoWindow(
       //     title: 'The title of the marker'
       // )
     ));
     _kGooglePlex = CameraPosition(
-      target: LatLng(_locationData.latitude, _locationData.longitude),
+      target: LatLng(_locationData!.latitude!, _locationData!.longitude!),
       zoom: 14,
     );
-    print(_locationData.latitude);
-    print(_locationData.longitude);
-    _locationtosend = LatLng(_locationData.latitude, _locationData.longitude);
+
+    _locationtosend = LatLng(_locationData!.latitude!, _locationData!.longitude!);
     // setState(() {
     //   print(_locationData.latitude);
     // });
@@ -123,40 +122,37 @@ class _ProfileeState extends State<Profilee> {
                   color: Colors.black,
                 )),
           ),
-          body: StreamBuilder<Preparation_profile_json>(
+          body: StreamBuilder<Preparation_profile_json?>(
               stream: _allNetworking
                   .preparation_profile(token_id: box.read('token'))
                   .asStream(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print(snapshot.data.message);
-                  print('99999999999999999999999999999999999999');
-                  print(snapshot.data.result.serviceDetails.length);
-                  ServiceDetails dat = snapshot.data.result.serviceDetails[0];
-                  address.text = dat.address;
+                  ServiceDetails dat = snapshot.data!.result!.serviceDetails![0];
+                  address.text = dat.address??'';
 
-                  address_tr.text = dat.addressTr;
-                  name_tr.text = dat.nameTr;
-                  des_tr.text = dat.descriptionTr;
+                  address_tr.text = dat.addressTr??'';
+                  name_tr.text = dat.nameTr??'';
+                  des_tr.text = dat.descriptionTr??'';
 
-                  title.text = dat.nameAr;
+                  title.text = dat.nameAr??'';
 
-                  password.text = dat.password;
+                  password.text = dat.password??'';
 
-                  titlen_en.text = dat.nameEn;
-                  phone.text = dat.phone;
-                  phone2.text = dat.phoneSecond;
-                  phone3.text = dat.phoneThird;
-                  whatsapp.text = dat.whatsapp;
+                  titlen_en.text = dat.nameEn??'';
+                  phone.text = dat.phone??'';
+                  phone2.text = dat.phoneSecond??'';
+                  phone3.text = dat.phoneThird??'';
+                  whatsapp.text = dat.whatsapp??'';
 
-                  description.text = dat.description;
-                  description_en.text = dat.descriptionEn;
+                  description.text = dat.description??'';
+                  description_en.text = dat.descriptionEn??'';
 
-                  addersinmap.text = dat.location;
-                  facebook.text = dat.facebook;
-                  twiter.text = dat.twitter;
-                  insta.text = dat.instagram;
-                  if (dat.lag.trim().isEmpty) {
+                  addersinmap.text = dat.location??'';
+                  facebook.text = dat.facebook??'';
+                  twiter.text = dat.twitter??'';
+                  insta.text = dat.instagram??'';
+                  if (dat.lag!.trim().isEmpty) {
                     _locationtosend =
                         LatLng(29.844621439086723, 31.334775711571776);
                     _kGooglePlex = CameraPosition(
@@ -172,18 +168,18 @@ class _ProfileeState extends State<Profilee> {
                     ));
                   } else {
                     _locationtosend =
-                        LatLng(double.parse(dat.lat), double.parse(dat.lag));
+                        LatLng(double.parse(dat.lat??''), double.parse(dat.lag??''));
                     _markers.add(Marker(
                       markerId: MarkerId('1'),
                       position:
-                          LatLng(double.parse(dat.lat), double.parse(dat.lag)),
+                          LatLng(double.parse(dat.lat??''), double.parse(dat.lag??'')),
                       // infoWindow: InfoWindow(
                       //     title: 'The title of the marker'
                       // )
                     ));
                     _kGooglePlex = CameraPosition(
                       target:
-                          LatLng(double.parse(dat.lat), double.parse(dat.lag)),
+                          LatLng(double.parse(dat.lat??''), double.parse(dat.lag??'')),
                       zoom: 14,
                     );
                   }
@@ -198,7 +194,7 @@ class _ProfileeState extends State<Profilee> {
                   return SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(
-                          top: 50, left: 50, right: 50, bottom: 8),
+                          top: 50, left: 20, right: 20, bottom: 8),
                       child: Column(
                         children: [
                           SizedBox(
@@ -222,7 +218,7 @@ class _ProfileeState extends State<Profilee> {
                                         }
                                       });
                                     },
-                                    child: _image == null && dat.mainImg.trim().isEmpty
+                                    child: _image == null && dat.mainImg!.trim().isEmpty
                                         ? Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -249,7 +245,7 @@ class _ProfileeState extends State<Profilee> {
                                                     MediaQuery.of(context).size.width *
                                                         .3,
                                                 child: Image.network(
-                                                  dat.mainImg,
+                                                  dat.mainImg??'',
                                                   fit: BoxFit.fill,
                                                 ),
                                               )
@@ -261,7 +257,7 @@ class _ProfileeState extends State<Profilee> {
                                                     MediaQuery.of(context).size.width *
                                                         .3,
                                                 child: Image.file(
-                                                  _image,
+                                                  _image!,
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
@@ -541,13 +537,13 @@ class _ProfileeState extends State<Profilee> {
                                       facebook: facebook.text,
                                       website: website.text,
                                       email: email.text,
-                                      lat: _locationtosend.latitude,
+                                      lat: _locationtosend?.latitude,
 
                                       //setcaruntloction
                                       // _locationData != null
                                       //     ? _locationData.latitude
                                       //     : null,
-                                      lag: _locationtosend.longitude,
+                                      lag: _locationtosend?.longitude,
 
                                       // setcaruntloction
                                       // _locationData != null
@@ -555,7 +551,7 @@ class _ProfileeState extends State<Profilee> {
                                       //     : null,
                                     )
                                         .then((value) {
-                                      Get.snackbar('', value.statusMessage);
+                                      Get.snackbar('', value?.statusMessage??'');
 
                                       senddata = false;
                                       setState(() {});
@@ -636,7 +632,7 @@ class _ProfileeState extends State<Profilee> {
   }
 
   Widget mywidget(
-      {hint, inputtype, TextEditingController textEditingController}) {
+      {hint, inputtype, TextEditingController? textEditingController}) {
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,

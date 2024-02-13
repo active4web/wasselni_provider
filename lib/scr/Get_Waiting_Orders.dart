@@ -15,7 +15,7 @@ class Get_Waiting_Orders extends StatefulWidget {
 
 class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
   final box = GetStorage();
-  String token;
+  String? token;
   AllNetworking _allNetworking = AllNetworking();
 
   @override
@@ -35,17 +35,17 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
         top: true,
         child: Scaffold(
           body: token != null
-              ? StreamBuilder<Get_Waiting_Orders_json>(
+              ? StreamBuilder<Get_Waiting_Orders_json?>(
                   stream: _allNetworking
                       .get_waiting_orders(token_id: token)
-                      .asStream(),
+                      .asStream() ,
                   builder: (context, snapshot) {
                     print(snapshot.data);
 
                     if (snapshot.hasData) {
-                      if (snapshot.data.result.allOrders.length > 0) {
+                      if (snapshot.data!.result!.allOrders!.length > 0) {
                         return ListView.builder(
-                            itemCount: snapshot.data.result.allOrders.length,
+                            itemCount: snapshot.data?.result?.allOrders?.length,
                             itemBuilder: (context, pos) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -77,17 +77,13 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            RaisedButton(
-                                                color: Colors.blue[900],
+                                            ElevatedButton(
+                                                // color: Colors.blue[900],
                                                 onPressed: () {
                                                   _allNetworking
                                                       .update_order(
                                                           token_id: token,
-                                                          id_order: snapshot
-                                                              .data
-                                                              .result
-                                                              .allOrders[pos]
-                                                              .idOrder
+                                                          id_order: snapshot.data?.result?.allOrders?[pos].idOrder
                                                               .toString(),
                                                           key_action: 1)
                                                       .then((value) {
@@ -106,16 +102,16 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                                               FontWeight.bold,
                                                           fontSize: 18)),
                                                 )),
-                                            RaisedButton(
-                                                color: Colors.blue[300],
+                                            ElevatedButton(
+                                                // color: Colors.blue[300],
                                                 onPressed: () {
                                                   _allNetworking
                                                       .update_order(
                                                           token_id: token,
                                                           id_order: snapshot
                                                               .data
-                                                              .result
-                                                              .allOrders[pos]
+                                                              ?.result
+                                                              ?.allOrders?[pos]
                                                               .idOrder
                                                               .toString(),
                                                           key_action: 4)
@@ -154,9 +150,9 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].idOrder
-                                                .toString()),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].idOrder
+                                                .toString()??''),
                                           ),
                                         ],
                                       ),
@@ -178,23 +174,23 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                                 left: 16, right: 16),
                                             child: Text(snapshot
                                                     .data
-                                                    .result
-                                                    .allOrders[pos]
+                                                    !.result
+                                                    !.allOrders![pos]
                                                     .shippingCharges
-                                                    .trim()
+                                                    !.trim()
                                                     .isEmpty
                                                 ? ''
                                                 : snapshot
                                                         .data
-                                                        .result
-                                                        .allOrders[pos]
-                                                        .shippingCharges +
+                                                        !.result
+                                                        !.allOrders![pos]
+                                                        .shippingCharges! +
                                                     " " +
                                                     snapshot
                                                         .data
-                                                        .result
-                                                        .allOrders[pos]
-                                                        .currencyName),
+                                                        !.result
+                                                        !.allOrders![pos]
+                                                        .currencyName!),
                                           ),
                                         ],
                                       ),
@@ -214,8 +210,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].totalProduct),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].totalProduct??''),
                                           ),
                                         ],
                                       ),
@@ -235,8 +231,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].date),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].date??''),
                                           ),
                                         ],
                                       ),
@@ -256,14 +252,14 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                    .allOrders[pos].totalPrice +
+                                            child: Text(snapshot.data!.result
+                                                    !.allOrders![pos].totalPrice! +
                                                 " " +
                                                 snapshot
                                                     .data
-                                                    .result
-                                                    .allOrders[pos]
-                                                    .currencyName),
+                                                    !.result
+                                                    !.allOrders![pos]
+                                                    .currencyName!),
                                           ),
                                         ],
                                       ),
@@ -291,8 +287,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].fullname),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].fullname??''),
                                           ),
                                         ],
                                       ),
@@ -312,8 +308,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].phone),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].phone??''),
                                           ),
                                         ],
                                       ),
@@ -332,8 +328,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                             ),
                                           ),
                                           Flexible(
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].address),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].address??''),
                                           ),
                                         ],
                                       ),
@@ -356,9 +352,9 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                             child: Container(
                                               child: Text(snapshot
                                                   .data
-                                                  .result
-                                                  .allOrders[pos]
-                                                  .antherAddress),
+                                                  ?.result
+                                                  ?.allOrders?[pos]
+                                                  .antherAddress??''),
                                             ),
                                           ),
                                         ],
@@ -379,8 +375,8 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data.result
-                                                .allOrders[pos].cityName),
+                                            child: Text(snapshot.data?.result
+                                                ?.allOrders?[pos].cityName??''),
                                           ),
                                         ],
                                       ),
@@ -393,21 +389,21 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                               await MapLauncher.installedMaps;
                                           print(availableMaps);
                                           if (await MapLauncher.isMapAvailable(
-                                              MapType.google)) {
+                                              MapType.google)??false) {
                                             await MapLauncher.showMarker(
                                                 mapType: MapType.google,
                                                 coords: Coords(
                                                   double.parse(snapshot
                                                       .data
-                                                      .result
-                                                      .allOrders[pos]
-                                                      .lat),
+                                                      ?.result
+                                                      ?.allOrders?[pos]
+                                                      .lat??''),
                                                   double.parse(snapshot
                                                       .data
-                                                      .result
-                                                      .allOrders[pos]
-                                                      .lag),
-                                                ));
+                                                      ?.result
+                                                      ?.allOrders?[pos]
+                                                      .lag??''),
+                                                ), title: '');
                                           }
                                         },
                                         child: Row(
@@ -438,11 +434,11 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                           ],
                                         ),
                                       ),
-                                      FutureBuilder<Get_order_details_json>(
+                                      FutureBuilder<Get_order_details_json?>(
                                           future:
                                               _allNetworking.get_order_details(
-                                            id_order: snapshot.data.result
-                                                .allOrders[pos].idOrder,
+                                            id_order: snapshot.data?.result
+                                                ?.allOrders?[pos].idOrder,
                                             token_id: token,
                                           ),
                                           builder: (context, snap) {
@@ -454,13 +450,13 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                                             if (snap.hasData) {
                                               for (int i = 0;
                                                   i <
-                                                      snap.data.result
-                                                          .allProducts.length;
+                                                      snap.data!.result
+                                                          !.allProducts!.length;
                                                   i++) {
                                                 list.add(Productsiteem(
                                                     size: size,
-                                                    offers: snap.data.result
-                                                        .allProducts[i]));
+                                                    offers: snap.data!.result
+                                                        !.allProducts![i]));
                                                 print('*' * 15);
                                                 print(list.length);
                                                 print('*' * 15);
@@ -515,7 +511,7 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
     );
   }
 
-  Widget Productsiteem({AllProducts offers, size}) {
+  Widget Productsiteem({AllProducts? offers, size}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -543,7 +539,7 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.network(
-                offers.image,
+                offers?.image??'',
                 width: size.width * .3,
                 height: size.height * .15,
                 fit: BoxFit.fill,
@@ -557,10 +553,10 @@ class _Get_Waiting_OrdersState extends State<Get_Waiting_Orders> {
                     child: Container(
                       height: size.height * .1,
                       width: size.width * .3,
-                      child: Text(offers.productName),
+                      child: Text(offers?.productName??''),
                     ),
                   ),
-                  Text(offers.price.toString() + '  ' + offers.currencyName)
+                  Text(offers!.price.toString() + '  ' + offers.currencyName!)
                 ],
               ),
             ),

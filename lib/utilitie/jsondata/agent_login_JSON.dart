@@ -1,8 +1,8 @@
 class Agent_login_JSON {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Agent_login_JSON({this.message, this.codenum, this.status, this.result});
 
@@ -20,14 +20,14 @@ class Agent_login_JSON {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  AgentData agentData;
+  AgentData? agentData;
 
   Result({this.agentData});
 
@@ -40,18 +40,18 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.agentData != null) {
-      data['agent_data'] = this.agentData.toJson();
+      data['agent_data'] = this.agentData?.toJson();
     }
     return data;
   }
 }
 
 class AgentData {
-  String name;
-  String phone;
-  int id;
-  String email;
-  String token;
+  String? name;
+  String? phone;
+  int? id;
+  String? email;
+  String? token;
 
   AgentData({this.name, this.phone, this.id, this.email, this.token});
 

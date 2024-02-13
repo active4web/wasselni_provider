@@ -1,8 +1,8 @@
 class Get_home_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Get_home_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,36 +20,36 @@ class Get_home_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  int totalProduct;
-  String totalViews;
-  String datePackege;
-  String startDate;
-  String endDate;
-  int keyUpdate;
-  String totalPoints;
-  String totalSelling;
-  String totalOrders;
-  String serviceCoupon;
-  int type;
-  String showOrder;
-  int totalListLocations;
-  String totalRate;
-  String locationDisplay;
-  String showRate;
-  String locationTitle;
-  String rateTitle;
-  String copounDisplay;
-  String scanDisplay;
-  String pointsDisplay;
-  String offersDisplay;
-  String branchesDisplay;
+  int? totalProduct;
+  String? totalViews;
+  String? datePackege;
+  String? startDate;
+  String? endDate;
+  int? keyUpdate;
+  String? totalPoints;
+  String? totalSelling;
+  String? totalOrders;
+  String? serviceCoupon;
+  int? type;
+  String? showOrder;
+  int? totalListLocations;
+  String? totalRate;
+  String? locationDisplay;
+  String? showRate;
+  String? locationTitle;
+  String? rateTitle;
+  String? copounDisplay;
+  String? scanDisplay;
+  String? pointsDisplay;
+  String? offersDisplay;
+  String? branchesDisplay;
 
   Result(
       {this.totalProduct,

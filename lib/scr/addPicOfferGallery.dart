@@ -17,11 +17,11 @@ class AddPicOfferGallery extends StatefulWidget {
 
 class _AddPicOfferGalleryState extends State<AddPicOfferGallery> {
   AllNetworking _allNetworking = AllNetworking();
-  List<XFile>  _imageFileList;
+  List<XFile>?  _imageFileList;
   final ImagePicker _picker = ImagePicker();
   final box = GetStorage();
-  String token;
-  File _image;
+  String? token;
+  File? _image;
 bool sendpictoweb=false;
   @override
   void initState() {
@@ -54,7 +54,7 @@ bool sendpictoweb=false;
                     maxWidth: 1200,
                     imageQuality: 100);
                 setState(() {
-                  _image = File(image.path);
+                  _image = File(image!.path);
                 });
               },
               child: _image == null
@@ -68,7 +68,7 @@ bool sendpictoweb=false;
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * .3,
                       child: Image.file(
-                        _image,
+                        _image!,
                         fit: BoxFit.cover,
                       ),
                     ),

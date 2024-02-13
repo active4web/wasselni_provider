@@ -9,8 +9,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart' as intl;
 
 class QRDetailsPoints extends StatefulWidget {
-   final String phoneNumber;
-  const QRDetailsPoints({Key key, this.phoneNumber}) : super(key: key);
+   final String? phoneNumber;
+  const QRDetailsPoints({Key? key, this.phoneNumber}) : super(key: key);
   @override
   _QRDetailsPointsState createState() => _QRDetailsPointsState();
 }
@@ -21,8 +21,8 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
   int limit = 1000;
   final box = GetStorage();
   String f = "";
-  int sum;
-  ScrollController _scrollController;
+  int? sum;
+  ScrollController? _scrollController;
   TextEditingController _startDate=TextEditingController();
   TextEditingController _endDate=TextEditingController();
 
@@ -50,10 +50,10 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                 .check_phone(token_id: box.read('token'),phone: widget.phoneNumber),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<AllVisitoe> dat = snapshot.data.result.allVisitoe;
+                List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe??[];
                 List<AllVisitoe> data = [];
                 dat.forEach((element) {
-                  if (element.userPhone.contains(f)) {
+                  if (element.userPhone!.contains(f)) {
                     data.add(element);
                   }
                 });
@@ -162,11 +162,11 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                     //     }, icon: Icon(Icons.filter_alt_outlined))
                     //   ],
                     // ),
-                    Text("عدد النقاط : ${snapshot.data.result.totalPoints}"),
+                    Text("عدد النقاط : ${snapshot.data?.result?.totalPoints}"),
                     Expanded(
                       child: ListView.builder(
                           itemCount:  f.trim().isEmpty
-                              ?snapshot.data.result.allVisitoe.length:data.length,
+                              ?snapshot.data?.result?.allVisitoe?.length:data.length,
                           controller: _scrollController,
                           itemBuilder: (context, pos) {
                             return Directionality(
@@ -185,7 +185,7 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                                     children: [
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}'
+                                            ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
                                             : 'اسم العميل : ${data[pos].userName}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -194,7 +194,7 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ? 'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}'
+                                            ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
                                             : 'رقم التلفون : ${data[pos].userPhone}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
@@ -203,7 +203,7 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'نقاط المسح : ${snapshot.data.result.allVisitoe[pos].serviceCoupon}': 'كود الخصم : ${data[pos].serviceCoupon}',
+                                            ?  'نقاط المسح : ${snapshot.data?.result?.allVisitoe?[pos].serviceCoupon}': 'كود الخصم : ${data[pos].serviceCoupon}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -211,7 +211,7 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                                       ),
                                       Text(
                                         f.trim().isEmpty
-                                            ?  'تاريخ المسح : ${snapshot.data.result.allVisitoe[pos].date}':'تاريخ الاستخدام : ${data[pos].date}',
+                                            ?  'تاريخ المسح : ${snapshot.data?.result?.allVisitoe?[pos].date}':'تاريخ الاستخدام : ${data[pos].date}',
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
                                             color: Colors.black,
@@ -228,8 +228,8 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
                                                         coupon_id:  f.trim().isEmpty
                                                             ? snapshot
                                                             .data
-                                                            .result
-                                                            .allVisitoe[pos]
+                                                            ?.result
+                                                            ?.allVisitoe![pos]
                                                             .visitorId:data[pos]
                                                             .visitorId)
                                                     .then((value) {
@@ -266,9 +266,9 @@ class _QRDetailsPointsState extends State<QRDetailsPoints> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

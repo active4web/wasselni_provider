@@ -1,8 +1,8 @@
 class Gate_list_rate_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Gate_list_rate_json({this.message, this.codenum, this.status, this.result});
 
@@ -20,22 +20,22 @@ class Gate_list_rate_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  List<AllRate> allRate;
+  List<AllRate>? allRate;
 
   Result({this.allRate});
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_rate'] != null) {
-      allRate = new List<AllRate>();
+      allRate =  <AllRate>[];
       json['all_rate'].forEach((v) {
-        allRate.add(new AllRate.fromJson(v));
+        allRate?.add(new AllRate.fromJson(v));
       });
     }
   }
@@ -43,17 +43,17 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.allRate != null) {
-      data['all_rate'] = this.allRate.map((v) => v.toJson()).toList();
+      data['all_rate'] = this.allRate?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class AllRate {
-  String username;
-  String userrate;
-  String usercomment;
-  int rateId;
+  String? username;
+  String? userrate;
+  String? usercomment;
+  int? rateId;
 
   AllRate({this.username, this.userrate, this.usercomment, this.rateId});
 

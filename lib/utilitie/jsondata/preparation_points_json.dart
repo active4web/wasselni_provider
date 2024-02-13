@@ -1,8 +1,8 @@
 class Preparation_points_json {
-  String message;
-  int codenum;
-  bool status;
-  Result result;
+  String? message;
+  int? codenum;
+  bool? status;
+  Result? result;
 
   Preparation_points_json(
       {this.message, this.codenum, this.status, this.result});
@@ -21,15 +21,15 @@ class Preparation_points_json {
     data['codenum'] = this.codenum;
     data['status'] = this.status;
     if (this.result != null) {
-      data['result'] = this.result.toJson();
+      data['result'] = this.result?.toJson();
     }
     return data;
   }
 }
 
 class Result {
-  String totalPoints;
-  String totalPointsQr;
+  String? totalPoints;
+  String? totalPointsQr;
 
   Result({this.totalPoints});
 

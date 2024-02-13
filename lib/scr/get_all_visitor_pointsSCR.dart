@@ -4,7 +4,7 @@ import 'package:commercial_app/utilitie/jsondata/get_all_visitor_points_json.dar
 import 'package:flutter/material.dart';
 
 class Get_all_visitor_points extends StatefulWidget {
-  String token_id;
+  String? token_id;
 
   Get_all_visitor_points(this.token_id);
 
@@ -18,7 +18,7 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
   int sizelist = 0;
   int limit = 50;
   String f = "";
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -38,17 +38,17 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
               centerTitle: true,
               title: Text('عدد الزوار'),
             ),
-            body: StreamBuilder<Get_all_visitor_points_json>(
+            body: StreamBuilder<Get_all_visitor_points_json?>(
                 stream: _allNetworking
                     .get_all_visitor_points(
                         token_id: widget.token_id, limit: limit, page_number: 0)
-                    .asStream(),
+                    .asStream() ,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<AllVisitoe> dat = snapshot.data.result.allVisitoe;
+                    List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe??[];
                     List<AllVisitoe> data = [];
                     dat.forEach((element) {
-                      if (element.userPhone.contains(f)) {
+                      if (element.userPhone!.contains(f)) {
                         data.add(element);
                       }
                     });
@@ -86,7 +86,7 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                         Expanded(
                           child: ListView.builder(
                               itemCount: f.trim().isEmpty
-                                  ? snapshot.data.result.allVisitoe.length
+                                  ? snapshot.data?.result?.allVisitoe?.length
                                   : data.length,
                               controller: _scrollController,
                               itemBuilder: (context, pos) {
@@ -106,17 +106,17 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(f.trim().isEmpty
-                                              ? 'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}'
+                                              ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
                                               : 'اسم العميل : ${data[pos].userName}'),
                                           Text(f.trim().isEmpty
-                                              ? 'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}'
+                                              ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
                                               : 'رقم التلفون : ${data[pos].userPhone}'),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(f.trim().isEmpty
-                                                  ? 'عدد النقاط : ${snapshot.data.result.allVisitoe[pos].totalPointsVisit}'
+                                                  ? 'عدد النقاط : ${snapshot.data?.result?.allVisitoe?[pos].totalPointsVisit}'
                                                   : 'عدد النقاط : ${data[pos].totalPointsVisit}'),
                                               GestureDetector(
                                                   onTap: () {
@@ -127,16 +127,10 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                                                             visitor_id: f
                                                                     .trim()
                                                                     .isEmpty
-                                                                ? snapshot
-                                                                    .data
-                                                                    .result
-                                                                    .allVisitoe[
-                                                                        pos]
-                                                                    .visitorId
+                                                                ? snapshot.data?.result?.allVisitoe![pos].visitorId
                                                                 : data[pos]
                                                                     .visitorId)
                                                         .then((value) {
-                                                      print(value.data);
                                                       setState(() {});
                                                     });
                                                   },
@@ -163,9 +157,9 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
   }
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
       if (sizelist > 50) {
         limit = limit + 20;
         setState(() {});

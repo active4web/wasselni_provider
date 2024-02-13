@@ -1,7 +1,7 @@
 class Cancel_order_json {
-  String message;
-  int codenum;
-  bool status;
+  String? message;
+  int? codenum;
+  bool? status;
 
   Cancel_order_json({this.message, this.codenum, this.status});
 
