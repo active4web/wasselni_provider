@@ -1,45 +1,151 @@
 {
   "project_info": {
-    "project_number": "1038203745884",
-    "project_id": "wasselni-provider",
-    "storage_bucket": "wasselni-provider.appspot.com"
+    "project_number": "378009877139",
+    "project_id": "mersaty-4ecb4",
+    "storage_bucket": "mersaty-4ecb4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1038203745884:android:499bbdeec2bde3e5945899",
+        "mobilesdk_app_id": "1:378009877139:android:d7450dada5ea0611d3ab66",
         "android_client_info": {
-          "package_name": "com.mystore.wasselni"
+          "package_name": "com.active.mystore"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCcvdWuyB0qnbxs5oYVEzviAbMoEOfGAdg"
+          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mersaty"
+              }
+            }
+          ]
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1038203745884:android:183ad84379e8c6aa945899",
+        "mobilesdk_app_id": "1:378009877139:android:cea7d4774a8452acd3ab66",
         "android_client_info": {
-          "package_name": "com.nram.commercial_app"
+          "package_name": "com.active.wasselni"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCcvdWuyB0qnbxs5oYVEzviAbMoEOfGAdg"
+          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mersaty"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378009877139:android:f16e80680bf8f82fd3ab66",
+        "android_client_info": {
+          "package_name": "com.mersaty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mersaty"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378009877139:android:e040a0d30a63fddcd3ab66",
+        "android_client_info": {
+          "package_name": "com.waselnni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mersaty"
+              }
+            }
+          ]
         }
       }
     }

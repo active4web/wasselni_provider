@@ -1,4 +1,4 @@
-package com.mystore.wasselni
+package com.active.mystore
 
 import io.flutter.embedding.android.FlutterActivity
 

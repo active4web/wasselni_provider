@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCcvdWuyB0qnbxs5oYVEzviAbMoEOfGAdg',
-    appId: '1:1038203745884:android:499bbdeec2bde3e5945899',
-    messagingSenderId: '1038203745884',
-    projectId: 'wasselni-provider',
-    storageBucket: 'wasselni-provider.appspot.com',
+    apiKey: 'AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A',
+    appId: '1:378009877139:android:d7450dada5ea0611d3ab66',
+    messagingSenderId: '378009877139',
+    projectId: 'mersaty-4ecb4',
+    storageBucket: 'mersaty-4ecb4.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAODcSuOvFbvPh6F_4uMf-kOtvLI5OKWXs',
-    appId: '1:1038203745884:ios:a2973a2c6b22e31e945899',
-    messagingSenderId: '1038203745884',
-    projectId: 'wasselni-provider',
-    storageBucket: 'wasselni-provider.appspot.com',
-    iosBundleId: 'com.wasselni.mystore',
+    apiKey: 'AIzaSyBOFxboAprxPaDQDx_RZvc4whQUX-4XFyQ',
+    appId: '1:378009877139:ios:2617807663a80b88d3ab66',
+    messagingSenderId: '378009877139',
+    projectId: 'mersaty-4ecb4',
+    storageBucket: 'mersaty-4ecb4.appspot.com',
+    iosBundleId: 'com.active.mystore',
   );
+
 }
