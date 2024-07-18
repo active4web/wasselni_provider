@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'Get_Waiting_Orders.dart';
@@ -16,9 +15,9 @@ class _MyOrderState extends State<MyOrder> {
     keepPage: true,
   );
   int _curr = 0;
-  List<Widget> _list = <Widget>[new Get_Waiting_Orders(),
+  List<Widget> _list = <Widget>[
+    new Get_Waiting_Orders(),
     new Get_current_orders(),
-
     new Get_previous_orders(),
   ];
 

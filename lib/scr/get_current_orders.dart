@@ -39,10 +39,10 @@ class _Get_current_ordersState extends State<Get_current_orders> {
               ? StreamBuilder<Get_current_orders_json?>(
                   stream: _allNetworking
                       .get_current_orders(token_id: token)
-                      .asStream() ,
+                      .asStream(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      if (snapshot.data!.result!.allOrders!.length <= 0) {
+                      if (snapshot.data!.result!.allOrders!.length > 0) {
                         return ListView.builder(
                             itemCount: snapshot.data!.result?.allOrders?.length,
                             itemBuilder: (context, pos) {
@@ -194,7 +194,17 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                                     .trim()
                                                     .isEmpty
                                                 ? ''
-                                                : snapshot.data!.result!.allOrders![pos].shippingCharges! + " " + snapshot.data!.result!.allOrders![pos].currencyName!),
+                                                : snapshot
+                                                        .data!
+                                                        .result!
+                                                        .allOrders![pos]
+                                                        .shippingCharges! +
+                                                    " " +
+                                                    snapshot
+                                                        .data!
+                                                        .result!
+                                                        .allOrders![pos]
+                                                        .currencyName!),
                                           ),
                                         ],
                                       ),
@@ -214,7 +224,12 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].totalProduct??''),
+                                            child: Text(snapshot
+                                                    .data
+                                                    ?.result
+                                                    ?.allOrders?[pos]
+                                                    .totalProduct ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -234,7 +249,9 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].date??''),
+                                            child: Text(snapshot.data?.result
+                                                    ?.allOrders?[pos].date ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -254,8 +271,11 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data!.result!
-                                                    .allOrders![pos].totalPrice! +
+                                            child: Text(snapshot
+                                                    .data!
+                                                    .result!
+                                                    .allOrders![pos]
+                                                    .totalPrice! +
                                                 " " +
                                                 snapshot
                                                     .data!
@@ -289,7 +309,12 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].fullname??''),
+                                            child: Text(snapshot
+                                                    .data
+                                                    ?.result
+                                                    ?.allOrders?[pos]
+                                                    .fullname ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -309,7 +334,9 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].phone??''),
+                                            child: Text(snapshot.data?.result
+                                                    ?.allOrders?[pos].phone ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -328,7 +355,9 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                             ),
                                           ),
                                           Flexible(
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].address??''),
+                                            child: Text(snapshot.data?.result
+                                                    ?.allOrders?[pos].address ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -349,7 +378,12 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
                                             child: Container(
-                                              child: Text(snapshot.data?.result?.allOrders?[pos].antherAddress??''),
+                                              child: Text(snapshot
+                                                      .data
+                                                      ?.result
+                                                      ?.allOrders?[pos]
+                                                      .antherAddress ??
+                                                  ''),
                                             ),
                                           ),
                                         ],
@@ -370,7 +404,12 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
-                                            child: Text(snapshot.data?.result?.allOrders?[pos].cityName??''),
+                                            child: Text(snapshot
+                                                    .data
+                                                    ?.result
+                                                    ?.allOrders?[pos]
+                                                    .cityName ??
+                                                ''),
                                           ),
                                         ],
                                       ),
@@ -386,15 +425,25 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                               await MapLauncher.installedMaps;
                                           print(availableMaps);
                                           if (await MapLauncher.isMapAvailable(
-                                              MapType.google)??false) {
+                                                  MapType.google) ??
+                                              false) {
                                             await MapLauncher.showMarker(
                                                 mapType: MapType.google,
                                                 coords: Coords(
                                                   double.parse(snapshot
-                                                      .data?.result?.allOrders?[pos].lat??''),
-                                                  double.parse(snapshot.data?.result?.allOrders?[pos]
-                                                      .lag??''),
-                                                ), title: '');
+                                                          .data
+                                                          ?.result
+                                                          ?.allOrders?[pos]
+                                                          .lat ??
+                                                      ''),
+                                                  double.parse(snapshot
+                                                          .data
+                                                          ?.result
+                                                          ?.allOrders?[pos]
+                                                          .lag ??
+                                                      ''),
+                                                ),
+                                                title: '');
                                           }
                                         },
                                         child: Row(
@@ -420,18 +469,28 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                       ),
                                       FutureBuilder<Get_order_details_json?>(
                                           future:
-                                              _allNetworking.get_order_details(id_order: snapshot.data?.result?.allOrders?[pos].idOrder, token_id: token,),
+                                              _allNetworking.get_order_details(
+                                            id_order: snapshot.data?.result
+                                                ?.allOrders?[pos].idOrder,
+                                            token_id: token,
+                                          ),
                                           builder: (context, snapshot) {
                                             print("snapshot.data");
                                             print(snapshot.data);
                                             print("snapshot.data");
                                             List<Widget> list = [];
                                             if (snapshot.hasData) {
-                                              for (int i = 0; i < snapshot.data!.result!.allProducts!.length;
+                                              for (int i = 0;
+                                                  i <
+                                                      snapshot.data!.result!
+                                                          .allProducts!.length;
                                                   i++) {
                                                 list.add(Productsiteem(
                                                     size: size,
-                                                    offers: snapshot.data!.result!.allProducts![i]));
+                                                    offers: snapshot
+                                                        .data!
+                                                        .result!
+                                                        .allProducts![i]));
                                               }
                                               return ExpansionTile(
                                                 title: Text('تفاصيل'),
@@ -511,7 +570,7 @@ class _Get_current_ordersState extends State<Get_current_orders> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.network(
-                offers?.image??'',
+                offers?.image ?? '',
                 width: size.width * .3,
                 height: size.height * .15,
                 fit: BoxFit.fill,
@@ -525,7 +584,7 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                     child: Container(
                       height: size.height * .1,
                       width: size.width * .3,
-                      child: Text(offers?.productName??''),
+                      child: Text(offers?.productName ?? ''),
                     ),
                   ),
                   Text("${offers?.price.toString()}  ${offers?.currencyName}")
@@ -537,7 +596,7 @@ class _Get_current_ordersState extends State<Get_current_orders> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(offers?.quantity.toString()??'',
+                  Text(offers?.quantity.toString() ?? '',
                       style: TextStyle(
                           fontSize: 22,
                           color: Colors.black87,

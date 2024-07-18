@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:commercial_app/myWidget/myDrawer.dart';
 import 'package:commercial_app/myWidget/productListItemWidget.dart';
 import 'package:commercial_app/netWORK/allnetworking.dart';
- 
+
 import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:commercial_app/utilitie/jsondata/get_all_products_JSON.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'addNewProdect.dart';
- 
+
 import 'editProduct.dart';
 
 class ProductScr extends StatefulWidget {
@@ -20,7 +20,7 @@ class ProductScr extends StatefulWidget {
 }
 
 List<AllProducts> list = [];
-int sizelist=0;
+int sizelist = 0;
 bool getprodect = true;
 int limit = 10;
 String? token;
@@ -41,14 +41,12 @@ class _ProductScrState extends State<ProductScr> {
     print('oooooooooooooooooooooooooooooooo');
     print(token);
     print('oooooooooooooooooooooooooooooooo');
-
   }
 
   @override
   Widget build(BuildContext context) {
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -58,24 +56,20 @@ class _ProductScrState extends State<ProductScr> {
             centerTitle: true,
             title: Text('المنتجات',
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
+                    fontFamily: 'Arbf',
+                    color: hexToColor('#00abeb'),
+                    fontSize: 18)),
           ),
           body: Column(
             children: [
               GestureDetector(
-                onTap: ()async {
-
+                onTap: () async {
                   final value = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => AddNewProdect(context)),
-
                   );
-                  setState(() {
-
-                  });
-
-
+                  setState(() {});
 
                   // Get.to(
                   //   AddNewProdect(),
@@ -108,53 +102,65 @@ class _ProductScrState extends State<ProductScr> {
                   flex: 1,
                   child: StreamBuilder(
                       stream: _allNetworking.Get_all_products(
-                          phone: phone,
-                          token_id: token,
-                          limit: limit.toString(),
-                          page_number: 0.toString())
+                              phone: phone,
+                              token_id: token,
+                              limit: limit.toString(),
+                              page_number: 0.toString())
                           .asStream(),
                       builder: (context, snapdata) {
-
                         if (snapdata.hasData) {
-
                           Get_all_products_JSON data =
-                          Get_all_products_JSON.fromJson(
-                              json.decode(snapdata.data!.body));
-                          sizelist=data.result!.allProducts!.length;
-                          return ListView.builder(
-                              itemCount: data.result?.allProducts?.length,controller: _scrollController,
-                              itemBuilder: (context, pos) {
-                                return productListItem(
-                                    high: high,offer: false,
-                                    data: data.result?.allProducts?[pos],
-                                    fun: () async {
-                                      getprodect = true;
-                                      setState(() {});
-                                      _allNetworking
-                                          .delete_product(
-                                          token_id: token,
-                                          product_id:data.result?.allProducts?[pos].productId)
-                                          .then((value) {
-                                        // var v = json.decode(value.body);
-
+                              Get_all_products_JSON.fromJson(
+                                  json.decode(snapdata.data!.body));
+                          sizelist = data.result!.allProducts!.length;
+                          if (sizelist > 0) {
+                            return ListView.builder(
+                                itemCount: data.result?.allProducts?.length,
+                                controller: _scrollController,
+                                itemBuilder: (context, pos) {
+                                  return productListItem(
+                                      high: high,
+                                      offer: false,
+                                      data: data.result?.allProducts?[pos],
+                                      fun: () async {
+                                        getprodect = true;
                                         setState(() {});
-                                      }
-                                      );
-                                    },
-                                    funedit: () {
-                                      print(data.result?.allProducts?[pos].productId);
+                                        _allNetworking
+                                            .delete_product(
+                                                token_id: token,
+                                                product_id: data
+                                                    .result
+                                                    ?.allProducts?[pos]
+                                                    .productId)
+                                            .then((value) {
+                                          // var v = json.decode(value.body);
 
-                                      Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) => EditProduct(
-                                              proid: int.parse(
-                                                  data.result?.allProducts?[pos].productId??''),
-                                              token: token,
-                                            )),
-                                      );
-                                    });
-                              });
+                                          setState(() {});
+                                        });
+                                      },
+                                      funedit: () {
+                                        print(data.result?.allProducts?[pos]
+                                            .productId);
+
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) => EditProduct(
+                                                    proid: int.parse(data
+                                                            .result
+                                                            ?.allProducts?[pos]
+                                                            .productId ??
+                                                        ''),
+                                                    token: token,
+                                                  )),
+                                        );
+                                      });
+                                });
+                          } else {
+                            return Center(
+                              child: Text('لايوجد منتجات'),
+                            );
+                          }
                         } else {
                           return Center(
                             child: CircularProgressIndicator(),
@@ -168,16 +174,11 @@ class _ProductScrState extends State<ProductScr> {
 
   _scrollListener() {
     if (_scrollController!.offset >=
-        _scrollController!.position.maxScrollExtent &&
+            _scrollController!.position.maxScrollExtent &&
         !_scrollController!.position.outOfRange) {
-
       if (sizelist > 8) {
-
-
         limit = limit + 20;
-        setState(() {
-
-        });
+        setState(() {});
         // getallp(
         //     limit: limit.toString().toString(),
         //     page_number: 0.toString(),

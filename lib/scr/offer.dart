@@ -60,7 +60,9 @@ class _OfferScrState extends State<OfferScr> {
             centerTitle: true,
             title: Text('offer'.tr,
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
+                    fontFamily: 'Arbf',
+                    color: hexToColor('#00abeb'),
+                    fontSize: 18)),
           ),
           body: Column(
             children: [
@@ -77,7 +79,7 @@ class _OfferScrState extends State<OfferScr> {
                       if (snapshot.hasData) {
                         Get_offers_json data = Get_offers_json.fromJson(
                             json.decode(snapshot.data!.body));
-                        sizelist = data.result?.allOffers?.length??0;
+                        sizelist = data.result?.allOffers?.length ?? 0;
                         return Column(
                           children: [
                             Padding(
@@ -136,15 +138,15 @@ class _OfferScrState extends State<OfferScr> {
                                                 DateTime.now().year + 1));
                                         if (endpick != null) {
                                           endpickDate = endpick;
-                                          end_date =
-                                              endpickDate!.year.toString() +
-                                                  "-" +
-                                                  endpickDate!.month.toString() +
-                                                  "-" +
-                                                  endpickDate!.day.toString();
+                                          end_date = endpickDate!.year
+                                                  .toString() +
+                                              "-" +
+                                              endpickDate!.month.toString() +
+                                              "-" +
+                                              endpickDate!.day.toString();
                                           _list.clear();
-                                          data.result!.allOffers
-                                              !.forEach((element) {
+                                          data.result!.allOffers!
+                                              .forEach((element) {
                                             if (element.endDate == end_date ||
                                                 element.startDate == end_date) {
                                               _list.add(element);
@@ -202,59 +204,67 @@ class _OfferScrState extends State<OfferScr> {
                                 ],
                               ),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: endpick == null
-                                      ? data.result?.allOffers?.length
-                                      : _list.length,
-                                  controller: _scrollController,
-                                  itemBuilder: (context, pos) {
-                                    return offertListItem(
-                                        high: high,
-                                        data: endpick == null
-                                            ? data.result?.allOffers![pos]
-                                            : _list[pos],
-                                        fun: () async {
-                                          getprodect = true;
+                            if (sizelist > 0)
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: endpick == null
+                                        ? data.result?.allOffers?.length
+                                        : _list.length,
+                                    controller: _scrollController,
+                                    itemBuilder: (context, pos) {
+                                      return offertListItem(
+                                          high: high,
+                                          data: endpick == null
+                                              ? data.result?.allOffers![pos]
+                                              : _list[pos],
+                                          fun: () async {
+                                            getprodect = true;
 
-                                          print(data
-                                              .result!.allOffers![pos].offersId);
+                                            print(data.result!.allOffers![pos]
+                                                .offersId);
 
-                                          setState(() {});
-                                          _allNetworking
-                                              .delete_offers(
-                                                  token_id: token,
-                                                  product_id: endpick == null
-                                                      ? data
-                                                          .result
-                                                          ?.allOffers![pos]
-                                                          .offersId
-                                                      : _list[pos].offersId)
-                                              .then((value) {
-                                            // var v = json.decode(value.body);
-                                            print(value);
                                             setState(() {});
+                                            _allNetworking
+                                                .delete_offers(
+                                                    token_id: token,
+                                                    product_id: endpick == null
+                                                        ? data
+                                                            .result
+                                                            ?.allOffers![pos]
+                                                            .offersId
+                                                        : _list[pos].offersId)
+                                                .then((value) {
+                                              // var v = json.decode(value.body);
+                                              print(value);
+                                              setState(() {});
+                                            });
+                                          },
+                                          funedit: () {
+                                            Navigator.push(
+                                              context,
+                                              new MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditOffer(
+                                                        offid: endpick == null
+                                                            ? data
+                                                                .result
+                                                                ?.allOffers![
+                                                                    pos]
+                                                                .offersId
+                                                            : _list[pos]
+                                                                .offersId,
+                                                        token: token,
+                                                      )),
+                                            );
                                           });
-                                        },
-                                        funedit: () {
-
-
-                                          Navigator.push(
-                                            context,
-                                            new MaterialPageRoute(
-                                                builder: (context) => EditOffer(
-                                                      offid: endpick == null
-                                                          ? data
-                                                              .result
-                                                              ?.allOffers![pos]
-                                                              .offersId
-                                                          : _list[pos].offersId,
-                                                      token: token,
-                                                    )),
-                                          );
-                                        });
-                                  }),
-                            ),
+                                    }),
+                              )
+                            else
+                              Expanded(
+                                child: Center(
+                                  child: Text('لا توجد عروض حتى الان'),
+                                ),
+                              ),
                           ],
                         );
                       } else {

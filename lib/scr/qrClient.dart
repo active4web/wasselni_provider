@@ -44,10 +44,10 @@ class _QRClientState extends State<QRClient> {
             stream: _allNetworking
                 .get_all_user_coupons(
                     token_id: box.read('token'), limit: limit, page_number: 0)
-                .asStream() ,
+                .asStream(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe??[];
+                List<AllVisitoe> dat = snapshot.data?.result?.allVisitoe ?? [];
                 List<AllVisitoe> data = [];
                 dat.forEach((element) {
                   if (element.userPhone!.contains(f)) {
@@ -83,95 +83,117 @@ class _QRClientState extends State<QRClient> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount:  f.trim().isEmpty
-                              ?snapshot.data?.result?.allVisitoe?.length:data.length,
-                          controller: _scrollController,
-                          itemBuilder: (context, pos) {
-                            return Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Card(
-                                elevation: 8,
-                                shape: BeveledRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        f.trim().isEmpty
-                                            ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
-                                            : 'اسم العميل : ${data[pos].userName}',
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 18),
-                                      ),
-                                      Text(
-                                        f.trim().isEmpty
-                                            ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
-                                            : 'رقم التلفون : ${data[pos].userPhone}',
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 18),
-                                      ),
-                                      Text(
-                                        f.trim().isEmpty
-                                            ?  'كود الخصم : ${snapshot.data?.result?.allVisitoe?[pos].serviceCoupon}': 'كود الخصم : ${data[pos].serviceCoupon}',
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 18),
-                                      ),
-                                      Text(
-                                        f.trim().isEmpty
-                                            ?  'تاريخ الاستخدام : ${snapshot.data?.result?.allVisitoe?[pos].date}':'تاريخ الاستخدام : ${data[pos].date}',
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 18),
-                                      ),
-                                      Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: GestureDetector(
-                                              onTap: () {
-                                                _allNetworking
-                                                    .delete_user_coupon(
-                                                        token_id:
-                                                            box.read('token'),
-                                                        coupon_id:  f.trim().isEmpty
-                                                            ? snapshot
-                                                            .data
-                                                            ?.result
-                                                            ?.allVisitoe![pos]
-                                                            .visitorId:data[pos]
-                                                            .visitorId)
-                                                    .then((value) {
-                                                  setState(() {});
-                                                });
-                                              },
-                                              child: Icon(Icons.delete)))
-                                    ],
+                    if (data.length > 0 ||
+                        snapshot.data!.result!.allVisitoe!.length > 0)
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: f.trim().isEmpty
+                                ? snapshot.data?.result?.allVisitoe?.length
+                                : data.length,
+                            controller: _scrollController,
+                            itemBuilder: (context, pos) {
+                              return Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Card(
+                                  elevation: 8,
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          f.trim().isEmpty
+                                              ? 'اسم العميل : ${snapshot.data?.result?.allVisitoe?[pos].userName}'
+                                              : 'اسم العميل : ${data[pos].userName}',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                        ),
+                                        Text(
+                                          f.trim().isEmpty
+                                              ? 'رقم التلفون : ${snapshot.data?.result?.allVisitoe?[pos].userPhone}'
+                                              : 'رقم التلفون : ${data[pos].userPhone}',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                        ),
+                                        Text(
+                                          f.trim().isEmpty
+                                              ? 'كود الخصم : ${snapshot.data?.result?.allVisitoe?[pos].serviceCoupon}'
+                                              : 'كود الخصم : ${data[pos].serviceCoupon}',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                        ),
+                                        Text(
+                                          f.trim().isEmpty
+                                              ? 'تاريخ الاستخدام : ${snapshot.data?.result?.allVisitoe?[pos].date}'
+                                              : 'تاريخ الاستخدام : ${data[pos].date}',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.black,
+                                              fontSize: 18),
+                                        ),
+                                        Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: GestureDetector(
+                                                onTap: () {
+                                                  _allNetworking
+                                                      .delete_user_coupon(
+                                                          token_id:
+                                                              box.read('token'),
+                                                          coupon_id: f
+                                                                  .trim()
+                                                                  .isEmpty
+                                                              ? snapshot
+                                                                  .data
+                                                                  ?.result
+                                                                  ?.allVisitoe![
+                                                                      pos]
+                                                                  .visitorId
+                                                              : data[pos]
+                                                                  .visitorId)
+                                                      .then((value) {
+                                                    setState(() {});
+                                                  });
+                                                },
+                                                child: Icon(Icons.delete)))
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
+                              );
 
-                            //
-                            // listQRclient(
-                            //   data: snapshot.data.result.allVisitoe[pos],
-                            //   high: high,
-                            //   fun: () {
-                            //
-                            //   });
-                          }),
-                    ),
+                              //
+                              // listQRclient(
+                              //   data: snapshot.data.result.allVisitoe[pos],
+                              //   high: high,
+                              //   fun: () {
+                              //
+                              //   });
+                            }),
+                      )
+                    else
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'لا توجد بيانات',
+                            style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: Colors.black,
+                                fontSize: 18),
+                          ),
+                        ),
+                      )
                   ],
                 );
               } else {

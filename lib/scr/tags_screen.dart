@@ -60,10 +60,10 @@ class _TagsScreenState extends State<TagsScreen> {
                   token_id: box.read('token'),
                   pageNumber: 0.toString(),
                   limit: limit.toString())
-              .asStream() ,
+              .asStream(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              sizelist = snapshot.data?.result?.allListLocation?.length??0;
+              sizelist = snapshot.data?.result?.allListLocation?.length ?? 0;
               return Column(
                 children: [
                   GestureDetector(
@@ -162,15 +162,22 @@ class _TagsScreenState extends State<TagsScreen> {
                                 tileMode: TileMode.clamp),
                             borderRadius: BorderRadius.circular(40.0))),
                   ),
-                  Expanded(
-                    child: ListView.separated(
-                        itemBuilder: (context, index) =>
-                            buildTagItem(snapshot, index, hight, width),
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 10,
-                            ),
-                        itemCount: snapshot.data?.result?.allListLocation?.length??0),
-                  )
+                  if (sizelist > 0)
+                    Expanded(
+                      child: ListView.separated(
+                          itemBuilder: (context, index) =>
+                              buildTagItem(snapshot, index, hight, width),
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 10,
+                              ),
+                          itemCount:
+                              snapshot.data?.result?.allListLocation?.length ??
+                                  0),
+                    )
+                  else
+                    Expanded(
+                      child: Center(child: Text("لايوجد كلمات بحثية")),
+                    )
                 ],
               );
             } else {
@@ -182,9 +189,11 @@ class _TagsScreenState extends State<TagsScreen> {
         ));
   }
 
-  Widget buildTagItem(AsyncSnapshot<TagsModel?> snapshot, index, hight, width) =>
+  Widget buildTagItem(
+          AsyncSnapshot<TagsModel?> snapshot, index, hight, width) =>
       ListTile(
-        title: Text(snapshot?.data?.result?.allListLocation?[index].tagName??''),
+        title:
+            Text(snapshot?.data?.result?.allListLocation?[index].tagName ?? ''),
         trailing: IntrinsicWidth(
           child: Row(
             children: [

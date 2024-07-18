@@ -42,95 +42,126 @@ class _NotificationScrState extends State<NotificationScr> {
       body: StreamBuilder<Get_list_notifications_JSON?>(
           stream: _allNetworking
               .get_list_notifications(
-              phone: phone, token_id: token, limit: limit, page_number: 0)
+                  phone: phone, token_id: token, limit: limit, page_number: 0)
               .asStream(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListView.builder(
-                    itemCount: snapshot.data?.result?.allNotifications?.length,
-                    itemBuilder: (cont, pos) {
-                      return GestureDetector(onTap: (){
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => NotifictionDetSCR( snapshot.data!.result
-                              !.allNotifications![pos])),
-                        );
-                      },
-                        child: Card(color:  snapshot.data?.result
-                            ?.allNotifications?[pos].isRead==1?Colors.black12:Colors.grey
-                     ,   elevation: 8,
-                          child: Container(
-                            //height: 100,
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(snapshot.data?.result
-                                          ?.allNotifications?[pos].createdAt??''),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: GestureDetector(onTap: () {
-                                        print ('ggggggggggggggggggggggggggg');
-                                        _allNetworking.delete_notification(
-                                            token_id: token,
-                                             id_notify:               snapshot.data?.result
-                                                ?.allNotifications?[pos].id).then((value) {
-                                                  print(value.data);
-                                                  setState(() {
-
-                                                  });
-                                        });
-                                      }, child: Icon(Icons.delete)),
-
-                                    ),
-                                  ],
-                                ),
-                                GestureDetector(onTap: (){
-
-                                },
-                                  child:  Text(
-                                          snapshot.data?.result?.allNotifications?[pos]
-                                              .title??'') ,
-                                )
-                              ,  snapshot.data?.result
-                                    ?.allNotifications?[pos].isRead==1?Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Align(alignment: Alignment.bottomLeft,child: Text( ' تم قراءة الرسالة')),
-                                    ):Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Align(alignment: Alignment.bottomLeft,child: Text( 'لم يتم  قراءة الرسالة')),
-                                )   ],
+              sizelist = snapshot.data?.result?.allNotifications?.length ?? 0;
+              if (sizelist > 0) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView.builder(
+                      itemCount:
+                          snapshot.data?.result?.allNotifications?.length,
+                      itemBuilder: (cont, pos) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NotifictionDetSCR(
+                                      snapshot.data!.result!
+                                          .allNotifications![pos])),
+                            );
+                          },
+                          child: Card(
+                            color: snapshot.data?.result?.allNotifications?[pos]
+                                        .isRead ==
+                                    1
+                                ? Colors.black12
+                                : Colors.grey,
+                            elevation: 8,
+                            child: Container(
+                              //height: 100,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(snapshot
+                                                .data
+                                                ?.result
+                                                ?.allNotifications?[pos]
+                                                .createdAt ??
+                                            ''),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              print(
+                                                  'ggggggggggggggggggggggggggg');
+                                              _allNetworking
+                                                  .delete_notification(
+                                                      token_id: token,
+                                                      id_notify: snapshot
+                                                          .data
+                                                          ?.result
+                                                          ?.allNotifications?[
+                                                              pos]
+                                                          .id)
+                                                  .then((value) {
+                                                print(value.data);
+                                                setState(() {});
+                                              });
+                                            },
+                                            child: Icon(Icons.delete)),
+                                      ),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Text(snapshot.data?.result
+                                            ?.allNotifications?[pos].title ??
+                                        ''),
+                                  ),
+                                  snapshot.data?.result?.allNotifications?[pos]
+                                              .isRead ==
+                                          1
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Align(
+                                              alignment: Alignment.bottomLeft,
+                                              child: Text(' تم قراءة الرسالة')),
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Align(
+                                              alignment: Alignment.bottomLeft,
+                                              child: Text(
+                                                  'لم يتم  قراءة الرسالة')),
+                                        )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              );
+                        );
+                      }),
+                );
+              } else {
+                return Center(
+                  child: Text('لا يوجد تنبيهات'),
+                );
+              }
             } else {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           }),
     );
   }
 
-
   _scrollListener() {
     if (_scrollController!.offset >=
-        _scrollController!.position.maxScrollExtent &&
+            _scrollController!.position.maxScrollExtent &&
         !_scrollController!.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
-        setState(() {
-
-        });
+        setState(() {});
         // getallp(
         //     limit: limit.toString().toString(),
         //     page_number: 0.toString(),

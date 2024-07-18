@@ -32,22 +32,22 @@ Widget mydrawer(context) {
       child: ListView(
         children: [
           SizedBox(
-            height: 100,
+            height: 30,
           ),
           ListTile(
             title: Text(box.read('name'),
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {},
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 30)),
+            // onTap: () {},
           ),
           Container(
-            color: Colors.white,
-            height: 2,
+            // color: Colors.white,
+            height: 30,
           ),
           ListTile(
             title: Text('حذف النقاط',
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Get.dialog(
                 AlertDialog(
@@ -116,7 +116,7 @@ Widget mydrawer(context) {
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("CLOSE"),
+                      child: Text("اغلاق"),
                       onPressed: () {
                         print(phone);
                         Get.back();
@@ -126,9 +126,10 @@ Widget mydrawer(context) {
                       child: Text("تنفيذ"),
                       onPressed: () {
                         print(phone);
-                        _allNetworking.empty_points(
-                                total_points: point??'',
-                                phone: phone??'',
+                        _allNetworking
+                            .empty_points(
+                                total_points: point ?? '',
+                                phone: phone ?? '',
                                 token_id: box.read('token'))
                             .then((value) {
                           Get.dialog(
@@ -165,7 +166,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("الكلمات البحثية",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               // Get.to(Profilee(),transition: Transition.cupertino);
               Navigator.push(
@@ -181,7 +182,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("ﺑﺮﻭﻓﺎﻳﻞ",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               // Get.to(Profilee(),transition: Transition.cupertino);
               Navigator.push(
@@ -213,7 +214,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("ﺗﻨﺒﻴﻬﺎﺕ",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Navigator.push(
                 context,
@@ -229,7 +230,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("ﻛﻮﺑﻮﻧﺎﺕ ﺧﺼﻢ",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Navigator.push(
                 context,
@@ -244,7 +245,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("نقاط المسح",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Navigator.push(
                 context,
@@ -259,7 +260,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("ﺗﻮﺍﺻﻞ ﻣﻊ ﺍﻻﺩﺍﺭﺓ",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Navigator.push(
                 context,
@@ -276,7 +277,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("النقاط",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               Navigator.push(
                 context,
@@ -293,7 +294,7 @@ Widget mydrawer(context) {
           ListTile(
             title: Text("ﺗﺴﺠﻴﻞ ﺍﻟﺨﺮﻭﺝ",
                 style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+                    fontFamily: 'Arbf', color: Colors.white, fontSize: 23)),
             onTap: () {
               _allNetworking
                   .logout(
