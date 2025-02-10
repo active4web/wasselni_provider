@@ -5,7 +5,7 @@ import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_storage/get_storage.dart';
 import 'Translation/Trans.dart';
 import 'firebase_options.dart';
@@ -13,6 +13,7 @@ import 'firebase_options.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("Handling a background message: ${message.messageType}");
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -56,7 +57,6 @@ class MyApp extends StatelessWidget {
                 return token != null
                     ? Statisticss()
                     : LoginScr(); //Statisticss();token!=null?Statisticss():
-
             }
           },
           initialData: false,
@@ -66,9 +66,9 @@ class MyApp extends StatelessWidget {
 
   Future<bool> check() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
+    if (connectivityResult.first == ConnectivityResult.mobile) {
       return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
+    } else if (connectivityResult.first == ConnectivityResult.wifi) {
       return true;
     }
     return false;

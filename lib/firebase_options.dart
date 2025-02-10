@@ -51,19 +51,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A',
-    appId: '1:378009877139:android:d7450dada5ea0611d3ab66',
+    appId: '1:378009877139:android:1832277881ed4661d3ab66',
     messagingSenderId: '378009877139',
     projectId: 'mersaty-4ecb4',
-    storageBucket: 'mersaty-4ecb4.appspot.com',
+    storageBucket: 'mersaty-4ecb4.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBOFxboAprxPaDQDx_RZvc4whQUX-4XFyQ',
-    appId: '1:378009877139:ios:2617807663a80b88d3ab66',
+    appId: '1:378009877139:ios:d47006a6d3ca41ced3ab66',
     messagingSenderId: '378009877139',
     projectId: 'mersaty-4ecb4',
-    storageBucket: 'mersaty-4ecb4.appspot.com',
-    iosBundleId: 'com.active.mystore',
+    storageBucket: 'mersaty-4ecb4.firebasestorage.app',
+    iosBundleId: 'com.active.wasselnniStore',
   );
 
 }

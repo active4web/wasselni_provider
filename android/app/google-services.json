@@ -2,14 +2,14 @@
   "project_info": {
     "project_number": "378009877139",
     "project_id": "mersaty-4ecb4",
-    "storage_bucket": "mersaty-4ecb4.appspot.com"
+    "storage_bucket": "mersaty-4ecb4.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:378009877139:android:d7450dada5ea0611d3ab66",
+        "mobilesdk_app_id": "1:378009877139:android:9d9f2e9985679351d3ab66",
         "android_client_info": {
-          "package_name": "com.active.mystore"
+          "package_name": "com.active.wasselnni"
         }
       },
       "oauth_client": [
@@ -43,81 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:378009877139:android:cea7d4774a8452acd3ab66",
+        "mobilesdk_app_id": "1:378009877139:android:1832277881ed4661d3ab66",
         "android_client_info": {
-          "package_name": "com.active.wasselni"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mersaty"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:378009877139:android:f16e80680bf8f82fd3ab66",
-        "android_client_info": {
-          "package_name": "com.mersaty"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDp2VzwEvOG_y0yAOdNgAXlWTyUgSRs9-A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "378009877139-608aeq70vkpa0dk4ninvcck8c6c5gfmb.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "378009877139-jg7log83lcg1np60lvrrl6pqqk7nqjus.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.mersaty"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:378009877139:android:e040a0d30a63fddcd3ab66",
-        "android_client_info": {
-          "package_name": "com.waselnni"
+          "package_name": "com.active.wasselnniStore"
         }
       },
       "oauth_client": [
