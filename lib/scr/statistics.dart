@@ -149,7 +149,7 @@ class _StatisticssState extends State<Statisticss> {
                 textDirection: TextDirection.rtl,
                 child: Scaffold(
                   appBar: AppBar(
-                    backgroundColor: Colors.black12,
+                    backgroundColor: Colors.white,
                     actions: [],
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,27 +189,26 @@ class _StatisticssState extends State<Statisticss> {
                               });
                               _allNetworking
                                   .check_coupon(
-                                  token_id: token,
-                                  coupon: _textEditingController.text)
+                                      token_id: token,
+                                      coupon: _textEditingController.text)
                                   .then((value) {
                                 // set up the AlertDialog
                                 print(value!.data);
                                 if (value.data['status']) {
                                   String user_name =
-                                  value.data['data']['user_name'];
+                                      value.data['data']['user_name'];
                                   String user_phone =
-                                  value.data['data']['user_phone'];
+                                      value.data['data']['user_phone'];
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (BuildContext context) =>
                                         CustomDialog(
-                                          title: "كود الخصم",
-                                          description: "رقم الهاتف  $user_phone" +
-                                              "\n" +
-                                              "اسم المستخدم $user_name",
-
-                                        ),
+                                      title: "كود الخصم",
+                                      description: "رقم الهاتف  $user_phone" +
+                                          "\n" +
+                                          "اسم المستخدم $user_name",
+                                    ),
                                   );
                                 } else {
                                   // set up the button
@@ -248,12 +247,12 @@ class _StatisticssState extends State<Statisticss> {
                           child: serch
                               ? CircularProgressIndicator()
                               : Container(
-                            color: Colors.white,
-                            child: Icon(
-                              Icons.apps_outlined,
-                              color: hexToColor('#00abeb'),
-                            ),
-                          ),
+                                  color: Colors.white,
+                                  child: Icon(
+                                    Icons.apps_outlined,
+                                    color: hexToColor('#00abeb'),
+                                  ),
+                                ),
                         ),
                         SizedBox(
                           width: 8,
@@ -339,7 +338,14 @@ class _StatisticssState extends State<Statisticss> {
                               //     serch = false;
                               //   });
                               // });
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => QRDetailsPoints(phoneNumber: _textEditingController.text.trim(),),));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => QRDetailsPoints(
+                                      phoneNumber:
+                                          _textEditingController.text.trim(),
+                                    ),
+                                  ));
                             }
                           },
                           child: serch
@@ -439,10 +445,11 @@ class _StatisticssState extends State<Statisticss> {
                                         icon: 'assets/images/Help.png',
                                         keyupdata: 0,
                                         dat: false,
-                                        number:data.totalListLocations.toString(),
+                                        number:
+                                            data.totalListLocations.toString(),
                                         //data.totalProduct.toString(),
                                         width: width,
-                                        name: data.locationTitle??'')),
+                                        name: data.locationTitle ?? '')),
                               ),
                             if (data.showRate == "1")
                               Padding(
@@ -463,7 +470,7 @@ class _StatisticssState extends State<Statisticss> {
                                         number: "",
                                         //data.totalProduct.toString(),
                                         width: width,
-                                        name: data.rateTitle??'')),
+                                        name: data.rateTitle ?? '')),
                               ),
                             Padding(
                               padding:
@@ -495,7 +502,7 @@ class _StatisticssState extends State<Statisticss> {
                                       keyupdata: 0,
                                       dat: true,
                                       width: width,
-                                      number: data.startDate??'',
+                                      number: data.startDate ?? '',
                                       number2: data.endDate,
                                       name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
                             ),
@@ -525,8 +532,7 @@ class _StatisticssState extends State<Statisticss> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                QRPoints()),
+                                            builder: (context) => QRPoints()),
                                       );
                                     },
                                     child: item_home_list(
@@ -554,8 +560,7 @@ class _StatisticssState extends State<Statisticss> {
                                               keyupdata: 0,
                                               dat: false,
                                               width: width,
-                                              number:
-                                                  "",
+                                              number: "",
                                               name: " انشاء  QR ")),
                                     ),
 
@@ -674,7 +679,8 @@ class _StatisticssState extends State<Statisticss> {
     Uint8List result = await scanner.generateBarCode(inputCode);
     File.fromRawPath(result);
     print(File.fromRawPath(result)); //_imge=
-    FutureOr<dynamic> success = await ImageGallerySaver.saveImage(result, quality: 100);
+    FutureOr<dynamic> success =
+        await ImageGallerySaver.saveImage(result, quality: 100);
     print(success);
     String imageString = base64Encode(result);
     print(imageString);
@@ -784,7 +790,7 @@ class _StatisticssState extends State<Statisticss> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(name??'',
+                Text(name ?? '',
                     style: TextStyle(
                         fontFamily: 'Arbf', color: Colors.black, fontSize: 18)),
                 SizedBox(
@@ -809,7 +815,7 @@ class _StatisticssState extends State<Statisticss> {
                           ],
                         ))
                     : Flexible(
-                        child: Text(number??'',
+                        child: Text(number ?? '',
                             style: TextStyle(
                                 fontFamily: 'Arbf',
                                 color: Colors.blue,

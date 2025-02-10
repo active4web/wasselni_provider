@@ -2,7 +2,7 @@ import 'package:commercial_app/bloc/datavalidator.dart';
 import 'package:commercial_app/myWidget/WelcomeTextWidget.dart';
 import 'package:commercial_app/myWidget/inputTextWidget.dart';
 import 'package:commercial_app/myWidget/logoWidget.dart';
- 
+
 import 'package:commercial_app/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DataValidator v = DataValidator();
-
 
   @override
   void dispose() {
@@ -56,42 +55,43 @@ class _HomePageState extends State<HomePage> {
                   changedata: v.changeName,
                   stram: v.passwordmy,
                   inputtype: TextInputType.text),
-
-
               SizedBox(
                 height: high * .02,
               ),
-
-
-             StreamBuilder(stream: v.validationUserDatamy,builder: (context,data){
-               return   GestureDetector(onTap: data.data!=null?(){
-
-               }:null,
-                 child: Container(
-                   height: high * .1,
-                   width: width * 0.5,
-                   child: Center(
-                     child: Text('login'.tr,
-                         style: TextStyle(
-                             fontFamily: 'Arbf',
-                             color: Colors.white,
-                             fontSize: 25)),
-                   ),
-                   decoration:data.data!=null? BoxDecoration(
-                       color: hexToColor('#00abeb'), gradient: new LinearGradient(
-                       colors: [hexToColor('#2358a6'), hexToColor('#00abeb')],
-                       begin: Alignment.centerLeft,
-                       end: Alignment.centerRight,
-                       tileMode: TileMode.clamp
-                   ),
-                       borderRadius: BorderRadius.circular(40.0)):BoxDecoration(
-                       color: Colors.grey,
-                       borderRadius: BorderRadius.circular(40.0)),
-                 ),
-               );
-             },)
-
-
+              StreamBuilder(
+                stream: v.validationUserDatamy,
+                builder: (context, data) {
+                  return GestureDetector(
+                    onTap: data.data != null ? () {} : null,
+                    child: Container(
+                      height: high * .1,
+                      width: width * 0.5,
+                      child: Center(
+                        child: Text('login'.tr,
+                            style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: Colors.white,
+                                fontSize: 25)),
+                      ),
+                      decoration: data.data != null
+                          ? BoxDecoration(
+                              color: hexToColor('#00abeb'),
+                              gradient: new LinearGradient(
+                                  colors: [
+                                    hexToColor('#2358a6'),
+                                    hexToColor('#00abeb')
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  tileMode: TileMode.clamp),
+                              borderRadius: BorderRadius.circular(40.0))
+                          : BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(40.0)),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
