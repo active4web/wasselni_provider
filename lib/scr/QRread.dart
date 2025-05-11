@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+// import 'package:qr_code_scanner/qr_code_scanner.dart' as scanner;
 import 'package:permission_handler/permission_handler.dart';
 class QRRead extends StatefulWidget {
   @override
@@ -49,7 +49,7 @@ class _QRReadState extends State<QRRead> {
                   print(
                       '0000000000000000000000000000000000000000000000000000000000000');
                   print(idOfQR);
-                  _generateBarCode(33.toString());
+                  // _generateBarCode(33.toString());
 
                   // if(!_qrStringgnra.isEmpty){
                   //
@@ -163,14 +163,14 @@ class _QRReadState extends State<QRRead> {
     );
   }
 
-  Future _scan() async {
-    barcode = (await scanner.scan())!;
-    if (barcode == null) {
-      print('nothing return.');
-    } else {
-      Get.snackbar('QR', barcode);
-    }
-  }
+  // Future _scan() async {
+  //   barcode = (await scanner.scan())!;
+  //   if (barcode == null) {
+  //     print('nothing return.');
+  //   } else {
+  //     Get.snackbar('QR', barcode);
+  //   }
+  // }
   _requestPermission() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.storage,
@@ -180,8 +180,8 @@ class _QRReadState extends State<QRRead> {
     print(info);
 
   }
-  Future _generateBarCode(String inputCode) async {
-    Uint8List result = await scanner.generateBarCode(inputCode);
-    this.setState(() => this.bytes = result);
-  }
+  // Future _generateBarCode(String inputCode) async {
+  //   Uint8List result = await scanner.generateBarCode(inputCode);
+  //   this.setState(() => this.bytes = result);
+  // }
 }

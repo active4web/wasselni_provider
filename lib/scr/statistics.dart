@@ -17,7 +17,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+// import 'package:qr_flutter/qr_flutter.dart' as scanner;
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
@@ -552,8 +552,8 @@ class _StatisticssState extends State<Statisticss> {
                                       child: GestureDetector(
                                           onTap: () async {
                                             int idOfQR = await box.read('id');
-                                            await _generateBarCode(
-                                                box.read('id').toString());
+                                            // await _generateBarCode(
+                                            //     box.read('id').toString());
                                           },
                                           child: item_home_list(
                                               icon: 'assets/images/qr.png',
@@ -673,43 +673,43 @@ class _StatisticssState extends State<Statisticss> {
     print(info);
   }
 
-  Future _generateBarCode(String inputCode) async {
-    qrgnratt = true;
-    setState(() {});
-    Uint8List result = await scanner.generateBarCode(inputCode);
-    File.fromRawPath(result);
-    print(File.fromRawPath(result)); //_imge=
-    FutureOr<dynamic> success =
-        await ImageGallerySaver.saveImage(result, quality: 100);
-    print(success);
-    String imageString = base64Encode(result);
-    print(imageString);
+  // Future _generateBarCode(String inputCode) async {
+  //   qrgnratt = true;
+  //   setState(() {});
+  //   Uint8List result = await scanner.generateBarCode(inputCode);
+  //   File.fromRawPath(result);
+  //   print(File.fromRawPath(result)); //_imge=
+  //   FutureOr<dynamic> success =
+  //       await ImageGallerySaver.saveImage(result, quality: 100);
+  //   print(success);
+  //   String imageString = base64Encode(result);
+  //   print(imageString);
 
-    await _allNetworking
-        .save_QR(token_id: token, file: imageString)
-        .then((value) async {
-      print(value.data);
+  //   await _allNetworking
+  //       .save_QR(token_id: token, file: imageString)
+  //       .then((value) async {
+  //     print(value.data);
 
-      Get.dialog(
-        AlertDialog(
-          title: Text(''),
-          content: Text("تم حفظ الصوره في مكتبة الصور"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("CLOSE"),
-              onPressed: () {
-                Get.back();
-              },
-            )
-          ],
-        ),
-        barrierDismissible: false,
-      );
-    });
+  //     Get.dialog(
+  //       AlertDialog(
+  //         title: Text(''),
+  //         content: Text("تم حفظ الصوره في مكتبة الصور"),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             child: Text("CLOSE"),
+  //             onPressed: () {
+  //               Get.back();
+  //             },
+  //           )
+  //         ],
+  //       ),
+  //       barrierDismissible: false,
+  //     );
+  //   });
 
-    qrgnratt = false;
-    setState(() {});
-  }
+  //   qrgnratt = false;
+  //   setState(() {});
+  // }
 
   Widget item_home_list(
       {String? name,
